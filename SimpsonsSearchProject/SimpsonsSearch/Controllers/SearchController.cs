@@ -20,11 +20,11 @@ namespace SimpsonsSearch.Controllers
 			return View(model);
 		}
 
-		public IActionResult Results(string query)
+		public IActionResult Results(IndexViewModel model)
 		{
 			//DeleteIndexFiles();
 			_searchEngine.BuildIndex();
-			var results = _searchEngine.Search("Edna Krabappel-Flanders: Bart?");
+			var results = _searchEngine.Search(model.SearchQuery);
 
 			return View(results);
 		}

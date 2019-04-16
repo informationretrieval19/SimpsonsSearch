@@ -12,10 +12,13 @@
 
 
 <form method="post" asp-controller="Search" asp-action="Results">
-
-    <div><label>Search</label> <input type="text" asp-for="SearchQuery" /></div>
-  <input type="submit" name="save" value="Save" />
+    <div class="form-group">
+        <label>Search</label> 
+        <input class="form-control" type="text" asp-for="SearchQuery"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
 </form>
+
 <table class="table table-bordered table-striped table-dark">
     <tr>
         <th scope="col"></th>
