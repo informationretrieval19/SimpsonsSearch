@@ -4,6 +4,7 @@ using System.Text;
 
 namespace luceneTest
 {
+	// diese Fähigkeiten hat die Suchmaschine
 	public interface ISearchEngine
 	{
 		void BuildIndex();

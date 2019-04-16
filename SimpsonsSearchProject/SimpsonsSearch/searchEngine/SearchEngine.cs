@@ -13,13 +13,28 @@ namespace SimpsonsSearch.searchEngine
 			index = new SimpsonsIndex(Settings.IndexLocation);
 		}
 
-		public void BuildIndex() => index.BuildIndex(GetDataFromFile());
+		public void BuildIndex()
+		{
+			index.BuildIndex(GetDataFromFile());
+		} 
 
-		public IEnumerable<ScriptLine> GetDataFromFile() =>
-			JsonConvert.DeserializeObject<List<ScriptLine>>(File.ReadAllText(Settings.ScriptLineJsonFile),
-				settings: new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Ignore });
+		public IEnumerable<ScriptLine> GetDataFromFile()
+		{
+			var scriptLines = JsonConvert.DeserializeObject<List<ScriptLine>>(File.ReadAllText(Settings.ScriptLineJsonFile),
+																settings: new JsonSerializerSettings
+																{
+																	NullValueHandling = NullValueHandling.Ignore,
+																	MissingMemberHandling = MissingMemberHandling.Ignore
+																});
+			return scriptLines;
+		}
 
 
-		public SearchResults Search(string query) => index.Search(query);
+
+		public SearchResults Search(string query)
+		{
+			var searchResults = index.Search(query);
+			return searchResults;
+		} 
 	}
 }

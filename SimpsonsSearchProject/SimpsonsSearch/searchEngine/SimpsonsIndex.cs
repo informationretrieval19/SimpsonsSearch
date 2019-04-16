@@ -11,6 +11,7 @@ using Lucene.Net.Util;
 
 namespace SimpsonsSearch.searchEngine
 {
+	// Klasee zur Index Bildung
 	internal class SimpsonsIndex : IDisposable
 	{
 		private const LuceneVersion MATCH_LUCENE_VERSION = LuceneVersion.LUCENE_48;
@@ -19,6 +20,9 @@ namespace SimpsonsSearch.searchEngine
 		private readonly Analyzer analyzer;
 		private readonly QueryParser queryParser;
 		private readonly SearcherManager searchManager;
+
+
+		// bug mit DirectoryWriter.. deswegen RAMDirectory --> inperformant bei größeren Datensätzen
 
 		public SimpsonsIndex(string indexPath)
 		{
@@ -44,7 +48,7 @@ namespace SimpsonsSearch.searchEngine
 
 			foreach (var scriptLine in scriptLines)
 			{
-				Document document = BuildDocument(scriptLine);
+				var document = BuildDocument(scriptLine);
 				writer.UpdateDocument(new Term("id", scriptLine.id.ToString()), document);
 			}
 
@@ -54,35 +58,29 @@ namespace SimpsonsSearch.searchEngine
 
 		private Document BuildDocument(ScriptLine scriptLine)
 		{
-			Document doc = new Document
+			var doc = new Document
 			{
 				new StoredField("id", scriptLine.id),
-				new TextField("text", scriptLine.raw_text, Field.Store.NO),
+				new TextField("text", scriptLine.raw_text, Field.Store.YES),
 				new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
-				new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
-				new StoredField("snippet", MakeSnippet(scriptLine.raw_text))
+				new TextField("location", scriptLine.raw_location_text, Field.Store.YES)
 			};
 
 			return doc;
 		}
 
-		private string MakeSnippet(string description)
-		{
-			return (string.IsNullOrWhiteSpace(description) || description.Length <= SNIPPET_LENGTH)
-					? description
-					: $"{description.Substring(0, SNIPPET_LENGTH)}...";
-		}
+		
 
 		public SearchResults Search(string queryString)
 		{
 			int resultsPerPage = 10;
-			Query query = BuildQuery(queryString);
+			var query = BuildQuery(queryString);
 			searchManager.MaybeRefreshBlocking();
-			IndexSearcher searcher = searchManager.Acquire();
+			var searcher = searchManager.Acquire();
 
 			try
 			{
-				TopDocs topdDocs = searcher.Search(query, resultsPerPage);
+				var topdDocs = searcher.Search(query, resultsPerPage);
 				return CompileResults(searcher, topdDocs);
 			}
 			finally
@@ -94,7 +92,7 @@ namespace SimpsonsSearch.searchEngine
 
 		private SearchResults CompileResults(IndexSearcher searcher, TopDocs topdDocs)
 		{
-			SearchResults searchResults = new SearchResults() { TotalHits = topdDocs.TotalHits };
+			var searchResults = new SearchResults() { TotalHits = topdDocs.TotalHits };
 			foreach (var result in topdDocs.ScoreDocs)
 			{
 				Document document = searcher.Doc(result.Doc);

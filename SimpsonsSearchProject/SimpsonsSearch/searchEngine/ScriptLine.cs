@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpsonsSearch.searchEngine
 {
+	// model der Datasource(scriptline.csv)
 	public class ScriptLine
 	{
 		public int id { get; set; }

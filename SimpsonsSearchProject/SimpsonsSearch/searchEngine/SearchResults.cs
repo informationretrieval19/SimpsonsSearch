@@ -2,6 +2,7 @@
 
 namespace SimpsonsSearch.searchEngine
 {
+	// Ergebnis was lucene nach einer suche zurück gibt
 	public class SearchResults
 	{
 		public SearchResults() => Hits = new List<Hit>();
@@ -10,9 +11,7 @@ namespace SimpsonsSearch.searchEngine
 		public IList<Hit> Hits { get; set; }
 	}
 
-	/// <summary>
-	/// a representation of a movie item retrieved from lucene.net
-	/// </summary>
+	// enthält alles was für jeden Suchtreffer angezeigt werden soll
 	public class Hit
 	{
 		public string Id { get; set; }
