@@ -22,9 +22,9 @@ namespace SimpsonsSearch.Controllers
 
 		public IActionResult Results(string query)
 		{
-			DeleteIndexFiles();
+			//DeleteIndexFiles();
 			_searchEngine.BuildIndex();
-			var results = _searchEngine.Search("party");
+			var results = _searchEngine.Search("Edna Krabappel-Flanders: Bart?");
 
 			return View(results);
 		}

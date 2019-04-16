@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Core;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
@@ -27,6 +28,7 @@ namespace SimpsonsSearch.searchEngine
 		public SimpsonsIndex(string indexPath)
 		{
 			analyzer = new StandardAnalyzer(MATCH_LUCENE_VERSION, StandardAnalyzer.STOP_WORDS_SET);
+			//analyzer = new KeywordAnalyzer();
 			queryParser = SetupQueryParser(analyzer);
 			//writer = new IndexWriter(FSDirectory.Open(indexPath), new IndexWriterConfig(MATCH_LUCENE_VERSION, analyzer));
 			writer = new IndexWriter(new RAMDirectory(), new IndexWriterConfig(MATCH_LUCENE_VERSION, analyzer));
@@ -37,7 +39,7 @@ namespace SimpsonsSearch.searchEngine
 		{
 			return new MultiFieldQueryParser(
 				MATCH_LUCENE_VERSION,
-				new[] { "raw_text" },
+				new[] { "text" },
 				analyzer
 			);
 		}
@@ -101,10 +103,9 @@ namespace SimpsonsSearch.searchEngine
 					Location = document.GetField("location")?.GetStringValue(),
 					Id = document.GetField("id")?.GetStringValue(),
 					Score = result.Score,
-					Person = document.GetField("person")?.GetStringValue(),
-					Snippet = document.GetField("snippet")?.GetStringValue()
+					Person = document.GetField("person")?.GetStringValue(),		
+					Text = document.GetField("text")?.GetStringValue()
 				};
-
 				searchResults.Hits.Add(searchResult);
 			}
 
