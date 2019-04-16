@@ -1,0 +1,29 @@
+﻿@model SimpsonsSearch.searchEngine.SearchResults;
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h2>Results</h2>
+
+<table class="table table-bordered table-striped table-dark">
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Id</th>
+        <th scope="col">Text</th>
+    </tr>
+
+    @foreach (var hit in Model.Hits)
+    {
+
+        <tr>
+            <th scope="row"></th>
+            <td> @hit.Id/td>
+            <td> @hit.Snippet</td>
+            <td>
+                <a class="btn btn-dark" asp-action="" asp-route-id="">Details</a>
+            </td>
+        </tr>
+    }
+</table>
+

@@ -12,7 +12,7 @@ namespace luceneTest
 		/// <param name="args"></param>
 		static void Main(string[] args)
 		{
-			//DeleteIndexFiles();
+			DeleteIndexFiles();
 			SearchEngine engine = new SearchEngine();
 			engine.BuildIndex();
 			string userInput = string.Empty;

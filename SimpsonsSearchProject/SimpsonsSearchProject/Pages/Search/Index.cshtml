@@ -1,0 +1,35 @@
+﻿@page
+@model SimpsonsSearchProject.ViewModels.IndexViewModel
+@{
+    ViewData["Title"] = "SimpsonsSearch";
+}
+
+<div>
+    <!-- Search form -->
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+    
+    <div>
+        <p>alle ScriptLines:</p>
+        <table class="table table-bordered table-striped table-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Id</th>
+                <th scope="col">Text</th>
+            </tr>
+    
+            @foreach (var scriptLine in Model.ScriptLines)
+            {
+          
+                <tr>
+                    <th scope="row"></th>
+                    <td> @scriptLine.Id/td>
+                    <td> @scriptLine.Text</td>
+                    <td>
+                        <a class="btn btn-dark" asp-action="" asp-route-id="@scriptLine.Id">Details</a>
+                        
+                    </td>
+                </tr>
+            }       
+        </table>
+    </div>
+</div>
