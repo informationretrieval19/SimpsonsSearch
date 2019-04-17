@@ -8,6 +8,7 @@ using Lucene.Net.Index;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
+using Lucene.Net.Support;
 using Lucene.Net.Util;
 using SimpsonsSearch.Helper;
 using SimpsonsSearch.Services;
@@ -64,7 +65,7 @@ namespace SimpsonsSearch.searchEngine
 		
 		private Document BuildDocument(ScriptLine scriptLine)
 		{
-			var convertedTimeStamp = _conversionService.ConvertMillisecondsToMinutes(double.Parse(scriptLine.timestamp_in_ms));
+			
 			var doc = new Document
 			{
 				new StoredField("id", scriptLine.id),
@@ -72,8 +73,7 @@ namespace SimpsonsSearch.searchEngine
 				new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
 				new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
 				new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
-				new StoredField("timestamp", convertedTimeStamp)
-
+				new StoredField("timestamp", scriptLine.timestamp_in_ms)
 			};
 
 			return doc;
