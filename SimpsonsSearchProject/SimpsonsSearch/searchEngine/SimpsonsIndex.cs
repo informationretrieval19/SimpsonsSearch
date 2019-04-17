@@ -58,14 +58,22 @@ namespace SimpsonsSearch.searchEngine
 			writer.Commit();
 		}
 
+		public static double ConvertMillisecondsToMinutes(double milliseconds)
+		{
+			return TimeSpan.FromMilliseconds(milliseconds).TotalMinutes;
+		}
 		private Document BuildDocument(ScriptLine scriptLine)
 		{
+			var convertedTimeStamp = ConvertMillisecondsToMinutes(scriptLine.timestamp_in_ms);
 			var doc = new Document
 			{
 				new StoredField("id", scriptLine.id),
-				new TextField("text", scriptLine.raw_text, Field.Store.YES),
+				new TextField("text", scriptLine.spoken_words, Field.Store.YES),
 				new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
-				new TextField("location", scriptLine.raw_location_text, Field.Store.YES)
+				new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
+				new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
+				new StoredField("timestamp", convertedTimeStamp)
+
 			};
 
 			return doc;
@@ -101,10 +109,11 @@ namespace SimpsonsSearch.searchEngine
 				Hit searchResult = new Hit
 				{
 					Location = document.GetField("location")?.GetStringValue(),
-					Id = document.GetField("id")?.GetStringValue(),
+					Id = document.GetField("episodeId")?.GetStringValue(),
 					Score = result.Score,
 					Person = document.GetField("person")?.GetStringValue(),		
-					Text = document.GetField("text")?.GetStringValue()
+					Text = document.GetField("text")?.GetStringValue(),
+					Timestamp = document.GetField("timestamp")?.GetSingleValue()
 				};
 				searchResults.Hits.Add(searchResult);
 			}

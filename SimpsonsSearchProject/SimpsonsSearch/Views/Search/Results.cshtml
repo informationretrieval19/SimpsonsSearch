@@ -9,8 +9,10 @@
 <table class="table table-bordered table-striped table-dark">
     <tr>
         <th scope="col"></th>
-        <th scope="col">Id</th>
+        <th scope="col">Episode & Timestamp</th>
         <th scope="col">Text</th>
+        <th scope="col">Person & Location</th>
+        <th scope="col">Score</th>
     </tr>
 
     @foreach (var hit in Model.Hits)
@@ -18,11 +20,14 @@
 
         <tr>
             <th scope="row"></th>
-            <td> @hit.Id/td>
+            <td> Episode: @hit.Id at minute: @hit.Timestamp</td>
             <td> @hit.Text</td>
             <td>
-                <a class="btn btn-dark" asp-action="" asp-route-id="">Details</a>
+                @hit.Person at @hit.Location 
             </td>
+            <td>@hit.Score</td>
+
+            
         </tr>
     }
 </table>
