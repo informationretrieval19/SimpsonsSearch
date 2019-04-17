@@ -1,39 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using SimpsonsSearch.Helper;
+using SimpsonsSearch.Services;
 
 namespace SimpsonsSearch.searchEngine
 {
 	public class SearchEngine : ISearchEngine
 	{
-		private readonly SimpsonsIndex index;
+		private readonly SimpsonsIndex _index;
+		private const string IndexLocation = @"C:/Temp/Index";
+		private readonly IConversionService _conversionService;
 
-		public SearchEngine()
+		public SearchEngine(IConversionService conversionService, SimpsonsIndex index)
 		{
-			index = new SimpsonsIndex(Settings.IndexLocation);
+			_index = index;
+			_conversionService = conversionService;
 		}
 
 		public void BuildIndex()
 		{
-			index.BuildIndex(GetDataFromFile());
+			_index.BuildIndex(_conversionService.ConvertCsVtoScriptLines());
 		} 
-
-		public IEnumerable<ScriptLine> GetDataFromFile()
-		{
-			var scriptLines = JsonConvert.DeserializeObject<List<ScriptLine>>(File.ReadAllText(Settings.ScriptLineJsonFile),
-																settings: new JsonSerializerSettings
-																{
-																	NullValueHandling = NullValueHandling.Ignore,
-																	MissingMemberHandling = MissingMemberHandling.Ignore
-																});
-			return scriptLines;
-		}
-
-
 
 		public SearchResults Search(string query)
 		{
-			var searchResults = index.Search(query);
+			var searchResults = _index.Search(query);
 			return searchResults;
 		} 
 	}

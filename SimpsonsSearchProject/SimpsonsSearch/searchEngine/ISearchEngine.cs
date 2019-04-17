@@ -8,6 +8,5 @@ namespace SimpsonsSearch.searchEngine
 
 		void BuildIndex();
 		SearchResults Search(string query);
-		IEnumerable<ScriptLine> GetDataFromFile();
 	}
 }

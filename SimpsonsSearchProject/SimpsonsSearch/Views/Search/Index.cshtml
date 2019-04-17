@@ -25,16 +25,28 @@
         <th scope="col">Klasse</th>
     </tr>
     
-    @foreach (var scriptLine in Model.ScriptLines)
+    @foreach (var episode in Model.Episodes)
     {
           
         <tr>
             <th scope="row"></th>
-            <td> @scriptLine.id</td>
-            <td> @scriptLine.raw_text</td>
+            <td> @episode.title</td>
+            <td> Episode @episode.number_in_season in season @episode.season </td>
             <td>
                 <a class="btn btn-dark" asp-action="" asp-route-id="">Details</a>
             </td>
         </tr>
-    }       
+    }     
+    @*@foreach (var scriptLine in Model.ScriptLines)
+    {
+          
+        <tr>
+            <th scope="row"></th>
+            <td> @scriptLine.spoken_words</td>
+            <td> @scriptLine.number</td>
+            <td>
+                <a class="btn btn-dark" asp-action="" asp-route-id="">Details</a>
+            </td>
+        </tr>
+    }*@     
 </table>

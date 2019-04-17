@@ -9,24 +9,27 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
+using SimpsonsSearch.Helper;
+using SimpsonsSearch.Services;
 
 namespace SimpsonsSearch.searchEngine
 {
 	// Klasee zur Index Bildung
-	internal class SimpsonsIndex : IDisposable
+	public class SimpsonsIndex : IDisposable
 	{
 		private const LuceneVersion MATCH_LUCENE_VERSION = LuceneVersion.LUCENE_48;
-		private const int SNIPPET_LENGTH = 100;
 		private readonly IndexWriter writer;
 		private readonly Analyzer analyzer;
 		private readonly QueryParser queryParser;
 		private readonly SearcherManager searchManager;
+		private readonly IConversionService _conversionService;
 
 
 		// bug mit DirectoryWriter.. deswegen RAMDirectory --> inperformant bei größeren Datensätzen
 
-		public SimpsonsIndex(string indexPath)
+		public SimpsonsIndex(IConversionService conversionService)
 		{
+			_conversionService = conversionService;
 			analyzer = new StandardAnalyzer(MATCH_LUCENE_VERSION, StandardAnalyzer.STOP_WORDS_SET);
 			//analyzer = new KeywordAnalyzer();
 			queryParser = SetupQueryParser(analyzer);
@@ -51,20 +54,17 @@ namespace SimpsonsSearch.searchEngine
 			foreach (var scriptLine in scriptLines)
 			{
 				var document = BuildDocument(scriptLine);
-				writer.UpdateDocument(new Term("id", scriptLine.id.ToString()), document);
+				writer.UpdateDocument(new Term("id", scriptLine.id), document);
 			}
 
 			writer.Flush(true, true);
 			writer.Commit();
 		}
 
-		public static double ConvertMillisecondsToMinutes(double milliseconds)
-		{
-			return TimeSpan.FromMilliseconds(milliseconds).TotalMinutes;
-		}
+		
 		private Document BuildDocument(ScriptLine scriptLine)
 		{
-			var convertedTimeStamp = ConvertMillisecondsToMinutes(scriptLine.timestamp_in_ms);
+			var convertedTimeStamp = _conversionService.ConvertMillisecondsToMinutes(double.Parse(scriptLine.timestamp_in_ms));
 			var doc = new Document
 			{
 				new StoredField("id", scriptLine.id),
