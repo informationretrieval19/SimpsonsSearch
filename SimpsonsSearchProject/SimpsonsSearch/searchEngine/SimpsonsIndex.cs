@@ -79,19 +79,19 @@ namespace SimpsonsSearch.searchEngine
 			return doc;
 		}
 
-		
+		//search methode hat viele Überladungen die angepasst werden können, um ergebnisse zumanipulieren..
 
 		public SearchResults Search(string queryString)
 		{
-			int resultsPerPage = 10;
+			int resultsPerPage = 20000;
 			var query = BuildQuery(queryString);
 			searchManager.MaybeRefreshBlocking();
 			var searcher = searchManager.Acquire();
 
 			try
 			{
-				var topdDocs = searcher.Search(query, resultsPerPage);
-				return CompileResults(searcher, topdDocs);
+				var topDocs = searcher.Search(query, resultsPerPage);
+				return CompileResults(searcher, topDocs);
 			}
 			finally
 			{

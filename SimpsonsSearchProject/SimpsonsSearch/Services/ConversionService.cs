@@ -30,6 +30,7 @@ namespace SimpsonsSearch.Helper
 				csv.Configuration.Delimiter = ",";
 				//csv.Configuration.IgnoreQuotes = true;
 				csv.Configuration.MissingFieldFound = null;
+			
 
 				csv.Configuration.BadDataFound = context =>
 				{
