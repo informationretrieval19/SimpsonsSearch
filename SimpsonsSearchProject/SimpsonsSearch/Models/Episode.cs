@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SimpsonsSearch.Models
+﻿namespace SimpsonsSearch.Models
 {
+    /// <summary>
+    /// Klasse die alle Attribute aus der ExcelTabelle simpsons_episodes.csv enthält
+    /// Daten aus Excel werden auf diese Klasse gemappt, sodass diese benutzt werden können
+    /// </summary>
 	public class Episode
 	{
 		public string id { get; set; }

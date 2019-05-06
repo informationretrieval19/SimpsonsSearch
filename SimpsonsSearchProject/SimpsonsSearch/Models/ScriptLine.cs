@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
-
-namespace SimpsonsSearch.searchEngine
+﻿namespace SimpsonsSearch.searchEngine
 {
-	// model der Datasource(scriptline.csv)
-	public class ScriptLine
+    // Klasse die Daten aus Exceltabelle simpsons_episodes.csv enthält
+    public class ScriptLine
 	{
 		public string id { get; set; }
 		public string episode_id { get; set; }
