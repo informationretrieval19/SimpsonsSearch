@@ -23,15 +23,15 @@ namespace SimpsonsSearch.Controllers
 			_searchEngine = searchEngine;
 		}
 
-        // Methode die aufgerufen wird wenn man die auf die seite: ../search/Index aufruft
+        // Methode die aufgerufen wird wenn man die seite: ../search/Index aufruft
         // returned ein Actionresult, in unserem Fall ist dies eine view(html seite)
-        // sucht Views Ornder nach einer Datei die Index.cshtml heißt und benutzt dort das IndexviewModel mit den Daten aus der Excel Datei Episodes..
-
+        // durchsucht den Views Ornder nach einer Datei die Index.cshtml heißt und benutzt dort das IndexviewModel mit den Daten aus der Excel Datei Episodes..
 		public IActionResult Index(IndexViewModel model)
 		{
 			model.Episodes = _conversionService.ConvertCsvToEpisodes();
 			return View(model);
 		}
+
         // Methode die die View Results.cshtml benutzt 
         // benutzt auch ein IndexviewModel - hier enthält dieses Model nur einen String Searchquery, 
         // der über die Nutzereingabe über die View hierhergelangt
@@ -43,11 +43,6 @@ namespace SimpsonsSearch.Controllers
 
 			return View(results);
 		}
-		//private static void DeleteIndexFiles()
-		//{
-		//	foreach (FileInfo f in new DirectoryInfo(Settings.IndexLocation).GetFiles())
-		//		f.Delete();
-		//}
 	}
 }
 
