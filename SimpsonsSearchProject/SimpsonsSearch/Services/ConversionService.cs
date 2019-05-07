@@ -24,7 +24,7 @@ namespace SimpsonsSearch.Helper
 		{
 			IList<string> _badRecords = new List<string>();
 
-			using (var reader = new StreamReader(@"C:\repos\uni\SimpsonsSearch\SimpsonsSearchProject\SimpsonsSearch\Data\simpsons_script_lines.csv"))
+			using (var reader = new StreamReader(@"data/simpsons_script_lines.csv"))
 			using (var csv = new CsvReader(reader))
 			{
 				csv.Configuration.Delimiter = ",";
@@ -46,7 +46,7 @@ namespace SimpsonsSearch.Helper
 		{
 			IList<string> _badRecords = new List<string>();
 
-			using (var reader = new StreamReader(@"C:\repos\uni\SimpsonsSearch\SimpsonsSearchProject\SimpsonsSearch\Data\simpsons_episodes.csv"))
+			using (var reader = new StreamReader(@"Data\simpsons_episodes.csv"))
 			using (var csv = new CsvReader(reader))
 			{
 				csv.Configuration.Delimiter = ",";
