@@ -12,12 +12,13 @@ using System;
 namespace SimpsonsSearch.searchEngine
 {
     /// <summary>
-    /// Klasse die 
+    /// Enthält Implementation der Lucene Suchengine
     /// </summary>
     public class LuceneEngine : ISearchEngine
 	{
 		private readonly IConversionService _conversionService;
 
+        // Lucene Objekte die benötigt werden
         private const LuceneVersion MATCH_LUCENE_VERSION = LuceneVersion.LUCENE_48;
         private readonly IndexWriter writer;
         private readonly Analyzer analyzer;
