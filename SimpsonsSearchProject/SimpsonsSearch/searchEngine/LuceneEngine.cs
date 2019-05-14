@@ -30,7 +30,6 @@ namespace SimpsonsSearch.searchEngine
         public LuceneEngine(IConversionService conversionService)
 		{
 			_conversionService = conversionService;
-
             analyzer = new StandardAnalyzer(MATCH_LUCENE_VERSION, StandardAnalyzer.STOP_WORDS_SET);
             queryParser = new MultiFieldQueryParser(MATCH_LUCENE_VERSION, new[] { "text" }, analyzer);
             writer = new IndexWriter(new RAMDirectory(), new IndexWriterConfig(MATCH_LUCENE_VERSION, analyzer));
