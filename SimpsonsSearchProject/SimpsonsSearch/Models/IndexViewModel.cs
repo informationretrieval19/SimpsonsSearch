@@ -12,6 +12,5 @@ namespace SimpsonsSearch
 		public IEnumerable<ScriptLine> ScriptLines { get; set; }
 		public IEnumerable<Episode> Episodes { get; set; }
 
-		public string SearchQuery { get; set; }
 	}
 }

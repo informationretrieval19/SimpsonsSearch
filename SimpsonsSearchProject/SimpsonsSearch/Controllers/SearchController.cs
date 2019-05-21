@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using SimpsonsSearch.Helper;
+using SimpsonsSearch.Models;
 using SimpsonsSearch.searchEngine;
 using SimpsonsSearch.Services;
 
@@ -25,21 +26,20 @@ namespace SimpsonsSearch.Controllers
 
         // Methode die aufgerufen wird wenn man die seite: ../search/Index aufruft
         // returned ein Actionresult, in unserem Fall ist dies eine view(html seite)
-        // durchsucht den Views Ornder nach einer Datei die Index.cshtml heißt und benutzt dort das IndexviewModel mit den Daten aus der Excel Datei Episodes..
-		public IActionResult Index(IndexViewModel model)
+        // durchsucht den Views Ornder nach einer Datei die Index.cshtml heißt und rendert diese
+		public IActionResult Index()
 		{
-			model.Episodes = _conversionService.ConvertCsvToEpisodes();
-			return View(model);
+			return View();
 		}
 
         // Methode die die View Results.cshtml benutzt 
         // benutzt auch ein IndexviewModel - hier enthält dieses Model nur einen String Searchquery, 
         // der über die Nutzereingabe über die View hierhergelangt
-		public IActionResult Results(IndexViewModel model)
+		public IActionResult Results(SearchformModel model)
 		{
 			//DeleteIndexFiles();
 			_searchEngine.BuildIndex();
-			var results = _searchEngine.Search(model.SearchQuery);
+			var results = _searchEngine.Search(model.searchQuery);
 
 			return View(results);
 		}

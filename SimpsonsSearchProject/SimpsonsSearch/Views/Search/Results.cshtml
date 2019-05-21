@@ -4,6 +4,11 @@
     ViewData["Title"] = "Results";
 }
 
+
+@await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
+
+
+
 <h2>Results</h2>
 
 <table class="table table-bordered table-striped table-dark">
@@ -23,11 +28,11 @@
             <td> Episode: @hit.Id at minute: @hit.Timestamp</td>
             <td> @hit.Text</td>
             <td>
-                @hit.Person at @hit.Location 
+                @hit.Person at @hit.Location
             </td>
             <td>@hit.Score</td>
 
-            
+
         </tr>
     }
 </table>

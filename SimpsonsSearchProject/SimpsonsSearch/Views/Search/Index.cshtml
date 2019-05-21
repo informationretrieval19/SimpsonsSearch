@@ -1,19 +1,8 @@
-﻿@model SimpsonsSearch.IndexViewModel
-@*
-*@
-@{
-}
-
+﻿
 
 <div class="container">
-    <div class="row" id="searchForm">
-        <form method="post" asp-controller="Search" asp-action="Results">
-            <div class="form-group">
-                <input class="form-control" type="text" asp-for="SearchQuery" />
-            </div>
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
-    </div>
+
+    @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
 
     <div class="mx-auto text-center">
         <img id="indexImage" src="~/images/simpsons_wallpaper.jpg" class="img-fluid" alt="simpsons Wallpaper" />
