@@ -17,34 +17,41 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Search" asp-action="Index" class="navbar-brand">SimpsonsSearch</a>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Search" asp-action="Index" class="navbar-brand">SimpsonsSearch</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav"></ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                   
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+        </nav>
+    </div>
     <partial name="_CookieConsentPartial" />
 
-    <div class="container-fluid body-content">
-        @RenderBody()
+
+    @RenderBody()
+
+    <footer id="layoutFooter" class="footer" height="100px" padding-left="5px">
         <hr />
-        <footer>
-            <p>&copy; 2019 - SimpsonsSearch</p>
-        </footer>
-    </div>
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-12">
+                    <span class="text-muted">&copy; 2019 - SimpsonsSearch</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

@@ -35,3 +35,20 @@ body {
         display: none;
     }
 }
+
+#layoutFooter {
+    padding-left: 5px;
+    position: absolute;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+}
+
+#searchForm {
+    padding-top:15px;
+}
+
+#indexImage {
+    width:50%;
+    
+}
