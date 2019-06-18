@@ -24,4 +24,8 @@
     <None Include="wwwroot\images\simpsons_wallpaper.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Index\" />
+  </ItemGroup>
+
 </Project>

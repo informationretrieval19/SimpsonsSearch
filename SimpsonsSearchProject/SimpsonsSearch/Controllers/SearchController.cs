@@ -37,13 +37,30 @@ namespace SimpsonsSearch.Controllers
         // der über die Nutzereingabe über die View hierhergelangt
 		public IActionResult Results(SearchformModel model)
 		{
-			//DeleteIndexFiles();
-			_searchEngine.BuildIndex();
+		
 			var results = _searchEngine.Search(model.searchQuery);
 
 			return View(results);
 		}
-	}
+
+
+
+        // button datenbankorientiert
+        public IActionResult SimpleSearch(SearchformModel model)
+        {
+            // hier auswählen ob baseVersion oder spezielle Version
+       //     var result = _searchEngine.Search(model.searchQuery, "baseVersion");
+            return View("Results");
+        }
+
+
+        // button interpretative suche
+        public IActionResult InterpretativeSearch(SearchformModel model)
+        {
+            return View("Results");
+        }
+
+    }
 }
 
 			

@@ -37,6 +37,7 @@ namespace SimpsonsSearch
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			services.AddScoped<ISearchEngine, LuceneEngine>();
+            services.AddScoped<SimpleSearchBase>();
 			services.AddScoped<IConversionService, ConversionService>();
 		}
 
