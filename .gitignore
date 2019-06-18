@@ -483,4 +483,11 @@ MigrationBackup/
 *.rss
 *.xhtml
 
+### index files ###
+
+*.cfe
+*.cfs
+*.si
+*.gen
+segments_1
 # End of https://www.gitignore.io/api/web,csharp,aspnetcore
