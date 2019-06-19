@@ -13,9 +13,9 @@ namespace SimpsonsSearch.searchEngine
         {
         }
 
-        public override Document BuildDocument(ScriptLine scriptLine)
-        {
-            return base.BuildDocument(scriptLine);
-        }
+        public override string LuceneDir => @"index/test";
+
+        
+
     }
 }

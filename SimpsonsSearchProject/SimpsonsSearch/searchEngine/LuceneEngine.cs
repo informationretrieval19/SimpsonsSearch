@@ -15,16 +15,19 @@ namespace SimpsonsSearch.searchEngine
     public class LuceneEngine : ISearchEngine
     {
         private readonly SimpleSearchBase _simpleSearchBase;
+        private readonly SimpleSearchTest _simpleSearchTest;
 
-        public LuceneEngine(SimpleSearchBase simpleSearchBase)
+        public LuceneEngine(SimpleSearchBase simpleSearchBase, SimpleSearchTest simpleSearchTest)
         {
             _simpleSearchBase = simpleSearchBase;
+            _simpleSearchTest = simpleSearchTest;
         }
 
 
         public SearchResults Search(string searchQuery)
         {
             return _simpleSearchBase.PrepareSearch(searchQuery);
+            //return _simpleSearchTest.PrepareSearch(searchQuery);
         }
     }
 }

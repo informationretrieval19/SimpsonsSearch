@@ -21,24 +21,29 @@ namespace SimpsonsSearch.searchEngine
     public class SimpleSearchBase
     {
         private const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
-        private string _luceneDir = @"Index\Base";
+        private static string _luceneDir = @"Index\Base";
         private readonly IConversionService _conversionService;
 
-        private FSDirectory _indexDirectory;
-        private readonly QueryParser _queryParser;
-        private readonly IndexWriter _indexWriter;
-        private readonly SearcherManager _searcherManager;
+        private static FSDirectory _indexDirectory;
+        private readonly QueryParser _queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, _analyzer);
+        private static readonly Analyzer _analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
+        private static readonly IndexWriter _indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, _analyzer));
+        private readonly SearcherManager _searcherManager = new SearcherManager(_indexWriter, true, null);
 
         public SimpleSearchBase(IConversionService conversionService)
         {
+
             _conversionService = conversionService;
-            Analyzer analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-            _queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzer);
-            _indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
-            _searcherManager = new SearcherManager(_indexWriter, true, null);
         }
 
-        public FSDirectory GetIndex()
+        public virtual string LuceneDir => _luceneDir;
+        public virtual IndexWriter IndexWriter => _indexWriter;
+        public virtual QueryParser QueryParser =>_queryParser;
+        public virtual Analyzer Analyzer => _analyzer;
+        public virtual SearcherManager SearcherManager => _searcherManager;
+
+
+        public static FSDirectory GetIndex()
         {
 
             _indexDirectory = FSDirectory.Open(new DirectoryInfo(_luceneDir));
@@ -81,7 +86,7 @@ namespace SimpsonsSearch.searchEngine
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 
         /// </summary>
         /// <returns>SearchResults</returns>
-        public SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
+        public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
         {
             var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
             foreach (var result in topDocs.ScoreDocs)
@@ -102,7 +107,7 @@ namespace SimpsonsSearch.searchEngine
             return searchResults;
         }
 
-        public void BuildIndex()
+        public virtual void BuildIndex()
         {
             var scriptLines = _conversionService.ConvertCsVtoScriptLines();
 
@@ -118,11 +123,11 @@ namespace SimpsonsSearch.searchEngine
             _indexWriter.Commit();
         }
 
-        public SearchResults PrepareSearch(string searchQuery)
+        public virtual SearchResults PrepareSearch(string searchQuery)
         {
             if (DirectoryReader.IndexExists(GetIndex()))
             {
-                // wenn indexexists do no call buildindex please!
+                // wenn indexexists do no call buildindex!
             }
             else
             {
