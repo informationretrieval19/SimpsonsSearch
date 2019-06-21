@@ -1,4 +1,9 @@
-﻿namespace SimpsonsSearch.Models
+﻿
+/// <summary>
+/// Test Text für Branch Nutzung Git
+/// </summary>
+
+namespace SimpsonsSearch.Models
 {
     /// <summary>
     /// Klasse die alle Attribute aus der ExcelTabelle simpsons_episodes.csv enthält
