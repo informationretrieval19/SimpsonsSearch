@@ -33,12 +33,13 @@ namespace SimpsonsSearch
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            // hier werden alle services registriert 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<ISearchEngine, LuceneEngine>();
             services.AddScoped<SimpleSearchBase>();
             services.AddScoped<SimpleSearchTest>();
+            services.AddScoped<AdvancedSearchBase>();
             services.AddScoped<IConversionService, ConversionService>();
         }
 

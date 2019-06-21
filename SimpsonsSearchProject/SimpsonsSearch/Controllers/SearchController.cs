@@ -14,14 +14,12 @@ namespace SimpsonsSearch.Controllers
 	public class SearchController : Controller
 	{
 		private readonly ISearchEngine _searchEngine;
-		private readonly IConversionService _conversionService;
 
         // Konstruktur der duch 'Dependency Injektion' den SeachEngineService und einen ConversionService initialisiert
         // somit stehen alle Methoden die in diesen KLassen erstellt wurden zur Verfügug
 		public SearchController(ISearchEngine searchEngine, IConversionService conversionService)
 		{
-			_conversionService = conversionService;
-			_searchEngine = searchEngine;
+            _searchEngine = searchEngine;
 		}
 
         // Methode die aufgerufen wird wenn man die seite: ../search/Index aufruft
@@ -43,19 +41,15 @@ namespace SimpsonsSearch.Controllers
 			return View(results);
 		}
 
-
-
         // button datenbankorientiert
         public IActionResult SimpleSearch(SearchformModel model)
         {
-            // hier auswählen ob baseVersion oder spezielle Version
-       //     var result = _searchEngine.Search(model.searchQuery, "baseVersion");
+            var results = _searchEngine.SearchSimple(model.searchQuery);
             return View("Results");
         }
 
-
         // button interpretative suche
-        public IActionResult InterpretativeSearch(SearchformModel model)
+        public IActionResult AdvancedSearch(SearchformModel model)
         {
             return View("Results");
         }
