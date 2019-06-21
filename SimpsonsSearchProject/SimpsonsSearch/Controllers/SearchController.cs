@@ -6,6 +6,7 @@ using SimpsonsSearch.Models;
 using SimpsonsSearch.searchEngine;
 using SimpsonsSearch.Services;
 
+//git: no risk, no fun
 namespace SimpsonsSearch.Controllers
 {
     /// <summary>
