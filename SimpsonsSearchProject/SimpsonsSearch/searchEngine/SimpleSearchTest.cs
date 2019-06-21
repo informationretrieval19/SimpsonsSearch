@@ -20,6 +20,7 @@ namespace SimpsonsSearch.searchEngine
         public override void BuildIndex()
         {
             // eigene implementation einfügen
+            //trst
         }
 
         public override SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
