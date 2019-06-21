@@ -1,18 +1,7 @@
-﻿using Lucene.Net.Analysis;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.Documents;
-using Lucene.Net.Index;
-using Lucene.Net.QueryParsers.Classic;
-using Lucene.Net.Search;
-using Lucene.Net.Store;
-using Lucene.Net.Util;
-using SimpsonsSearch.Services;
-using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace SimpsonsSearch.searchEngine
 {
-   
     public class LuceneEngine : ISearchEngine
     {
         private readonly SimpleSearchBase _simpleSearchBase;
@@ -39,13 +28,17 @@ namespace SimpsonsSearch.searchEngine
         }
 
         // hier fall unterscheidung für einfache suche 
+
         public SearchResults SearchSimple(string searchQuery)
         {
+
             return _simpleSearchBase.PrepareSearch(searchQuery);
         }
         // hier fall unterscheidung für interpretative suche 
         public SearchResults SearchAdvanced(string searchQuery)
         {
+            // suchanfrage obama --> suche in liste oboma --> list terme sind dann suchbegriffe 
+
             var wordlist = new WordListBuilder();
             var list = wordlist.GetExampleList();
             if (list.Contains(searchQuery))
@@ -56,3 +49,6 @@ namespace SimpsonsSearch.searchEngine
         }
     }
 }
+
+
+// 
