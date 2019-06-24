@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
@@ -11,58 +8,74 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
-using Microsoft.AspNetCore.Mvc;
-using SimpsonsSearch.Models;
 using SimpsonsSearch.Services;
-using Directory = Lucene.Net.Store.Directory;
+
 
 namespace SimpsonsSearch.searchEngine
 {
     public class SimpleSearchBase
     {
         private const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
-        private static string _luceneDir = @"Index\Base";
         private readonly IConversionService _conversionService;
-
-        private static FSDirectory _indexDirectory;
-        private readonly QueryParser _queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, _analyzer);
-        private static readonly Analyzer _analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-        private static readonly IndexWriter _indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, _analyzer));
-        private readonly SearcherManager _searcherManager = new SearcherManager(_indexWriter, true, null);
+        private FSDirectory _indexDirectory;
 
         public SimpleSearchBase(IConversionService conversionService)
         {
-
             _conversionService = conversionService;
         }
 
-        public virtual string LuceneDir => _luceneDir;
-        public virtual IndexWriter IndexWriter => _indexWriter;
-        public virtual QueryParser QueryParser =>_queryParser;
-        public virtual Analyzer Analyzer => _analyzer;
-        public virtual SearcherManager SearcherManager => _searcherManager;
 
 
-        public static FSDirectory GetIndex()
+
+        // getter für die Properties die lucene benötigt um index zu bauen/zudurchsuchen
+        public virtual string LuceneDir
         {
-
-            _indexDirectory = FSDirectory.Open(new DirectoryInfo(_luceneDir));
+            get
             {
-                if (IndexWriter.IsLocked(_indexDirectory))
-                {
-                    IndexWriter.Unlock(_indexDirectory);
-                }
-
-                var lockFilePath = Path.Combine(_luceneDir, "write.lock");
-                if (File.Exists(lockFilePath))
-                {
-                    File.Delete(lockFilePath);
-                }
-
-                return _indexDirectory;
+                var luceneDir = @"Index\Base";
+                return luceneDir;
             }
-
         }
+
+        public virtual IndexWriter IndexWriter
+        {
+            get
+            {
+                var indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, Analyzer));
+                return indexWriter;
+            }
+        }
+
+        public virtual QueryParser QueryParser
+        {
+            get
+            {
+                var queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, Analyzer);
+                return queryParser;
+            }
+        }
+
+        public virtual Analyzer Analyzer
+        {
+            get
+            {
+                var analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
+                return analyzer;
+            }
+           
+        }
+
+        public virtual SearcherManager SearcherManager
+        {
+            get
+            {
+                var searcherManager = new SearcherManager(IndexWriter, true, null);
+                return searcherManager;
+            }
+        }
+
+
+        
 
         /// <summary>
         /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
@@ -116,11 +129,11 @@ namespace SimpsonsSearch.searchEngine
             foreach (var scriptLine in scriptLines)
             {
                 var document = BuildDocument(scriptLine);
-                _indexWriter.UpdateDocument(new Term("id", scriptLine.id), document);
+                IndexWriter.UpdateDocument(new Term("id", scriptLine.id), document);
             }
 
-            _indexWriter.Flush(true, true);
-            _indexWriter.Commit();
+            IndexWriter.Flush(true, true);
+            IndexWriter.Commit();
         }
 
         public virtual SearchResults PrepareSearch(string searchQuery)
@@ -135,10 +148,10 @@ namespace SimpsonsSearch.searchEngine
             }
 
             var resultsPerPage = 20000;
-            var query = _queryParser.Parse(searchQuery);
-            _searcherManager.MaybeRefresh();
+            var query = QueryParser.Parse(searchQuery);
+            SearcherManager.MaybeRefresh();
 
-            var searcher = _searcherManager.Acquire();
+            var searcher = SearcherManager.Acquire();
 
             try
             {
@@ -147,11 +160,31 @@ namespace SimpsonsSearch.searchEngine
             }
             finally
             {
-                _searcherManager.Release(searcher);
+                SearcherManager.Release(searcher);
 
             }
         }
 
+        private FSDirectory GetIndex()
+        {
+
+            _indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
+            {
+                if (IndexWriter.IsLocked(_indexDirectory))
+                {
+                    IndexWriter.Unlock(_indexDirectory);
+                }
+
+                var lockFilePath = Path.Combine(LuceneDir, "write.lock");
+                if (File.Exists(lockFilePath))
+                {
+                    File.Delete(lockFilePath);
+                }
+
+                return _indexDirectory;
+            }
+
+        }
 
     }
 }
