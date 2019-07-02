@@ -5,50 +5,34 @@ namespace SimpsonsSearch.searchEngine
     public class LuceneEngine : ISearchEngine
     {
         private readonly SimpleSearchBase _simpleSearchBase;
-        private readonly SimpleSearchTest _simpleSearchTest;
+        private readonly AdvancedSearchWithSynonyms _advancedSearchWithSynonyms;
         private readonly AdvancedSearchBase _advancedSearchBase;
 
-        public LuceneEngine(SimpleSearchBase simpleSearchBase, SimpleSearchTest simpleSearchTest, AdvancedSearchBase advancedSearchBase)
+        public LuceneEngine(SimpleSearchBase simpleSearchBase, AdvancedSearchWithSynonyms advancedSearchWithSynonyms, AdvancedSearchBase advancedSearchBase)
         {
             _simpleSearchBase = simpleSearchBase;
-            _simpleSearchTest = simpleSearchTest;
+            _advancedSearchWithSynonyms = advancedSearchWithSynonyms;
             _advancedSearchBase = advancedSearchBase;
         }
-        // das ist die zuordnungsklasse
-        // hier wird entschieden welcher index, bzw wie gesucht wird 
-        // indem je nach dem ob der user den button(datenbankabfrage oder interpretative suche angekreuzt hat), der simplesearchbase oder advancedsearchbase ausgewählt wird
-        // weitere unterscheidung: topic abhängig
-        // wenn user bestimmte wörter eingibt die in einer wörterliste sind wird eine bestimmte klasse aufgerufen 
-        // das selbe für simplesearch nur ohne wörterliste 
-        // abhängig von den inputparametern der searchMethode, neben searchquery können noch weitere hinzukommen 
+        // zuordnungsklasse
+        // hier mapping wie und wann welche klasse zur indexbildung ausgewählt wird 
+        // ruft unter bestimmtem umständen die base klasse oder eine spezielle klasse auf 
+
 
         public SearchResults Search(string query)
         {
             return _simpleSearchBase.PrepareSearch(query);
         }
 
-        // hier fall unterscheidung für einfache suche 
-
         public SearchResults SearchSimple(string searchQuery)
         {
 
             return _simpleSearchBase.PrepareSearch(searchQuery);
         }
-        // hier fall unterscheidung für interpretative suche 
+        
         public SearchResults SearchAdvanced(string searchQuery)
         {
-            // suchanfrage obama --> suche in liste oboma --> list terme sind dann suchbegriffe 
-
-            var wordlist = new WordListBuilder();
-            var list = wordlist.GetExampleList();
-            if (list.Contains(searchQuery))
-            {
-                return _advancedSearchBase.PrepareSearch(searchQuery);
-            }
-            return _simpleSearchTest.PrepareSearch(searchQuery);
+            return _advancedSearchWithSynonyms.PrepareSearch(searchQuery);
         }
     }
 }
-
-
-// 

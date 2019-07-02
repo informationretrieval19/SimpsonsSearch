@@ -18,7 +18,7 @@ namespace SimpsonsSearch.Controllers
 
         // Konstruktur der duch 'Dependency Injektion' den SeachEngineService und einen ConversionService initialisiert
         // somit stehen alle Methoden die in diesen KLassen erstellt wurden zur Verfügug
-		public SearchController(ISearchEngine searchEngine, IConversionService conversionService)
+		public SearchController(ISearchEngine searchEngine)
 		{
             _searchEngine = searchEngine;
 		}
@@ -35,25 +35,35 @@ namespace SimpsonsSearch.Controllers
         // benutzt auch ein IndexviewModel - hier enthält dieses Model nur einen String Searchquery, 
         // der über die Nutzereingabe über die View hierhergelangt
 		public IActionResult Results(SearchformModel model)
-		{
-		
-			var results = _searchEngine.Search(model.searchQuery);
-
-			return View(results);
+        {
+            
+            if (model.searchQuery.Contains('*'))
+            {
+                model.searchQuery.Replace("*", string.Empty);
+                var results = _searchEngine.SearchAdvanced(model.searchQuery);
+                return View(results);
+            }
+            else
+            {
+                var results = _searchEngine.Search(model.searchQuery);
+                return View(results);
+            }
+			
 		}
 
-        // button datenbankorientiert
-        public IActionResult SimpleSearch(SearchformModel model)
-        {
-            var results = _searchEngine.SearchSimple(model.searchQuery);
-            return View("Results");
-        }
+        //// button datenbankorientiert
+        //public IActionResult SimpleSearch(SearchformModel model)
+        //{
+        //    var results = _searchEngine.SearchSimple(model.searchQuery);
+        //    return View("Results");
+        //}
 
-        // button interpretative suche
-        public IActionResult AdvancedSearch(SearchformModel model)
-        {
-            return View("Results");
-        }
+        //// button interpretative suche
+        //public IActionResult AdvancedSearch(SearchformModel model)
+        //{
+        //    var results = _searchEngine.SearchAdvanced(model.searchQuery);
+        //    return View("Results", results);
+        //}
 
     }
 }
