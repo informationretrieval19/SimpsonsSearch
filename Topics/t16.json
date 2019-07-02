@@ -1,0 +1,9 @@
+{
+	"topic_id": "t16",
+	"query": "affair", 
+	"description": "To find episodes where a character cheats on his or her significant other or has an affair.",
+	"narrative": [
+		"Only if there is actual cheating on a significant other involved, the document counts as relevant. Another possibility would be that of someone having a sexual relationship with someone without having a partner",
+		"A simple flirt that does not include more than one scene would not be sufficient." 
+		]
+}
