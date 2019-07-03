@@ -18,6 +18,7 @@ namespace SimpsonsSearch.searchEngine
     {
         public const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
         private readonly IConversionService _conversionService;
+        private FSDirectory _indexDirectory;
 
         public SimpleSearchBase(IConversionService conversionService)
         {
@@ -30,7 +31,7 @@ namespace SimpsonsSearch.searchEngine
         {
             get
             {
-                var luceneDir = @"Index\Base";
+                var luceneDir = @"Index/Base";
                 return luceneDir;
             }
         }
@@ -58,22 +59,21 @@ namespace SimpsonsSearch.searchEngine
             get
             {
                 var analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-                //var analyzer = new SynonymAnalyzer();
                 return analyzer;
             }
-           
+
         }
 
         public virtual SearcherManager SearcherManager
         {
-            get 
+            get
             {
                 var searcherManager = new SearcherManager(IndexWriter, true, null);
                 return searcherManager;
             }
         }
 
-        
+
 
         /// <summary>
         /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
@@ -92,6 +92,7 @@ namespace SimpsonsSearch.searchEngine
             };
             return doc;
         }
+
         /// <summary>
         /// baut index
         /// </summary>
@@ -103,11 +104,21 @@ namespace SimpsonsSearch.searchEngine
             foreach (var scriptLine in scriptLines)
             {
                 var document = BuildDocument(scriptLine);
-                IndexWriter.UpdateDocument(new Term("id", scriptLine.id), document);
+                
+                try
+                {
+                    IndexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
+                }
+                catch (IOException e)
+                {
+
+                    IndexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
+                }
             }
 
             IndexWriter.Flush(true, true);
             IndexWriter.Commit();
+            IndexWriter.Dispose();
         }
         /// <summary>
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 
@@ -134,19 +145,15 @@ namespace SimpsonsSearch.searchEngine
             return searchResults;
         }
 
-        
+
 
         public virtual SearchResults PrepareSearch(string searchQuery)
         {
-            if (DirectoryReader.IndexExists(GetIndex()))
-            {
-                // wenn indexexists do no call buildindex!
-            }
-            else
+            if (!DirectoryReader.IndexExists(GetIndex()))
             {
                 BuildIndex();
             }
-
+            
             var resultsPerPage = 20000;
             var query = QueryParser.Parse(searchQuery);
             SearcherManager.MaybeRefresh();
@@ -173,21 +180,21 @@ namespace SimpsonsSearch.searchEngine
         public FSDirectory GetIndex()
         {
 
-           var  indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
-           {
-               if (IndexWriter.IsLocked(indexDirectory))
-               {
-                   IndexWriter.Unlock(indexDirectory);
-               }
+            _indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
+            {
+                if (IndexWriter.IsLocked(_indexDirectory))
+                {
+                    IndexWriter.Unlock(_indexDirectory);
+                }
 
-               var lockFilePath = Path.Combine(LuceneDir, "write.lock");
-               if (File.Exists(lockFilePath))
-               {
-                   File.Delete(lockFilePath);
-               }
+                var lockFilePath = Path.Combine(LuceneDir, "write.lock");
+                if (File.Exists(lockFilePath))
+                {
+                    File.Delete(lockFilePath);
+                }
 
-               return indexDirectory;
-           }
+                return _indexDirectory;
+            }
 
         }
 
