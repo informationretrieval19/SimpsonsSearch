@@ -19,17 +19,66 @@ namespace SimpsonsSearch.searchEngine
     {
         private readonly IConversionService _conversionService;
         private FSDirectory _indexDirectory;
-        
-        
+        private readonly IndexWriter indexWriter;
+        private readonly Analyzer analyzer;
+        private readonly QueryParser queryParser;
+        private readonly SearcherManager searcherManager;
+
         public AdvancedSearchWithSynonyms(IConversionService conversionService) : base(conversionService)
         {
             _conversionService = conversionService;
+            analyzer = new SynonymAnalyzer();
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzer);
+            indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
+            searcherManager = new SearcherManager(indexWriter, true, null);
         }
 
         public override string LuceneDir => @"index/test";
 
-        
-        
+        public override SearchResults PrepareSearch(string searchQuery)
+        {
+            if (!DirectoryReader.IndexExists(GetIndex()))
+            {
+                BuildIndex();
+            }
+
+            var resultsPerPage = 20000;
+            var query = queryParser.Parse(searchQuery);
+            searcherManager.MaybeRefresh();
+
+            var searcher = searcherManager.Acquire();
+
+            try
+            {
+                var topDocs = searcher.Search(query, resultsPerPage);
+                var results = CompileResults(searcher, topDocs);
+                return results;
+            }
+            finally
+            {
+                searcherManager.Release(searcher);
+
+            }
+        }
+
+        public override void BuildIndex()
+        {
+            var scriptLines = _conversionService.ConvertCsVtoScriptLines();
+            if (scriptLines == null) throw new ArgumentNullException();
+
+            foreach (var scriptLine in scriptLines)
+            {
+                var document = BuildDocument(scriptLine);
+
+
+                indexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
+
+            }
+
+            indexWriter.Flush(true, true);
+            indexWriter.Commit();
+        }
+
         public override Document BuildDocument(ScriptLine scriptLine)
         {
             return base.BuildDocument(scriptLine);
@@ -58,9 +107,24 @@ namespace SimpsonsSearch.searchEngine
             return searchResults;
         }
 
-       
 
-       
+        public override FSDirectory GetIndex()
+        {
+            _indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
+            {
+                if (IndexWriter.IsLocked(_indexDirectory))
+                {
+                    IndexWriter.Unlock(_indexDirectory);
+                }
 
+                var lockFilePath = Path.Combine(LuceneDir, "write.lock");
+                if (File.Exists(lockFilePath))
+                {
+                    File.Delete(lockFilePath);
+                }
+
+                return _indexDirectory;
+            }
+        }
     }
 }

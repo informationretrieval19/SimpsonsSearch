@@ -47,22 +47,30 @@ namespace SimpsonsSearch.searchEngine
             }
         }
 
-        /// <summary>
-        /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
-        /// </summary>
-        /// <returns>Document</returns>
-        public virtual Document BuildDocument(ScriptLine scriptLine)
+        public virtual SearchResults PrepareSearch(string searchQuery)
         {
-            var doc = new Document
+            if (!DirectoryReader.IndexExists(GetIndex()))
             {
-                new StoredField("id", scriptLine.id),
-                new TextField("text", scriptLine.spoken_words, Field.Store.YES),
-                new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
-                new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
-                new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
-                new StoredField("timestamp", scriptLine.timestamp_in_ms)
-            };
-            return doc;
+                BuildIndex();
+            }
+
+            var resultsPerPage = 20000;
+            var query = queryParser.Parse(searchQuery);
+            searcherManager.MaybeRefresh();
+
+            var searcher = searcherManager.Acquire();
+
+            try
+            {
+                var topDocs = searcher.Search(query, resultsPerPage);
+                var results = CompileResults(searcher, topDocs);
+                return results;
+            }
+            finally
+            {
+                searcherManager.Release(searcher);
+
+            }
         }
 
         /// <summary>
@@ -110,39 +118,29 @@ namespace SimpsonsSearch.searchEngine
             return searchResults;
         }
 
-
-
-        public virtual SearchResults PrepareSearch(string searchQuery)
+        /// <summary>
+        /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
+        /// </summary>
+        /// <returns>Document</returns>
+        public virtual Document BuildDocument(ScriptLine scriptLine)
         {
-            if (!DirectoryReader.IndexExists(GetIndex()))
+            var doc = new Document
             {
-                BuildIndex();
-            }
-
-            var resultsPerPage = 20000;
-            var query = queryParser.Parse(searchQuery);
-            searcherManager.MaybeRefresh();
-
-            var searcher = searcherManager.Acquire();
-
-            try
-            {
-                var topDocs = searcher.Search(query, resultsPerPage);
-                var results = CompileResults(searcher, topDocs);
-                return results;
-            }
-            finally
-            {
-                searcherManager.Release(searcher);
-
-            }
+                new StoredField("id", scriptLine.id),
+                new TextField("text", scriptLine.spoken_words, Field.Store.YES),
+                new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
+                new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
+                new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
+                new StoredField("timestamp", scriptLine.timestamp_in_ms)
+            };
+            return doc;
         }
 
         /// <summary>
         /// hilfsmethode die gespeicherten index returned
         /// </summary>
         /// <returns></returns>
-        public FSDirectory GetIndex()
+        public virtual FSDirectory GetIndex()
         {
 
             _indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
