@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
@@ -19,14 +20,24 @@ namespace SimpsonsSearch.searchEngine
         public const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
         private readonly IConversionService _conversionService;
         private FSDirectory _indexDirectory;
+        private readonly IndexWriter indexWriter;
+        private readonly Analyzer analyzer;
+        private readonly QueryParser queryParser;
+        private readonly SearcherManager searcherManager;
+
+
 
         public SimpleSearchBase(IConversionService conversionService)
         {
             _conversionService = conversionService;
+            analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzer);
+            indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
+            searcherManager = new SearcherManager(indexWriter, true, null);
         }
 
 
-        // getter für die Properties die lucene benötigt um index zu bauen/zudurchsuchen
+       // ort an dem index gespeichert wird ist überschreibbar 
         public virtual string LuceneDir
         {
             get
@@ -35,45 +46,6 @@ namespace SimpsonsSearch.searchEngine
                 return luceneDir;
             }
         }
-
-        public virtual IndexWriter IndexWriter
-        {
-            get
-            {
-                var indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, Analyzer));
-                return indexWriter;
-            }
-        }
-
-        public virtual QueryParser QueryParser
-        {
-            get
-            {
-                var queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, Analyzer);
-                return queryParser;
-            }
-        }
-
-        public virtual Analyzer Analyzer
-        {
-            get
-            {
-                var analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-                return analyzer;
-            }
-
-        }
-
-        public virtual SearcherManager SearcherManager
-        {
-            get
-            {
-                var searcherManager = new SearcherManager(IndexWriter, true, null);
-                return searcherManager;
-            }
-        }
-
-
 
         /// <summary>
         /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
@@ -104,21 +76,14 @@ namespace SimpsonsSearch.searchEngine
             foreach (var scriptLine in scriptLines)
             {
                 var document = BuildDocument(scriptLine);
-                
-                try
-                {
-                    IndexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
-                }
-                catch (IOException e)
-                {
 
-                    IndexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
-                }
+
+                indexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
+
             }
 
-            IndexWriter.Flush(true, true);
-            IndexWriter.Commit();
-            IndexWriter.Dispose();
+            indexWriter.Flush(true, true);
+            indexWriter.Commit();
         }
         /// <summary>
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 
@@ -153,12 +118,12 @@ namespace SimpsonsSearch.searchEngine
             {
                 BuildIndex();
             }
-            
-            var resultsPerPage = 20000;
-            var query = QueryParser.Parse(searchQuery);
-            SearcherManager.MaybeRefresh();
 
-            var searcher = SearcherManager.Acquire();
+            var resultsPerPage = 20000;
+            var query = queryParser.Parse(searchQuery);
+            searcherManager.MaybeRefresh();
+
+            var searcher = searcherManager.Acquire();
 
             try
             {
@@ -168,7 +133,7 @@ namespace SimpsonsSearch.searchEngine
             }
             finally
             {
-                SearcherManager.Release(searcher);
+                searcherManager.Release(searcher);
 
             }
         }
