@@ -39,8 +39,8 @@ namespace SimpsonsSearch.Controllers
             
             if (model.searchQuery.Contains('*'))
             {
-                model.searchQuery.Replace("*", string.Empty);
-                var results = _searchEngine.SearchAdvanced(model.searchQuery);
+                var searchQueryEdited  = model.searchQuery.Replace("*", string.Empty);
+                var results = _searchEngine.SearchAdvanced(searchQueryEdited);
                 return View(results);
             }
             else

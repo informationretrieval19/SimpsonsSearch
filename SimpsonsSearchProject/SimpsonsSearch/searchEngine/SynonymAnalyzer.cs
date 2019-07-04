@@ -17,26 +17,30 @@ namespace SimpsonsSearch.searchEngine
         protected override TokenStreamComponents CreateComponents(string fieldName, TextReader reader)
         {
             
-
             var tokenizer = new StandardTokenizer(SimpleSearchBase.LUCENEVERSION, reader);
 
 
             var result = new SynonymFilter(tokenizer, GetSynonyms(), true);
 
-
             return new TokenStreamComponents(tokenizer, result);
         }
 
-       
         
-           
+        // hier wortlisten er synonymmap hinzufügen
+        // herausfinden wie man mehr als ein string einer base hinzufügt.. 
         public SynonymMap GetSynonyms()
         {
-            var base1 = "weihnachtsmann";
+            var wordlist1 = "weihnachtsmann";
             var syn1 = "christmas";
 
+            var wordlist2 = "ostern";
+            var syn2 = "easter";
+            
+
             var sBuilder = new SynonymMap.Builder(true);
-            sBuilder.Add(new CharsRef(base1), new CharsRef(syn1), true);
+            
+            sBuilder.Add(new CharsRef(wordlist1), new CharsRef(syn1), true);
+            sBuilder.Add(new CharsRef(wordlist1), new CharsRef(syn2),  true);
             var synonyms = sBuilder.Build();
             return synonyms;
         }

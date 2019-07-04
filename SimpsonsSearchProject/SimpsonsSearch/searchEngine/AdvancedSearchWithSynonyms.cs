@@ -21,14 +21,16 @@ namespace SimpsonsSearch.searchEngine
         private FSDirectory _indexDirectory;
         private readonly IndexWriter indexWriter;
         private readonly Analyzer analyzer;
+        private readonly Analyzer analyzerSearch;
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
 
         public AdvancedSearchWithSynonyms(IConversionService conversionService) : base(conversionService)
         {
             _conversionService = conversionService;
-            analyzer = new SynonymAnalyzer();
-            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzer);
+            analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
+            analyzerSearch = new SynonymAnalyzer();
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzerSearch);
             indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
             searcherManager = new SearcherManager(indexWriter, true, null);
         }
