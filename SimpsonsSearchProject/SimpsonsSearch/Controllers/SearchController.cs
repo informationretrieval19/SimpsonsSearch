@@ -41,7 +41,7 @@ namespace SimpsonsSearch.Controllers
             {
                 var searchQueryEdited  = model.searchQuery.Replace("*", string.Empty);
                 var results = _searchEngine.SearchAdvanced(searchQueryEdited);
-                return View("TopicView", results);
+                return View(results);
             }
             else
             {

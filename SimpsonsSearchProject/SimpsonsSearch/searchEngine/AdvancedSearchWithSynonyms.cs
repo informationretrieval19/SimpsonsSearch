@@ -8,10 +8,12 @@ using Lucene.Net.Analysis.Core;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
+using Lucene.Net.Queries;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using SimpsonsSearch.Services;
+using FilterClause = Lucene.Net.Search.FilterClause;
 
 namespace SimpsonsSearch.searchEngine
 {
@@ -63,6 +65,7 @@ namespace SimpsonsSearch.searchEngine
             }
         }
 
+
         public override void BuildIndex()
         {
             var scriptLines = _conversionService.ConvertCsVtoScriptLines();
@@ -86,7 +89,6 @@ namespace SimpsonsSearch.searchEngine
             return base.BuildDocument(scriptLine);
         }
 
-        
 
         public override SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
         {
