@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using SimpsonsSearch.searchEngine.topics;
 
 namespace SimpsonsSearch.searchEngine
 {
@@ -7,12 +8,14 @@ namespace SimpsonsSearch.searchEngine
         private readonly SimpleSearchBase _simpleSearchBase;
         private readonly AdvancedSearchWithSynonyms _advancedSearchWithSynonyms;
         private readonly AdvancedSearchBase _advancedSearchBase;
+        private readonly AlcoholTopic _alcoholTopic;
 
-        public LuceneEngine(SimpleSearchBase simpleSearchBase, AdvancedSearchWithSynonyms advancedSearchWithSynonyms, AdvancedSearchBase advancedSearchBase)
+        public LuceneEngine(SimpleSearchBase simpleSearchBase, AdvancedSearchWithSynonyms advancedSearchWithSynonyms, AdvancedSearchBase advancedSearchBase, AlcoholTopic alcoholTopic)
         {
             _simpleSearchBase = simpleSearchBase;
             _advancedSearchWithSynonyms = advancedSearchWithSynonyms;
             _advancedSearchBase = advancedSearchBase;
+            _alcoholTopic = alcoholTopic;
         }
         // zuordnungsklasse
         // hier mapping wie und wann welche klasse zur indexbildung ausgewählt wird 
@@ -32,6 +35,11 @@ namespace SimpsonsSearch.searchEngine
         
         public SearchResults SearchAdvanced(string searchQuery)
         {
+            var dicionaries = new Dictionaries();
+            if (dicionaries.alcoholDic.ContainsValue(searchQuery))
+            {
+                return _alcoholTopic.PrepareSearch(searchQuery);
+            }
             return _advancedSearchWithSynonyms.PrepareSearch(searchQuery);
         }
     }

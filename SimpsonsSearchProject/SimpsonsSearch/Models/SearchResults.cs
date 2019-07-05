@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace SimpsonsSearch.searchEngine
 {
-	// Ergebnis was lucene nach einer suche zurück gibt
+	// Suchergebnisse von lucene und selbst festgelegte
 	public class SearchResults
 	{
 		public SearchResults() => Hits = new List<Hit>();
 		public string Time { get; set; }
 		public int TotalHits { get; set; }
 		public IList<Hit> Hits { get; set; }
-	}
+
+
+        public string TopicName { get; set; }
+    }
 
 	// enthält alles was für jeden Suchtreffer angezeigt werden soll
 	public class Hit
@@ -20,6 +24,7 @@ namespace SimpsonsSearch.searchEngine
 		public string Text { get; set; }
 		public float Score { get; set; }
 		public float? Timestamp { get; set; }
+
 	}
 }
 

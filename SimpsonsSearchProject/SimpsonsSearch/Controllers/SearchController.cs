@@ -36,12 +36,12 @@ namespace SimpsonsSearch.Controllers
         // der über die Nutzereingabe über die View hierhergelangt
 		public IActionResult Results(SearchformModel model)
         {
-            
+            //vorrübergehende auswahl der interpretativen suche durch * in der nutzereingabe
             if (model.searchQuery.Contains('*'))
             {
                 var searchQueryEdited  = model.searchQuery.Replace("*", string.Empty);
                 var results = _searchEngine.SearchAdvanced(searchQueryEdited);
-                return View(results);
+                return View("TopicView", results);
             }
             else
             {
@@ -50,21 +50,6 @@ namespace SimpsonsSearch.Controllers
             }
 			
 		}
-
-        //// button datenbankorientiert
-        //public IActionResult SimpleSearch(SearchformModel model)
-        //{
-        //    var results = _searchEngine.SearchSimple(model.searchQuery);
-        //    return View("Results");
-        //}
-
-        //// button interpretative suche
-        //public IActionResult AdvancedSearch(SearchformModel model)
-        //{
-        //    var results = _searchEngine.SearchAdvanced(model.searchQuery);
-        //    return View("Results", results);
-        //}
-
     }
 }
 

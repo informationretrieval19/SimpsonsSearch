@@ -17,7 +17,19 @@ namespace SimpsonsSearch.searchEngine.topics
 
         public override SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
         {
-            return base.CompileResults(searcher, topDocs);
+            var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
+            foreach (var result in topDocs.ScoreDocs)
+            {
+                Document document = searcher.Doc(result.Doc);
+                Hit searchResult = new Hit {
+                    Id = document.GetField("episodeId")?.GetStringValue(),
+                    Score = result.Score,
+                };
+                searchResults.TopicName = "Alcohol";
+                searchResults.Hits.Add(searchResult);
+            }
+
+            return searchResults;
         }
     }
 }
