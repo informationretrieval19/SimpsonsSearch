@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpsonsSearch.Helper;
 using SimpsonsSearch.searchEngine;
-using SimpsonsSearch.searchEngine.topics;
 using SimpsonsSearch.Services;
 
 namespace SimpsonsSearch
@@ -39,9 +38,6 @@ namespace SimpsonsSearch
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<ISearchEngine, LuceneEngine>();
             services.AddScoped<SimpleSearchBase>();
-            services.AddScoped<AdvancedSearchWithSynonyms>();
-            services.AddScoped<AdvancedSearchBase>();
-            services.AddScoped<AlcoholTopic>();
             services.AddScoped<IConversionService, ConversionService>();
         }
 

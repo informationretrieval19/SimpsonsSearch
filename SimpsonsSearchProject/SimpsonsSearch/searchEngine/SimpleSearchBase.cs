@@ -93,6 +93,21 @@ namespace SimpsonsSearch.searchEngine
             indexWriter.Flush(true, true);
             indexWriter.Commit();
         }
+
+        public virtual Document BuildDocument(ScriptLine scriptLine)
+        {
+            var doc = new Document
+            {
+                new StoredField("id", scriptLine.id),
+                new TextField("text", scriptLine.spoken_words, Field.Store.YES),
+                new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
+                new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
+                new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
+                new StoredField("timestamp", scriptLine.timestamp_in_ms)
+            };
+            return doc;
+        }
+
         /// <summary>
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 
         /// </summary>
@@ -122,20 +137,7 @@ namespace SimpsonsSearch.searchEngine
         /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
         /// </summary>
         /// <returns>Document</returns>
-        public virtual Document BuildDocument(ScriptLine scriptLine)
-        {
-            var doc = new Document
-            {
-                new StoredField("id", scriptLine.id),
-                new TextField("text", scriptLine.spoken_words, Field.Store.YES),
-                new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
-                new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
-                new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
-                new StoredField("timestamp", scriptLine.timestamp_in_ms)
-            };
-            return doc;
-        }
-
+        
         /// <summary>
         /// hilfsmethode die gespeicherten index returned
         /// </summary>
