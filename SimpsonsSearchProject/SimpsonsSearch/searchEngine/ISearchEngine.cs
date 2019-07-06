@@ -5,7 +5,5 @@
 	{
 		//void BuildIndex();
 		SearchResults Search(string query);
-        SearchResults SearchSimple(string query);
-        SearchResults SearchAdvanced(string query);
     }
 }
