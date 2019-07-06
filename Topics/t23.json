@@ -1,0 +1,10 @@
+{
+	"topic_id": "t23",
+	"query": "education", 
+	"description": "To find episodes focusing around education and school.",
+	"narrative": [
+		"Relevant documents would include education or school as the main theme of the episode. This may also include a change of schools, special school projects or tests.",
+		"It does not suffice to have a small portion of scenes inside the school or school being mentioned at home." 
+	]
+		
+}

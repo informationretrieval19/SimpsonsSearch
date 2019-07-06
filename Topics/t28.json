@@ -1,0 +1,14 @@
+{
+	"topic_id": "t28",
+	"query": "holiday",
+	"description": "To find episodes focusing around a certain holiday.",
+	"narrative": [
+		"A relevant document would include dialogue or actions about holidays like",
+		"Halloween",
+		"Valentines Day", 
+		"Christmas", 
+		"Thanksgiving",
+		"St.Patricks Day",
+		"in Springfield. Travelling in an episode or a scene is not sufficient for it to be relevant."
+	]
+}

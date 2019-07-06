@@ -1,0 +1,10 @@
+{
+	"topic_id": "t39",
+	"query": "religion", 
+	"description": "To find episodes where religion plays a part in.",
+	"narrative": [
+		"When the episode is very religion centred or someone's religion strongly influence their action the document would be relevant. This does include all religions, not just christianity.",
+		"Insufficient would be the mere mentioning of a religion or a religious practice. Also going to church on a regular basis is not important enough." 
+	]
+		
+}

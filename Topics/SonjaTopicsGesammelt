@@ -1,0 +1,99 @@
+Stand 05.07. noch ohne Narrative, aber schonmal zum Gucken, was ich so andenken würde
+
+{
+"topic_id": "t1",
+"query": "Homer", 
+"description": "To find scenes where the character Homer appears.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t2",
+"query": "Krusty", 
+"description": "To find scenes where the character Krusty appears.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t3",
+"query": "Bart Bob", 
+"description": "To find scenes where the characters Bart and Sideshow Bob both appear.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t4",
+"query": "Homer tavern", 
+"description": "To find scenes where Home is at Moe’s tavern.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t5",
+"query": "Stupid Flanders", 
+"description": To find scenes where the phrase ‘Stupid Flanders’ is being said and by whom.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t6",
+"query": "Okily Dokily", 
+"description": "To find scenes where the phrase ‘okily dokily’ is being said and by whom.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t7",
+"query": "Lisa saxophone", 
+"description": "To find scenes where Lisa appears with her saxophone.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t8",
+"query": " Lisa Bart treehouse ", 
+"description": "To find scenes where Lisa and Bart are in the treehouse together.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t9",
+"query": "How many times is Bart in the Detention Room"
+"description": "To find and count all scenes where Bart is in the Detention room.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t10",
+"query": " Who says donut most often", 
+"description": "To find the character that says the word donut most often and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t11",
+"query": "Where is Bart’s favorite location", 
+"description": "To find the location where Bart appears most often and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t12",
+"query": "lisa milhouse alone", 
+"description": "To find scenes where the only characters talking are Lisa and Milhouse.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t13",
+"query": "top words in episode 100", 
+"description": "To find the top 5 spoken words that are characteristic for episode 100 and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}
+
+{
+"topic_id": "t14",
+"query": "most relevant words in season 1", 
+"description": "To find the top 5 spoken words that are characteristic for season 1 and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include 	."]
+}

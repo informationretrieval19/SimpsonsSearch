@@ -1,0 +1,10 @@
+{
+	"topic_id": "t22",
+	"query": "doomsday", 
+	"description": "To find episodes in which Springfield survives a would-be armageddon.",
+	"narrative": [
+		"Only if (an area including) Springfield nearly gets destroyed or their inhabitants annihilated, the document counts as relevant.",
+		"An apocalyptic scenario outside of springfield does not suffice for this query." 
+	]
+		
+}
