@@ -18,23 +18,23 @@ namespace SimpsonsSearch.Helper
         public IEnumerable<ScriptLine> _scriptLineRecords;
         public IEnumerable<Episode> _episodeRecords;
 
+        public IEnumerable<ScriptLine> ConvertCsVtoScriptLines() =>
+            ConvertCsVtoScriptLines(@"data/simpsons_script_lines.csv");
 
         /// <summary>
         /// Methode zur Umwandlung von sciptlines.csv zu einer Liste von ScriptLine Objekten
         /// zur HIlfe wird hier eine Library benutzt die es sehr einfach ermöglicht .csv Dateien umzuwandeln(csvHelper)
         /// </summary>
         /// <returns>Liste von Scriptline objekten</returns>
-        public IEnumerable<ScriptLine> ConvertCsVtoScriptLines()
+        public IEnumerable<ScriptLine> ConvertCsVtoScriptLines(string pathToResourceCsv)
         {
             IList<string> _badRecords = new List<string>();
 
-            using (var reader = new StreamReader(@"data/simpsons_script_lines.csv"))
+            using (var reader = new StreamReader(pathToResourceCsv))
             using (var csv = new CsvReader(reader))
             {
                 csv.Configuration.Delimiter = ",";
-                csv.Configuration.IgnoreQuotes = true;
                 csv.Configuration.MissingFieldFound = null;
-
 
                 csv.Configuration.BadDataFound = context =>
                 {
