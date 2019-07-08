@@ -118,11 +118,12 @@ namespace SimpsonsSearch.searchEngine
             // wir gehen liste durch und fügen strings zusammen bis speakingline == false
             var sceneList = new List<ScriptLine>();
             var normalizedText = "";
+
             foreach (var item in scriptLines)
             {
 
                 // solange true ist, füge die strings in normalized text zusammen 
-                if (item.speaking_line == true)
+                if (Convert.ToBoolean(item.speaking_line) == true)
                 {
                     normalizedText = normalizedText + item.normalized_text;
                 }
