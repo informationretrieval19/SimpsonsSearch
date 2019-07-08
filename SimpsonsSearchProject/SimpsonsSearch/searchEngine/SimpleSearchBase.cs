@@ -81,6 +81,9 @@ namespace SimpsonsSearch.searchEngine
             var scriptLines = _conversionService.ConvertCsVtoScriptLines();
             if (scriptLines == null) throw new ArgumentNullException();
 
+
+
+            // if speaking line == false create document 
             foreach (var scriptLine in scriptLines)
             {
                 var document = BuildDocument(scriptLine);
@@ -93,13 +96,53 @@ namespace SimpsonsSearch.searchEngine
             indexWriter.Flush(true, true);
             indexWriter.Commit();
         }
+        //funkion szenebuilder
+        //bekommt alle scriptlines geliefert
+        public IEnumerable<ScriptLine> SceneBuilder(List<ScriptLine> scriptLines)
+        {
+            // wir gehen liste durch und fügen strings zusammen bis speakingline == false
+            var sceneList = new List<ScriptLine>();
 
+            foreach (var item in scriptLines)
+            {
+                ScriptLine scene = new ScriptLine();
+
+                scene.normalized_text = "";
+                if (item.speaking_line == true)
+                {
+                    scene.normalized_text = scene.normalized_text + item.normalized_text;
+                    sceneList.Add(scene);
+                }
+                else
+                {
+                    ScriptLine newScene = new ScriptLine();
+                    newScene.normalized_text = newScene.normalized_text + item.normalized_text;
+                    sceneList.Add(newScene);
+                }
+            }
+            return sceneList;
+        }
+
+        //bekommt eine liste von scenen geliefert
+        public virtual Document BuildDocument(List<ScriptLine> scriptLines)
+        {
+           
+
+
+            var document = new Document
+            {
+                new TextField("text", $"{scriptLines[0]} +{scriptLines[1]}" ,Field.Store.YES),
+                
+            };
+            return document;
+        }
         public virtual Document BuildDocument(ScriptLine scriptLine)
         {
+            
             var doc = new Document
             {
                 new StoredField("id", scriptLine.id),
-                new TextField("text", scriptLine.spoken_words, Field.Store.YES),
+                new TextField("text", scriptLine.normalized_text, Field.Store.YES),
                 new TextField("person", scriptLine.raw_character_text, Field.Store.YES),
                 new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
                 new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),

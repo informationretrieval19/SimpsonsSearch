@@ -8,7 +8,7 @@
 		public string number { get; set; }
 		public string raw_text { get; set; }
 		public string timestamp_in_ms { get; set; }
-		public string speaking_line { get; set; }
+		public bool speaking_line { get; set; }
 		public string character_id { get; set; }
 		public string location_id { get; set; }
 		public string raw_character_text { get; set; }
