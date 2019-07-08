@@ -37,7 +37,7 @@ namespace SimpsonsSearch.searchEngine
         }
 
 
-       // ort an dem index gespeichert wird ist überschreibbar 
+        // ort an dem index gespeichert wird ist überschreibbar 
         public virtual string LuceneDir
         {
             get
@@ -78,7 +78,8 @@ namespace SimpsonsSearch.searchEngine
         /// </summary>
         public virtual void BuildIndex()
         {
-            var scriptLines = _conversionService.ConvertCsVtoScriptLines();
+            var scriptLines = BuildScene(_conversionService.ConvertCsVtoScriptLines());
+            
             if (scriptLines == null) throw new ArgumentNullException();
 
 
@@ -86,8 +87,7 @@ namespace SimpsonsSearch.searchEngine
             // if speaking line == false create document 
             foreach (var scriptLine in scriptLines)
             {
-                var document = BuildDocument(scriptLine);
-
+                var document = BuildDocumentForEachScene(scriptLine);
 
                 indexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
 
@@ -96,49 +96,10 @@ namespace SimpsonsSearch.searchEngine
             indexWriter.Flush(true, true);
             indexWriter.Commit();
         }
-        //funkion szenebuilder
-        //bekommt alle scriptlines geliefert
-        public IEnumerable<ScriptLine> SceneBuilder(List<ScriptLine> scriptLines)
+
+        public virtual Document BuildDocumentForEachSpeakingLine(ScriptLine scriptLine)
         {
-            // wir gehen liste durch und fügen strings zusammen bis speakingline == false
-            var sceneList = new List<ScriptLine>();
 
-            foreach (var item in scriptLines)
-            {
-                ScriptLine scene = new ScriptLine();
-
-                scene.normalized_text = "";
-                if (item.speaking_line == true)
-                {
-                    scene.normalized_text = scene.normalized_text + item.normalized_text;
-                    sceneList.Add(scene);
-                }
-                else
-                {
-                    ScriptLine newScene = new ScriptLine();
-                    newScene.normalized_text = newScene.normalized_text + item.normalized_text;
-                    sceneList.Add(newScene);
-                }
-            }
-            return sceneList;
-        }
-
-        //bekommt eine liste von scenen geliefert
-        public virtual Document BuildDocument(List<ScriptLine> scriptLines)
-        {
-           
-
-
-            var document = new Document
-            {
-                new TextField("text", $"{scriptLines[0]} +{scriptLines[1]}" ,Field.Store.YES),
-                
-            };
-            return document;
-        }
-        public virtual Document BuildDocument(ScriptLine scriptLine)
-        {
-            
             var doc = new Document
             {
                 new StoredField("id", scriptLine.id),
@@ -150,63 +111,103 @@ namespace SimpsonsSearch.searchEngine
             };
             return doc;
         }
+        //funkion szenebuilder
+        public IEnumerable<ScriptLine> BuildScene(IEnumerable<ScriptLine> scriptLines)
+        {
+            //bekommt alle scriptlines geliefert
+            // wir gehen liste durch und fügen strings zusammen bis speakingline == false
+            var sceneList = new List<ScriptLine>();
+            var normalizedText = "";
+            foreach (var item in scriptLines)
+            {
+
+                // solange true ist, füge die strings in normalized text zusammen 
+                if (item.speaking_line == true)
+                {
+                    normalizedText = normalizedText + item.normalized_text;
+                }
+                else
+                {
+                    sceneList.Add(new ScriptLine() {id = item.id, episode_id = item.episode_id, normalized_text = normalizedText });
+                };
+            }
+            return sceneList;
+        }
+
+    
+
+    //bekommt eine liste von scenen geliefert
+    public virtual Document BuildDocumentForEachScene(ScriptLine scriptLine)
+    {
+
+        var document = new Document
+            {
+            new StoredField("id", scriptLine.id),
+            new TextField("text", scriptLine.normalized_text, Field.Store.YES),
+            new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
+
+            };
+        return document;
+    }
+
+        
 
         /// <summary>
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 
         /// </summary>
         /// <returns>SearchResults</returns>
         public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
+    {
+        var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
+        foreach (var result in topDocs.ScoreDocs)
         {
-            var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
-            foreach (var result in topDocs.ScoreDocs)
+            Document document = searcher.Doc(result.Doc);
+            Hit searchResult = new Hit
             {
-                Document document = searcher.Doc(result.Doc);
-                Hit searchResult = new Hit
-                {
-                    Location = document.GetField("location")?.GetStringValue(),
-                    Id = document.GetField("episodeId")?.GetStringValue(),
-                    Score = result.Score,
-                    Person = document.GetField("person")?.GetStringValue(),
-                    Text = document.GetField("text")?.GetStringValue(),
-                    Timestamp = document.GetField("timestamp")?.GetSingleValue()
-                };
-                searchResults.Hits.Add(searchResult);
-            }
-
-            return searchResults;
+                Location = document.GetField("location")?.GetStringValue(),
+                Id = document.GetField("episodeId")?.GetStringValue(),
+                Score = result.Score,
+                Person = document.GetField("person")?.GetStringValue(),
+                Text = document.GetField("text")?.GetStringValue(),
+                Timestamp = document.GetField("timestamp")?.GetSingleValue()
+            };
+            searchResults.Hits.Add(searchResult);
         }
 
-        /// <summary>
-        /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
-        /// </summary>
-        /// <returns>Document</returns>
-        
-        /// <summary>
-        /// hilfsmethode die gespeicherten index returned
-        /// </summary>
-        /// <returns></returns>
-        public virtual FSDirectory GetIndex()
+        return searchResults;
+    }
+
+    /// <summary>
+    /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
+    /// </summary>
+    /// <returns>Document</returns>
+
+    /// <summary>
+    /// hilfsmethode die gespeicherten index returned
+    /// </summary>
+    /// <returns></returns>
+    public virtual FSDirectory GetIndex()
+    {
+
+        _indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
         {
-
-            _indexDirectory = FSDirectory.Open(new DirectoryInfo(LuceneDir));
+            if (IndexWriter.IsLocked(_indexDirectory))
             {
-                if (IndexWriter.IsLocked(_indexDirectory))
-                {
-                    IndexWriter.Unlock(_indexDirectory);
-                }
-
-                var lockFilePath = Path.Combine(LuceneDir, "write.lock");
-                if (File.Exists(lockFilePath))
-                {
-                    File.Delete(lockFilePath);
-                }
-
-                return _indexDirectory;
+                IndexWriter.Unlock(_indexDirectory);
             }
 
+            var lockFilePath = Path.Combine(LuceneDir, "write.lock");
+            if (File.Exists(lockFilePath))
+            {
+                File.Delete(lockFilePath);
+            }
+
+            return _indexDirectory;
         }
 
     }
+
+}
 }
 
 
