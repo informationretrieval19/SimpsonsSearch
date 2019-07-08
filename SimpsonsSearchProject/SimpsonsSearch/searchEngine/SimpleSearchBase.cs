@@ -122,14 +122,27 @@ namespace SimpsonsSearch.searchEngine
             foreach (var item in scriptLines)
             {
 
+
+                // "fix" für falsches spalten einlesen..
+                // Todo
+                if((!item.speaking_line.Contains("true") && !item.speaking_line.Contains("false")))
+                {
+                    continue;
+                }
+                if(item.speaking_line.Length > 6)
+                {
+                    continue;
+                }
                 // solange true ist, füge die strings in normalized text zusammen 
                 if (Convert.ToBoolean(item.speaking_line) == true)
                 {
                     normalizedText = normalizedText + item.normalized_text;
                 }
+                // schreibe zusammengefügte scene in liste 
                 else
                 {
                     sceneList.Add(new ScriptLine() {id = item.id, episode_id = item.episode_id, normalized_text = normalizedText });
+                    normalizedText = "";
                 };
             }
             return sceneList;
