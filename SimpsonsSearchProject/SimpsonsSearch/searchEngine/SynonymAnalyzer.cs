@@ -33,11 +33,7 @@ namespace SimpsonsSearch.searchEngine
 
             var dictionaries = new Dictionaries();
             
-            var test = "weihnachtsmann";
-            var syn1 = "christmas";
-            var syn2 = "easter";
 
-            
             var sBuilder = new SynonymMap.Builder(true);
             
             for (int i = 1;  i <= dictionaries.alcoholDic.Count(); i++)

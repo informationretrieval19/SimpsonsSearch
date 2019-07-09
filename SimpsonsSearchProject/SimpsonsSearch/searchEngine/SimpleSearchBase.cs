@@ -118,7 +118,7 @@ namespace SimpsonsSearch.searchEngine
             // wir gehen liste durch und fügen strings zusammen bis speakingline == false
             var sceneList = new List<ScriptLine>();
             var spokenLinesList = new List<string>();
-            var personsList = new List<string>();
+            var personsList = new HashSet<string>();
 
             var testErrorLIst = new List<ScriptLine>();
 
@@ -147,7 +147,7 @@ namespace SimpsonsSearch.searchEngine
                 // schreibe zusammengefügte scene in liste 
                 else
                 {
-                    sceneList.Add(new ScriptLine() { id = item.id, episode_id = item.episode_id, normalized_text = String.Join(".", spokenLinesList.ToArray()), raw_character_text = String.Join(" ", personsList.ToArray()), raw_location_text = item.raw_location_text });
+                    sceneList.Add(new ScriptLine() { id = item.id, episode_id = item.episode_id, normalized_text = String.Join(".", spokenLinesList.ToArray()), raw_character_text = String.Join(" ", personsList), raw_location_text = item.raw_location_text });
                     spokenLinesList.Clear();
                     personsList.Clear();
                 };
