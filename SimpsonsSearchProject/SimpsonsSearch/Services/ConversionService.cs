@@ -73,9 +73,12 @@ namespace SimpsonsSearch.Helper
             }
         }
 
-        public double ConvertMillisecondsToMinutes(double milliseconds)
+        public string ConvertMillisecondsToMinutes(double milliseconds)
         {
-            return TimeSpan.FromMilliseconds(milliseconds).TotalMinutes;
+            var t = TimeSpan.FromMilliseconds(milliseconds);
+            var answer = string.Format("{0:D2}m:{1:D2}s", t.Minutes, t.Seconds);
+           
+            return answer;
         }
     }
 }

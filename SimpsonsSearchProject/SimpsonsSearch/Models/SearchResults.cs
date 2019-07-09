@@ -24,7 +24,7 @@ namespace SimpsonsSearch.searchEngine
 		public string Location { get; set; }
 		public string Text { get; set; }
 		public float Score { get; set; }
-		public float? Timestamp { get; set; }
+		public string Timestamp { get; set; }
 
 	}
 }
