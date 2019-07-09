@@ -1,4 +1,6 @@
-﻿namespace SimpsonsSearch.searchEngine
+﻿using System.Collections.Generic;
+
+namespace SimpsonsSearch.searchEngine
 {
     // Klasse die Daten aus Exceltabelle simpsons_episodes.csv enthält
     public class ScriptLine
@@ -16,6 +18,8 @@
 		public string spoken_words { get; set; }
 		public string normalized_text { get; set; }
 		public string word_count { get; set; }
+
+        public List<string> persons { get; set; }
 
 	}
 }

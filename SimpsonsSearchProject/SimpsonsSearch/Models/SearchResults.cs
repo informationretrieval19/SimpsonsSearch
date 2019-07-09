@@ -19,6 +19,7 @@ namespace SimpsonsSearch.searchEngine
 	public class Hit
 	{
 		public string Id { get; set; }
+        public string EpisodeId { get; set; }
 		public string Person { get; set; }
 		public string Location { get; set; }
 		public string Text { get; set; }

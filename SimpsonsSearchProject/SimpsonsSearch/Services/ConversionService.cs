@@ -32,7 +32,7 @@ namespace SimpsonsSearch.Helper
             using (var csv = new CsvReader(reader))
             {
                 csv.Configuration.Delimiter = ",";
-                csv.Configuration.IgnoreQuotes = true;
+                //csv.Configuration.IgnoreQuotes = true;
                 csv.Configuration.MissingFieldFound = null;
 
 
