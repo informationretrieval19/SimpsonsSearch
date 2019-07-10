@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Linq;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Analysis.TokenAttributes;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers.Classic;
@@ -82,8 +84,6 @@ namespace SimpsonsSearch.searchEngine
 
             if (scriptLines == null) throw new ArgumentNullException();
 
-
-
             // if speaking line == false create document 
             foreach (var scriptLine in scriptLines)
             {
@@ -111,7 +111,7 @@ namespace SimpsonsSearch.searchEngine
             };
             return doc;
         }
-        //funkion szenebuilder
+        
         public IEnumerable<ScriptLine> BuildScene(IEnumerable<ScriptLine> scriptLines)
         {
             //bekommt alle scriptlines geliefert
@@ -125,8 +125,6 @@ namespace SimpsonsSearch.searchEngine
 
             foreach (var item in scriptLines)
             {
-
-
                 // "fix" für falsches spalten einlesen..
                 // Todo
                 if ((!item.speaking_line.Contains("true") && !item.speaking_line.Contains("false")))
@@ -208,11 +206,6 @@ namespace SimpsonsSearch.searchEngine
         }
 
         /// <summary>
-        /// Methode die für den Index Dokumente aus einem Scriptline Objekt baut, aus beliebig vielen Feldern, der eingelesenen Datei 
-        /// </summary>
-        /// <returns>Document</returns>
-
-        /// <summary>
         /// hilfsmethode die gespeicherten index returned
         /// </summary>
         /// <returns></returns>
@@ -234,9 +227,87 @@ namespace SimpsonsSearch.searchEngine
 
                 return _indexDirectory;
             }
+        }
+
+        public void CreateQuery()
+        {
+            // is button bad result is pressed --> delete it for this index, or give it bad score
+            // good result button is pressed --> boost score
+  
 
         }
 
+        // spliting user input into tokens 
+        IList<string> Tokenize(string userInput)
+        {
+            List<string> tokens = new List<string>();
+            using (var reader = new StringReader(userInput))
+            using (TokenStream stream = analyzer.GetTokenStream("myfield", reader))
+            {
+                stream.Reset();
+                while (stream.IncrementToken())
+                    tokens.Add(stream.GetAttribute<ICharTermAttribute>().ToString());
+            }
+            return tokens;
+        }
+
+        class FieldDefinition
+        {
+            public string Name { get; set; }
+            public bool IsDefault { get; set; } = false;
+            //other properties omitted
+        }
+
+        //in a different class
+        Query BuildQuery(string userInput, IEnumerable<FieldDefinition> fields)
+        {
+            BooleanQuery query = new BooleanQuery();
+            IList<string> tokens = Tokenize(userInput);
+
+            //combine tokens present in user input
+            if (tokens.Count > 1)
+            {
+                FieldDefinition defaultField = fields.FirstOrDefault(f => f.IsDefault == true);
+                query.Add(BuildExactPhraseQuery(tokens, defaultField), Occur.SHOULD);
+
+                foreach (var q in GetIncrementalMatchQuery(tokens, defaultField))
+                    query.Add(q, Occur.SHOULD);
+            }
+
+            //create a term query per field - non boosted
+            foreach (var token in tokens)
+                foreach (var field in fields)
+                    query.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
+
+            return query;
+        }
+
+        Query BuildExactPhraseQuery(IList<string> tokens, FieldDefinition field)
+        {
+            //boost factor (6) and slop (2) come from configuration - code omitted for simplicity
+            PhraseQuery pq = new PhraseQuery() { Boost = tokens.Count * 6, Slop = 2 };
+            foreach (var token in tokens)
+                pq.Add(new Term(field.Name, token));
+
+            return pq;
+        }
+
+        IEnumerable<Query> GetIncrementalMatchQuery(IList<string> tokens, FieldDefinition field)
+        {
+            BooleanQuery bq = new BooleanQuery();
+            foreach (var token in tokens)
+                bq.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
+
+            //5 comes from config - code omitted
+            int upperLimit = Math.Min(tokens.Count, 5);
+            for (int match = 2; match <= upperLimit; match++)
+            {
+                BooleanQuery q = bq.Clone() as BooleanQuery;
+                q.Boost = match * 3;
+                q.MinimumNumberShouldMatch = match;
+                yield return q;
+            }
+        }
     }
 }
 
