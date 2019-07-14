@@ -1,0 +1,9 @@
+{
+	"topic_id": "t38",
+	"query": "politics", 
+	"description": "To find documents that include any politician or governmental institution.",
+	"narrative": [
+		"Documents relevant for this topic including a person who is related to politics or a governmental institution.",
+		"Insufficient are documents which do not include any kind of person who is related to politics or governmental institutions."
+	]
+}

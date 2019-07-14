@@ -1,0 +1,9 @@
+{
+	"topic_id": "t45",
+	"query": "travel", 
+	"description": "To find documents in wich the characters are on a trip or are talking about a trip.",
+	"narrative": [
+		"Documents relevant for this topic would include the process of driving or flying, or would take place outside of the everyday living of one character.",
+		"Insufficient are documents which shows all characters at home or in their hometown." 
+	]
+}

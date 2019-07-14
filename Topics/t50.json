@@ -1,0 +1,9 @@
+{
+	"topic_id": "t50",
+	"query": "patriotism", 
+	"description": "To find documents that have a large ammount of patriotic content.",
+	"narrative": [
+		"Documents relevant for this topic would include episodes that either directly or indirectly adress patriotism.",
+		"Insufficient are documents which does not adress the construct of nationalities at all." 
+	]
+}
