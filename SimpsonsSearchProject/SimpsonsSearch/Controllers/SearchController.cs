@@ -41,6 +41,12 @@ namespace SimpsonsSearch.Controllers
             return View(results);
 
         }
+
+        public IActionResult Evaluation(SearchformModel model)
+        {
+            var results = _searchEngine.Search(model.searchQuery);
+            return View(results);
+        }
     }
 }
 

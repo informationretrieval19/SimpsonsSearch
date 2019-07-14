@@ -5,9 +5,20 @@
 }
 
 
-@await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
 
 
+
+<div class="container">
+
+    @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
+
+    <form class="form-inline " method="post" asp-controller="Auth" asp-action="SignOut">
+
+        <button class="btn btn-primary" type="button" data-toggle="collapse"
+                data-target=".multi-collapse" aria-expanded="false" aria-controls="evaluation evaluationtable">Toggle Evaluation</button>
+
+    </form>
+</div>
 
 <h2>Results</h2>
 
@@ -19,6 +30,7 @@
         <th scope="col">Location</th>
         <th scope="col">Persons</th>
         <th scope="col">Score</th>
+        <th class="collapse multi-collapse" id="evaluationtable" scope="col">Evaluation</th>
     </tr>
 
     @foreach (var hit in Model.Hits)
@@ -31,6 +43,18 @@
             <td> @hit.Location </td>
             <td> @hit.Person</td>
             <td>@hit.Score</td>
+            <td>
+                <div class="collapse multi-collapse" id="evaluation">
+                    <form class="form-inline " method="post" asp-controller="Search" asp-action="">
+                        <button type="submit" class="btn btn-success">Good</button>
+
+                    </form>
+                    <form class="form-inline " method="post" asp-controller="Search" asp-action="">
+
+                        <button type="submit" class="btn btn-danger">Bad</button>
+                    </form>
+                </div>
+            </td>
         </tr>
     }
 </table>
