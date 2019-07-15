@@ -3,7 +3,7 @@
     // Interface für eine Suchmaschine
     public interface ISearchEngine
 	{
-		void BuildIndex();
+		//void BuildIndex();
 		SearchResults Search(string query);
-	}
+    }
 }

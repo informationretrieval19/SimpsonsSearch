@@ -1,0 +1,247 @@
+[33mcommit 607b66ac6c656bbeead6f03ba878e2768e08c7f9[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Jul 3 16:23:15 2019 +0200
+
+    [ADD] synonym analyzer
+
+[33mcommit 009f53dfcd13f6f5eadf1fcca1527bc05d851bf1[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Jul 3 15:29:40 2019 +0200
+
+    revert to object construction in constructor
+
+[33mcommit 66162009c3eb52fdca0ff6bf63fad7054d2c55df[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Jul 3 12:24:09 2019 +0200
+
+    index overwriting bug
+
+[33mcommit ef937d4f7edab3065375a78e37465b991a618552[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Tue Jul 2 17:19:01 2019 +0200
+
+    [ADD] synonymAnalyzer
+
+[33mcommit 7d8183d2fb039e487f1cd50a676f98cd165254f1[m[33m ([m[1;32mCarlos[m[33m)[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Mon Jun 24 15:39:43 2019 +0200
+
+    overwritable baseclass that is not static
+
+[33mcommit bacb06d7094bbb69f6e937050b2fb4588a5ad4fa[m[33m ([m[1;31morigin/Carlos[m[33m)[m
+Author: Carlos Koenig <carlos@koenigsreich.com>
+Date:   Fri Jun 21 16:33:59 2019 +0200
+
+    test Carlos
+
+[33mcommit 6230739126af5ac1a3331c1e09abd9f871a2f673[m
+Author: Carlos Koenig <carlos@koenigsreich.com>
+Date:   Fri Jun 21 16:31:54 2019 +0200
+
+    test Carlos
+
+[33mcommit f0e63dc80eb19c3c3408d08cb67066dfa721f920[m[33m ([m[1;31morigin/feature/test[m[33m, [m[1;32mfeature/test[m[33m)[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Fri Jun 21 16:17:24 2019 +0200
+
+    comment
+
+[33mcommit 9266c8d94e10a347e38d8dbe1096abd64e24df84[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Fri Jun 21 16:12:00 2019 +0200
+
+    test
+
+[33mcommit 7d2cf74da17212c984f0abcce60c327e0f10bccd[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Fri Jun 21 14:53:56 2019 +0200
+
+    beispiel aufbau + comments
+
+[33mcommit d3da6c3c0a74bc2a92deb9b0a1f616049a9cd1b8[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Jun 19 11:35:11 2019 +0200
+
+    [ADD] base ist overwriteable but static
+
+[33mcommit a3fab912e334fafc1a8cb770561f1e2ff84f8deb[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Tue Jun 18 15:14:35 2019 +0200
+
+    index files in gitignore
+
+[33mcommit ef3c7ee9704fffec17137c18807885c73be17c4d[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Tue Jun 18 15:11:24 2019 +0200
+
+    [REDESIGN] index on file, multiple indexes possible
+
+[33mcommit e8a11c214869e421e8d09a4aefa8caa3d75130c2[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: mopselfrops <49680339+mopselfrops@users.noreply.github.com>
+Date:   Mon May 27 22:23:21 2019 +0200
+
+    Add files via upload
+
+[33mcommit ac5030de91355049ac31e8f05728c8ec00f1a473[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Tue May 21 15:19:20 2019 +0200
+
+    searchform is now a partial view
+
+[33mcommit ad85d8eedac8878c00c024d3639d38729304a3a2[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Tue May 21 13:29:07 2019 +0200
+
+    [ADD] layout index page
+
+[33mcommit d0f45ac7b448031ca430c38d98de0588567ba713[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue May 14 18:19:39 2019 +0200
+
+    [ADD] image for index page
+
+[33mcommit c2344ef594981b2d2989d0f6b91da43f2ce88326[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Thu May 9 14:54:47 2019 +0200
+
+    [fix] bad records in csv
+
+[33mcommit da2c9b0cb55a2e6d4456b8c2a3221240171e4635[m
+Merge: 43f2041 d3331d3
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue May 7 14:15:18 2019 +0200
+
+    Merge branch 'master' of https://github.com/informationretrieval19/SimpsonsSearch
+
+[33mcommit 43f2041e23655b16973871ced374170ea21cb0d6[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue May 7 14:15:01 2019 +0200
+
+    [ADD] comments
+
+[33mcommit d3331d3f73deb5450cf87954f30626d01e454c1a[m
+Author: banzaiiiiii <40140980+banzaiiiiii@users.noreply.github.com>
+Date:   Tue May 7 13:36:26 2019 +0200
+
+    Update README.md
+
+[33mcommit 724468d20ed1175b5cf4093c0d8db57b33c9a0cb[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue May 7 13:31:16 2019 +0200
+
+    [fix] filepaths
+
+[33mcommit 0e40f914306bc580d79c90d746eda66bae0aa042[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue May 7 11:01:42 2019 +0200
+
+    added styles
+
+[33mcommit 0b8d2459840436f869cd164c66fc1ac581fc6c55[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Mon May 6 12:43:48 2019 +0200
+
+    [ADD] some comments + class name change
+
+[33mcommit 22c4248d89850a1756b12225cc25707bb0bd3ff0[m
+Author: banzaiiiiii <40140980+banzaiiiiii@users.noreply.github.com>
+Date:   Tue Apr 30 16:01:32 2019 +0200
+
+    Update README.md
+
+[33mcommit ffcdcdf777265169366f2bac15ef274353cc2d79[m
+Merge: 0493f23 f6467f6
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Thu Apr 18 18:44:01 2019 +0200
+
+    Merge branch 'master' of https://github.com/informationretrieval19/SimpsonsSearch
+
+[33mcommit 0493f23a399cadf8e935cb7fb1124647a29acbe7[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Thu Apr 18 18:43:39 2019 +0200
+
+    show all results
+
+[33mcommit f6467f65a752db346fc76d042062cfe5408a449b[m
+Author: banzaiiiiii <40140980+banzaiiiiii@users.noreply.github.com>
+Date:   Thu Apr 18 18:02:23 2019 +0200
+
+    Delete scriptlines.json
+
+[33mcommit c49e2cb227a7c25d32c6486cd0f6c383ffe9afa3[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Apr 17 13:33:39 2019 +0200
+
+    better results
+
+[33mcommit 6b2be907aba0f8a5d0ee9a231b03b0c24bc0a54c[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Apr 17 13:06:49 2019 +0200
+
+    refac
+
+[33mcommit 738b2cc7129878f264f67f8a2b5c4bca0a96b5fa[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Wed Apr 17 09:56:18 2019 +0200
+
+    [ADD] searchResult shows more data
+
+[33mcommit d8c1fb4468e07d0316a32b7974f65ba07ec77964[m
+Author: banzaiiiiii <40140980+banzaiiiiii@users.noreply.github.com>
+Date:   Tue Apr 16 23:21:48 2019 +0200
+
+    Create README.md
+
+[33mcommit c4dd4b522a09f0da44b2a9fef3aec9fa2b0f2210[m
+Author: rs92vegi <robin.seidel@hypservice.de>
+Date:   Tue Apr 16 23:14:54 2019 +0200
+
+    deleted unnessary stuff
+
+[33mcommit dc74f559719fa387d0464bbd78f4ff46a82653cc[m
+Author: rs92vegi <robin.seidel@hypservice.de>
+Date:   Tue Apr 16 23:03:45 2019 +0200
+
+    [FIX] passing searchQuery from view to controller
+
+[33mcommit 683779fca22ceca1831ffd418587d3cdfa5c4000[m
+Author: rs92vegi <robin.seidel@hypservice.de>
+Date:   Tue Apr 16 22:49:36 2019 +0200
+
+    deleted test project
+
+[33mcommit da751de4b0b0686e71af51029ba390bd522d26b1[m
+Author: rs92vegi <robin.seidel@hypservice.de>
+Date:   Tue Apr 16 22:48:48 2019 +0200
+
+    [FIX] search works in web project
+
+[33mcommit 4b55437c728a44d906e2ca21147fbaa2022b47af[m
+Author: rs92vegi <robin.seidel@hypservice.de>
+Date:   Tue Apr 16 22:10:31 2019 +0200
+
+    [ADD] some comments
+
+[33mcommit c4b5dc8d1cd01ad834b19a21d01ba8a40a102087[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Tue Apr 16 21:52:39 2019 +0200
+
+    [ADD] frontend changes..
+
+[33mcommit c2e53ad55a03db0b0ab8cf7ae991c085a098b80b[m
+Author: Robin Seidel <robin.seidel@hypservice.de>
+Date:   Sun Apr 14 09:20:10 2019 +0200
+
+    add test projekt
+
+[33mcommit aab7b4bbfab4856731bb86d74ef2b2d7a56ee3a6[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue Apr 9 13:16:45 2019 +0200
+
+    created .net core testProjekt
+
+[33mcommit 3e4dc8a8dc00b8cb45dede23b2fbba995d752453[m
+Author: Robin Seidel <r.seidel@olymp.local>
+Date:   Tue Apr 9 12:19:56 2019 +0200
+
+    add simpsons csv data

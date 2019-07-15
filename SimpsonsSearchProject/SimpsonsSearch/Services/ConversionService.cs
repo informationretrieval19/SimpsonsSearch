@@ -18,7 +18,10 @@ namespace SimpsonsSearch.Helper
         public IEnumerable<ScriptLine> _scriptLineRecords;
         public IEnumerable<Episode> _episodeRecords;
 
-
+        // konnte nicht eingelesen werden wegen quotes, wenn man quotes beim einlesen ignoriert, verrutschen die spalten und landen in _errorlist
+        IList<string> _badRecords = new List<string>();
+        // hier landen verrutschte zeilen
+        IList<ScriptLine> _errorList = new List<ScriptLine>();
         /// <summary>
         /// Methode zur Umwandlung von sciptlines.csv zu einer Liste von ScriptLine Objekten
         /// zur HIlfe wird hier eine Library benutzt die es sehr einfach ermöglicht .csv Dateien umzuwandeln(csvHelper)
@@ -26,26 +29,53 @@ namespace SimpsonsSearch.Helper
         /// <returns>Liste von Scriptline objekten</returns>
         public IEnumerable<ScriptLine> ConvertCsVtoScriptLines()
         {
-            IList<string> _badRecords = new List<string>();
+
 
             using (var reader = new StreamReader(@"data/simpsons_script_lines.csv"))
             using (var csv = new CsvReader(reader))
             {
                 csv.Configuration.Delimiter = ",";
-                csv.Configuration.IgnoreQuotes = true;
                 csv.Configuration.MissingFieldFound = null;
 
+                csv.Configuration.Escape = '\\';
+               
+                csv.Configuration.RegisterClassMap<BadFieldMap>();
 
                 csv.Configuration.BadDataFound = context =>
                 {
                     _badRecords.Add(context.RawRecord);
                 };
 
+
                 _scriptLineRecords = csv.GetRecords<ScriptLine>().ToList();
+
+
+                
+
+
+                checkIfDataIsCorrekt(_scriptLineRecords);
                 return _scriptLineRecords;
             }
         }
 
+        public void checkIfDataIsCorrekt(IEnumerable<ScriptLine> scriptLines)
+        {
+            foreach (var item in scriptLines)
+            {
+                // "fix" für falsches spalten einlesen..
+                // Todo
+                if ((!item.speaking_line.Contains("true") && !item.speaking_line.Contains("false")))
+                {
+                    _errorList.Add(item);
+                    continue;
+                }
+                if (item.speaking_line.Length > 6)
+                {
+                    _errorList.Add(item);
+                    continue;
+                }
+            }
+        }
         /// <summary>
         /// Methode zur Umwandlung der Episodes.csv in LIste von Episode Objekten
         /// </summary>
@@ -73,9 +103,12 @@ namespace SimpsonsSearch.Helper
             }
         }
 
-        public double ConvertMillisecondsToMinutes(double milliseconds)
+        public string ConvertMillisecondsToMinutes(double milliseconds)
         {
-            return TimeSpan.FromMilliseconds(milliseconds).TotalMinutes;
+            var t = TimeSpan.FromMilliseconds(milliseconds);
+            var answer = string.Format("{0:D2}m:{1:D2}s", t.Minutes, t.Seconds);
+
+            return answer;
         }
     }
 }

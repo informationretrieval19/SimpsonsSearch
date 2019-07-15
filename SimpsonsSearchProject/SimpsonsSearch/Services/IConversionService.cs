@@ -9,7 +9,7 @@ namespace SimpsonsSearch.Services
 {
 	public interface IConversionService
 	{
-		double ConvertMillisecondsToMinutes(double milliseconds);
+		string ConvertMillisecondsToMinutes(double milliseconds);
 		IEnumerable<ScriptLine> ConvertCsVtoScriptLines();
 		IEnumerable<Episode> ConvertCsvToEpisodes();
 	}
