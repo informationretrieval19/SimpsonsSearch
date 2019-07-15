@@ -1,61 +1,52 @@
 ﻿@model SimpsonsSearch.searchEngine.SearchResults;
-
 @{
     ViewData["Title"] = "Results";
 }
 
 
-
-
-
 <div class="container">
-
     @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
-
-    <form class="form-inline " method="post" asp-controller="Auth" asp-action="SignOut">
-
-        <button class="btn btn-primary" type="button" data-toggle="collapse"
-                data-target=".multi-collapse" aria-expanded="false" aria-controls="evaluation evaluationtable">Toggle Evaluation</button>
-
-    </form>
 </div>
 
-<h2>Results</h2>
-
-<table class="table table-bordered table-striped table-dark">
-    <tr>
-        <th scope="col"></th>
-        <th scope="col">Episode</th>
-        <th scope="col">Text</th>
-        <th scope="col">Location</th>
-        <th scope="col">Persons</th>
-        <th scope="col">Score</th>
+<table id="results">
+    <tr class="spaceUnder">
+        <th class="Episode" scope="col">Episode</th>
+        <th class="Text" scope="col">Text</th>
+        <th class="Actor" scope="col">Location</th>
+        <th class="ID" scope="col">Persons</th>
+        <th class= "Score" scope="col">Score</th>
         <th class="collapse multi-collapse" id="evaluationtable" scope="col">Evaluation</th>
     </tr>
-
     @foreach (var hit in Model.Hits)
     {
 
-        <tr>
-            <th scope="row"></th>
+        <tr class="Entry">
             <td> Episode: @hit.EpisodeId @@ @hit.Timestamp</td>
             <td> @hit.Text</td>
             <td> @hit.Location </td>
             <td> @hit.Person</td>
             <td>@hit.Score</td>
             <td>
-                <div class="collapse multi-collapse" id="evaluation">
-                    <form class="form-inline " method="post" asp-controller="Search" asp-action="">
-                        <button type="submit" class="btn btn-success">Good</button>
+                @*<div class="collapse multi-collapse" id="evaluation">
+                        <form class="form-inline " method="post" asp-controller="Search" asp-action="">
+                            <button type="submit" class="btn btn-success">Good</button>
 
-                    </form>
-                    <form class="form-inline " method="post" asp-controller="Search" asp-action="">
+                        </form>
+                        <form class="form-inline " method="post" asp-controller="Search" asp-action="">
 
-                        <button type="submit" class="btn btn-danger">Bad</button>
-                    </form>
+                            <button type="submit" class="btn btn-danger">Bad</button>
+                        </form>
+                    </div>*@
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> +
+                    </label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> -
+                    </label>
+
                 </div>
             </td>
         </tr>
     }
 </table>
-

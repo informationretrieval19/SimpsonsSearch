@@ -45,14 +45,49 @@ body {
 }
 
 #searchForm {
-    padding-top:15px;
+    padding-top: 15px;
 }
 
 #indexImage {
-    width:50%;
-    
+    width: 50%;
 }
 
+#results {
+    font-family: "Arial", sans-serif;
+    border: 3px solid rgba(255,255,255,1);
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
 
+.Entry {
+    width: 150px;
+    text-align: left;
+    border: 2px solid #e0d823;
+    border-spacing: 5px;
+}
 
+.Episode {
+    width: 10%;
+}
 
+.Text {
+    width: 40%;
+}
+
+.Actor {
+    width: 15%;
+}
+
+.Score {
+    width: 30%;
+}
+
+.ID {
+    width: 5%;
+}
+
+tr > td {
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
