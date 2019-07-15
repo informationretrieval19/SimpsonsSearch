@@ -144,7 +144,8 @@ namespace SimpsonsSearch.searchEngine
 
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
 
-                    spokenLinesList.Add(item.normalized_text);
+                    var textWithSpeaker = $"({item.raw_character_text}) {item.normalized_text}";
+                    spokenLinesList.Add(textWithSpeaker);
                     personsList.Add(item.raw_character_text);
                 }
                 // schreibe zusammengefügte scene in liste 
@@ -155,8 +156,8 @@ namespace SimpsonsSearch.searchEngine
                         id = item.id,
                         episode_id = item.episode_id,
                         timestamp_in_ms = startingTime,
-                        normalized_text = String.Join(".", spokenLinesList.ToArray()),
-                        raw_character_text = String.Join(" ", personsList),
+                        normalized_text = String.Join(":", spokenLinesList.ToArray()),
+                        raw_character_text = String.Join(", ", personsList),
                         raw_location_text = item.raw_location_text
                     });
                     spokenLinesList.Clear();

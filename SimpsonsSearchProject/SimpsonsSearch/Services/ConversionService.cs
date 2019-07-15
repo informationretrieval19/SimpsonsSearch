@@ -35,18 +35,22 @@ namespace SimpsonsSearch.Helper
             using (var csv = new CsvReader(reader))
             {
                 csv.Configuration.Delimiter = ",";
-                //csv.Configuration.IgnoreQuotes = true;
                 csv.Configuration.MissingFieldFound = null;
-                //csv.Configuration.HeaderValidated(false);
 
-
+                csv.Configuration.Escape = '\\';
+               
+                csv.Configuration.RegisterClassMap<BadFieldMap>();
 
                 csv.Configuration.BadDataFound = context =>
                 {
                     _badRecords.Add(context.RawRecord);
                 };
 
+
                 _scriptLineRecords = csv.GetRecords<ScriptLine>().ToList();
+
+
+                
 
 
                 checkIfDataIsCorrekt(_scriptLineRecords);
