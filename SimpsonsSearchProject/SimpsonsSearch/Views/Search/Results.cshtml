@@ -1,39 +1,78 @@
-﻿@model SimpsonsSearch.searchEngine.SearchResults;
+﻿<style> #results 
+        {   font-family: "Arial", sans-serif;
+            border: 3px solid rgba(255,255,255,1);
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-top: 5%;}
+        .Entry
+        {   width:150px; 
+            text-align:left; 
+            border:2px solid #e0d823;
+            border-spacing: 5px;
+            }
+        .Episode
+        {   width: 10%; }
+        .Text
+        {   width: 40%; }
+        .Actor
+        {   width: 15%; }
+        .Score
+        {   width: 30%; }
+        .ID
+        {   width: 5%;  }
+        tr>td {
+            padding-bottom: 12px;
+            padding-top: 12px;
+        }
+        </style>
+@using SimpsonsSearch.Models
+@model SimpsonsSearch.searchEngine.SearchResults;
 
 @{
     ViewData["Title"] = "Results";
 }
 
 
-@await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
+@await Html.PartialAsync("_searchForm", new SearchformModel())
 
 
 
 <h2>Results</h2>
 
-<table class="table table-bordered table-striped table-dark">
-    <tr>
-        <th scope="col"></th>
-        <th scope="col">Episode & Timestamp</th>
-        <th scope="col">Text</th>
-        <th scope="col">Person & Location</th>
-        <th scope="col">Score</th>
+<table id="results">
+    <tr class="spaceUnder">
+        <th class="Episode" scope="col">Episode & Timestamp</th>
+        <th class="Text" scope="col">Text</th>
+        <th class="Actor" scope="col">Person & Location</th>
+        <th class="Score" scope="col">Score</th>
+        <th class="ID" scope="col">ID</th>
     </tr>
 
     @foreach (var hit in Model.Hits)
     {
-
-        <tr>
-            <th scope="row"></th>
+        <tr class="Entry">
             <td> Episode: @hit.Id at minute: @hit.Timestamp</td>
             <td> @hit.Text</td>
             <td>
                 @hit.Person at @hit.Location
             </td>
-            <td>@hit.Score</td>
+            <td>
+                @hit.Score
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> +
+                    </label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> -
+                    </label>
+
+                </div>
+            </td>
+            <td>
+                @hit.Id
+            </td>
 
 
         </tr>
     }
 </table>
-

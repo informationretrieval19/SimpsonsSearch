@@ -1,0 +1,42 @@
+<link href="@Url.Content("evaluation.css")" rel="stylesheet" type="text/css" />
+
+@model SimpsonsSearch.searchEngine.SearchResults;
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+
+@await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
+
+
+
+<h2>Results</h2>
+
+<table class="table table-bordered table-striped table-dark">
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Episode & Timestamp</th>
+        <th scope="col">Text</th>
+        <th scope="col">Person & Location</th>
+        <th scope="col">Score</th>
+        <th scope="col">Relevanz</th>
+    </tr>
+
+    @foreach (var hit in Model.Hits)
+    {
+
+        <tr>
+            <th scope="row"></th>
+            <td> Episode: @hit.Id at minute: @hit.Timestamp</td>
+            <td> @hit.Text</td>
+            <td>
+                @hit.Person at @hit.Location
+            </td>
+            <td>@hit.Score</td>
+            <td></td>
+
+
+        </tr>
+    }
+</table>
