@@ -1,0 +1,9 @@
+{
+	"topic_id": "t46",
+	"query": "work", 
+	"description": "To find documents that include an employment.",
+	"narrative": [
+		"Documents relevant for this topic are showing a person on its workplace or talking about their employment.",
+		"Insufficient are documents which include only people that are not working in any form of payed work."
+	]
+}

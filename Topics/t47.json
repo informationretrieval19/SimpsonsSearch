@@ -1,0 +1,9 @@
+{
+	"topic_id": "t47",
+	"query": "election", 
+	"description": "To find documents that are connected to any kind of election.",
+	"narrative": [
+		"Documents relevant for this topic are about an election.",
+		"Insufficient are documents which do not adress an election or something directly related to it."
+	]
+}

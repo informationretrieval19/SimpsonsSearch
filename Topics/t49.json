@@ -1,0 +1,9 @@
+{
+	"topic_id": "t49",
+	"query": "mobbing", 
+	"description": "To find documents that showes someone who is getting bullied or adresses bullying.",
+	"narrative": [
+		"Documents relevant for this topic are showing harassment against a person or adresses such harassment.",
+		"Insufficient are documents which show harassment that does not aim to socialy exclude a person or a group from another group." 
+	]
+}

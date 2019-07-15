@@ -1,0 +1,9 @@
+{
+	"topic_id": "t44",
+	"query": "super-heroes", 
+	"description": "To find documents that are about super-heroes or include one.",
+	"narrative": [
+		"Documents relevant for this topic including a person who is a super hero or someone who talks about any super-hero.",
+		"Insufficient are documents which do not talk about heroes or the concept of heroes at all."
+	]
+}

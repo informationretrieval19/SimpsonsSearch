@@ -1,0 +1,9 @@
+{
+	"topic_id": "t43",
+	"query": "sports", 
+	"description": "To find documents that include any form of sports.",
+	"narrative": [
+		"Documents relevant for this topic including a person who is doing any form of sports.",
+		"Insufficient are documents which do not include any kind of sports."
+	]
+}

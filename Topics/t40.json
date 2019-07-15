@@ -1,0 +1,9 @@
+{
+	"topic_id": "t40",
+	"query": "road trip", 
+	"description": "To find documents that include people on a road trip.",
+	"narrative": [
+		"Documents relevant for this topic including a person who is doing a roadtrip or people talking about a roadtrip.",
+		"Insufficient are documents which do not include any kind of travelling or driving."
+	]
+}
