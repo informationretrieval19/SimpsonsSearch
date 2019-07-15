@@ -56,7 +56,7 @@ namespace SimpsonsSearch.searchEngine
                 BuildIndex();
             }
 
-            var resultsPerPage = 10;
+            var resultsPerPage = 20000;
             var query = queryParser.Parse(searchQuery);
             searcherManager.MaybeRefresh();
 
@@ -111,7 +111,7 @@ namespace SimpsonsSearch.searchEngine
             };
             return doc;
         }
-        
+
         public IEnumerable<ScriptLine> BuildScene(IEnumerable<ScriptLine> scriptLines)
         {
             //bekommt alle scriptlines geliefert
@@ -120,37 +120,45 @@ namespace SimpsonsSearch.searchEngine
             var spokenLinesList = new List<string>();
             var personsList = new HashSet<string>();
             var startingTime = "";
-
-            var testErrorLIst = new List<ScriptLine>();
+            var testErrorList = new List<ScriptLine>();
 
             foreach (var item in scriptLines)
             {
+
                 // "fix" für falsches spalten einlesen..
                 // Todo
                 if ((!item.speaking_line.Contains("true") && !item.speaking_line.Contains("false")))
                 {
-                    testErrorLIst.Add(item);
+                    testErrorList.Add(item);
                     continue;
                 }
                 if (item.speaking_line.Length > 6)
                 {
-                    testErrorLIst.Add(item);
+                    testErrorList.Add(item);
                     continue;
                 }
+
                 // solange true ist, füge die strings in normalized text zusammen 
                 if (Convert.ToBoolean(item.speaking_line) == true)
                 {
-                    
+
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
-                       
+
                     spokenLinesList.Add(item.normalized_text);
                     personsList.Add(item.raw_character_text);
                 }
                 // schreibe zusammengefügte scene in liste 
                 else
                 {
-                    sceneList.Add(new ScriptLine() { id = item.id, episode_id = item.episode_id, timestamp_in_ms = startingTime,
-                        normalized_text = String.Join(".", spokenLinesList.ToArray()), raw_character_text = String.Join(" ", personsList), raw_location_text = item.raw_location_text });
+                    sceneList.Add(new ScriptLine()
+                    {
+                        id = item.id,
+                        episode_id = item.episode_id,
+                        timestamp_in_ms = startingTime,
+                        normalized_text = String.Join(".", spokenLinesList.ToArray()),
+                        raw_character_text = String.Join(" ", personsList),
+                        raw_location_text = item.raw_location_text
+                    });
                     spokenLinesList.Clear();
                     personsList.Clear();
                 };
@@ -233,7 +241,7 @@ namespace SimpsonsSearch.searchEngine
         {
             // is button bad result is pressed --> delete it for this index, or give it bad score
             // good result button is pressed --> boost score
-  
+
 
         }
 
