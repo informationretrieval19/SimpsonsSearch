@@ -36,10 +36,7 @@ namespace SimpsonsSearch.Helper
             {
                 csv.Configuration.Delimiter = ",";
                 csv.Configuration.MissingFieldFound = null;
-
-                csv.Configuration.Escape = '\\';
-               
-                csv.Configuration.RegisterClassMap<BadFieldMap>();
+                
 
                 csv.Configuration.BadDataFound = context =>
                 {
