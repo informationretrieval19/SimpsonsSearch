@@ -1,1 +1,8 @@
-
+{
+	"topic_id": "t34", 
+	"query": "medical themed", 
+	"description": "To find episodes/scenes with a medical theme as its focus",
+	"narrative": [
+		"Relevant documents would include episodes/scenes where any medical drama, the hospital, medical testing or work plays a major part." 
+	]
+}
