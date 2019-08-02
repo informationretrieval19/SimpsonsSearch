@@ -1,0 +1,8 @@
+{
+	"topic_id": "t24", 
+	"query": "environment",
+	"description": "To find episodes/scenes revolving around environmental issues", 
+	"narrative": [
+		"Episodes/Scenes relevant to the query have to have an environmental theme, that can focus on a range of topics including ecology, environmentalism, animal rights, etc."
+	]
+}
