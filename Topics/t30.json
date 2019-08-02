@@ -1,0 +1,9 @@
+{
+	"topic_id": "t30", 
+	"query": "internet",
+	"description": "To find episodes/scenes revolving around the internet", 
+	"narrative": [
+		"Relevant documents would include episodes/scenes that focus on the internet as a main theme.",
+		"Insufficient would be episodes/scenes where the internet is being used casually"
+	]
+}
