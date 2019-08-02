@@ -1,0 +1,8 @@
+{
+	"topic_id": "t37", 
+	"query": "musical", 
+	"description": "To find episodes/scenes including a musical number",
+	"narrative": [
+		"Whenever a musical number is performed in an episode or a scene, it will count as sufficient for the query." 
+	]
+}
