@@ -1,0 +1,9 @@
+{
+	"topic_id": "t42",
+	"query": "school",
+	"description": "To find episodes where school is the main topic",
+	"narrative": [
+		"Relevant docuemts would include Episodes/Scenes centred around school. This may include first/last day of school episodes/scenes or school being the main location.",
+		"A regular school scene would not suffice for the query, i.e. the intro scene with Bart writing on the blackboard"
+	]
+}
