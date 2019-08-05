@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SimpsonsSearch.Helper;
 using SimpsonsSearch.Models;
 using SimpsonsSearch.searchEngine;
@@ -15,12 +17,14 @@ namespace SimpsonsSearch.Controllers
 	public class SearchController : Controller
     {
         private readonly ISearchEngine _searchEngine;
+        private readonly ILogger<SearchController> _logger;
 
         // Konstruktur der duch 'Dependency Injektion' den SeachEngineService und einen ConversionService initialisiert
         // somit stehen alle Methoden die in diesen KLassen erstellt wurden zur Verfügug
-        public SearchController(ISearchEngine searchEngine)
+        public SearchController(ISearchEngine searchEngine, ILoggerFactory loggerFactory)
         {
             _searchEngine = searchEngine;
+            _logger = loggerFactory.CreateLogger<SearchController>();
         }
 
         // Methode die aufgerufen wird wenn man die seite: ../search/Index aufruft
@@ -36,6 +40,8 @@ namespace SimpsonsSearch.Controllers
         // der über die Nutzereingabe über die View hierhergelangt
         public IActionResult Results(SearchformModel model)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _logger.LogInformation($"hello, here is the logger,  and this is the current userid: {userId}");
 
             var results = _searchEngine.Search(model.searchQuery);
             return View(results);
