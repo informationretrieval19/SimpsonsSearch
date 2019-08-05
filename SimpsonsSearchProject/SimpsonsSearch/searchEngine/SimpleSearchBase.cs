@@ -127,19 +127,19 @@ namespace SimpsonsSearch.searchEngine
 
                 // "fix" für falsches spalten einlesen..
                 // Todo
-                if ((!item.speaking_line.Contains("true") && !item.speaking_line.Contains("false")))
-                {
-                    testErrorList.Add(item);
-                    continue;
-                }
-                if (item.speaking_line.Length > 6)
-                {
-                    testErrorList.Add(item);
-                    continue;
-                }
+                //if ((!item.speaking_line.Contains("wahr") && !item.speaking_line.Contains("falsch")))
+                //{
+                //    testErrorList.Add(item);
+                //    continue;
+                //}
+                //if (item.speaking_line.Length > 6)
+                //{
+                //    testErrorList.Add(item);
+                //    continue;
+                //}
 
                 // solange true ist, füge die strings in normalized text zusammen 
-                if (Convert.ToBoolean(item.speaking_line) == true)
+                if (item.speaking_line == "WAHR")
                 {
 
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));

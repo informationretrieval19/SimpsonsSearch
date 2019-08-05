@@ -41,7 +41,7 @@ namespace SimpsonsSearch.Controllers
         public IActionResult Results(SearchformModel model)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _logger.LogInformation($"hello, here is the logger,  and this is the current userid: {userId}");
+            _logger.LogError($"hello, here is the logger,  and this is the current userid: {userId}");
 
             var results = _searchEngine.Search(model.searchQuery);
             return View(results);

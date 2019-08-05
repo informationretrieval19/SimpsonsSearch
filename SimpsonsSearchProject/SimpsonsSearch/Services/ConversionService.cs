@@ -34,7 +34,8 @@ namespace SimpsonsSearch.Helper
             using (var reader = new StreamReader(@"data/simpsons_script_lines.csv"))
             using (var csv = new CsvReader(reader))
             {
-                csv.Configuration.Delimiter = ",";
+
+                //csv.Configuration.Delimiter = ",";
                 csv.Configuration.MissingFieldFound = null;
                 
 
@@ -46,11 +47,7 @@ namespace SimpsonsSearch.Helper
 
                 _scriptLineRecords = csv.GetRecords<ScriptLine>().ToList();
 
-
-                
-
-
-                checkIfDataIsCorrekt(_scriptLineRecords);
+                //checkIfDataIsCorrekt(_scriptLineRecords);
                 return _scriptLineRecords;
             }
         }
