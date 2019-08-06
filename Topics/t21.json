@@ -1,7 +1,7 @@
 {
 	"topic_id": "t21",
 	"query": "death", 
-	"description": "To find episodes featuring a sifnificant character's death.",
+	"description": "To find scenes featuring a sifnificant character's death.",
 	"narrative": [
 		"A relevant document would include the on screen or off screen death or funeral of a named character. Pets may also be included if they played a major role in the series.",
 		"Insufficient would be the death of nameless characters or serious injuries that almost result in death." 
