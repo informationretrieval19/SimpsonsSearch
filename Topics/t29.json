@@ -1,8 +1,8 @@
 {
 	"topic_id": "t29", 
 	"query": "insanity",
-	"description": "To find episodes/scenes about insanity or someone becoming insane", 
+	"description": "To find scenes about insanity or someone becoming insane", 
 	"narrative": [
-		"Relevant episodes/scenes would feature insanity as a theme or follow a character becoming insane. Scenes in a mental asylum would also suffice for the query."
+		"Relevant scenes would feature insanity as a theme or follow a character becoming insane. Scenes in a mental asylum would also suffice for the query."
 	]
 }
