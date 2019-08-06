@@ -1,9 +1,9 @@
 {
 	"topic_id": "t15",
 	"query": "action", 
-	"description": "To find episodes that would qualify as action themed.",
+	"description": "To find scenes that would qualify as action themed.",
 	"narrative": [
-		"Documents relevant for this topic would include episodes being significally packed with action of having a plot that would place the episode inside the action genre.",
-		"Insufficient are episodes that include only a small part or scene that could be defined as action." 
+		"Documents relevant for this topic would include scenes being significally packed with action of having a plot that would place the episode inside the action genre.",
+		"Insufficient are senes that include only a small part that could be defined as action." 
 	]
 }
