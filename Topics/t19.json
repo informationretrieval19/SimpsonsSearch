@@ -1,9 +1,9 @@
 {
 	"topic_id": "t19", 
 	"query": "computing",
-	"description": "To find episodes/scenes centered around computing", 
+	"description": "To find scenes centered around computing", 
 	"narrative": [
-		"Relevant documents would include episodes/scenes where computing or technology is being used or discussed to a great extend.",
+		"Relevant documents would include scenes where computing or technology is being used or discussed to a great extend.",
 		"Not sufficient are regular or ordinary interactions with computers."
 	]
 }
