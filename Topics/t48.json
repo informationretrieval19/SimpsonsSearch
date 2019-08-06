@@ -1,9 +1,9 @@
 {
 	"topic_id": "t48", 
 	"query": "gun control", 
-	"description": "To find episodes/scenes where gun control is discussed",
+	"description": "To find scenes where gun control is discussed",
 	"narrative": [
-		"Relevant documents would include episodes/scenes where gun control or actions that would cause a debate about gun control are the main theme.",
+		"Relevant documents would include scenes where gun control or actions that would cause a debate about gun control are the main theme.",
 		"This may include shootings, someone buying a gun or (political) discussions about the topic."
 	]
 }
