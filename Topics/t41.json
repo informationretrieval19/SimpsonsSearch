@@ -1,8 +1,8 @@
 {
 	"topic_id": "t41", 
 	"query": "romance", 
-	"description": "To find episodes that centre around love and romance",
+	"description": "To find scenes that centre around love and romance",
 	"narrative": [
-		"Episodes/Scenes counting as relevant would focus around romance or romantic events such as proposals, weddings or first kisses." 
+		"Scenes counting as relevant would focus around romance or romantic events such as proposals, weddings or first kisses." 
 	]
 }
