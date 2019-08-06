@@ -1,9 +1,9 @@
 {
 	"topic_id": "t26", 
 	"query": "food",
-	"description": "To find episodes/scenes where food is the main focus", 
+	"description": "To find scenes where food is the main focus", 
 	"narrative": [
-		"Relevant documents would include episodes/scenes centered around a certain food product, company, or food in general.",
+		"Relevant documents would include scenes centered around a certain food product, company, or food in general.",
 		"A scene simply showing someone eating or a family having a regular dinner would be insufficient for the query."
 	]
 }
