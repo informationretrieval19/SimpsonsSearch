@@ -1,8 +1,8 @@
 {
 	"topic_id": "t25", 
 	"query": "fantasy",
-	"description": "To find episodes/scenes being fantasy themed or having strong fantasy elements", 
+	"description": "To find scenes being fantasy themed or having strong fantasy elements", 
 	"narrative": [
-		"The Episodes/Scenes should be centered aroud fantasy, fairy tales or magic or at least include elements common for the fantasy genre."
+		"The Scenes should be centered aroud fantasy, fairy tales or magic or at least include elements common for the fantasy genre."
 	]
 }
