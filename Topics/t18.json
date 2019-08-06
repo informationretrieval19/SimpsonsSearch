@@ -1,7 +1,7 @@
 {
 	"topic_id": "t18",
 	"query": "animals", 
-	"description": "To find episodes focusing on a certain animal.",
+	"description": "To find scenes focusing on a certain animal.",
 	"narrative": [
 		 "A relevant document would consist of dialogue or actions revolving around a special animal.",
 		 "Insufficient would be episodes with a short appearance of pets that can be seen frequently throughout the series." 
