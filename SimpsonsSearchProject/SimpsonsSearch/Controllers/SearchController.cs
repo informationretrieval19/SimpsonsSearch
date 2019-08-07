@@ -40,18 +40,19 @@ namespace SimpsonsSearch.Controllers
         // der über die Nutzereingabe über die View hierhergelangt
         public IActionResult Results(SearchformModel model)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _logger.LogError($"hello, here is the logger,  and this is the current userid: {userId}");
-
             var results = _searchEngine.Search(model.searchQuery);
+
+            //sollte eigenlich nur info sein, aber da werden zusätzlich weitere dinge gelogt, deswegen "fix" --> höheres loglevel 
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
+
             return View(results);
 
         }
 
-        public IActionResult Evaluation(SearchformModel model)
+        public void Evaluation(SearchformModel model)
         {
-            var results = _searchEngine.Search(model.searchQuery);
-            return View(results);
+            // die zeile die angedrückt wurde loggen .. 
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} hat ");
         }
     }
 }

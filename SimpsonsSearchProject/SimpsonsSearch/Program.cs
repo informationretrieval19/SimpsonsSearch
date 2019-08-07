@@ -22,7 +22,7 @@ namespace SimpsonsSearch
         public Program()
         {
             var services = new ServiceCollection()
-                .AddLogging(logBuilder => logBuilder.SetMinimumLevel(LogLevel.Debug))
+                .AddLogging()
                 .BuildServiceProvider();
 
 
@@ -33,13 +33,20 @@ namespace SimpsonsSearch
 
         public static void Main(string[] args)
 		{
-			CreateWebHostBuilder(args).Build().Run();
+            var logRepo = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(logRepo, new FileInfo("log4net.config"));
 
-            
+            CreateWebHostBuilder(args).Build().Run();
+
+
         }
 
-		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.UseStartup<Startup>();
-	}
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging((webHostBuilderContext, loggingBuilder) =>
+                {
+                    loggingBuilder.AddLog4Net();
+                })
+                .UseStartup<Startup>();
+    }
 }
