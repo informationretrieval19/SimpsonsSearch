@@ -48,10 +48,14 @@ namespace SimpsonsSearch.Controllers
 
         }
 
-        public IActionResult Evaluation(SearchformModel model)
+        public void LogGoodResult(Hit ratedDoc)
         {
-            var results = _searchEngine.Search(model.searchQuery);
-            return View(results);
+            var goodResult = "bla";
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc.Id} with a good score!");
+        }
+        public void LogBadResult(Hit ratedDoc)
+        {
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc} with a bad score!");
         }
     }
 }

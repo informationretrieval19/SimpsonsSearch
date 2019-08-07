@@ -56,7 +56,7 @@ namespace SimpsonsSearch.searchEngine
                 BuildIndex();
             }
 
-            var resultsPerPage = 20000;
+            var resultsPerPage = 100;
             var query = queryParser.Parse(searchQuery);
             searcherManager.MaybeRefresh();
 
