@@ -88,9 +88,9 @@ namespace SimpsonsSearch.searchEngine
             foreach (var scriptLine in scriptLines)
             {
                 var document = BuildDocumentForEachScene(scriptLine);
+                //var document = BuildDocumentForEachSpeakingLine(scriptLine);
 
                 indexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
-
             }
 
             indexWriter.Flush(true, true);
@@ -120,24 +120,9 @@ namespace SimpsonsSearch.searchEngine
             var spokenLinesList = new List<string>();
             var personsList = new HashSet<string>();
             var startingTime = "";
-            var testErrorList = new List<ScriptLine>();
-
+            
             foreach (var item in scriptLines)
             {
-
-                // "fix" für falsches spalten einlesen..
-                // Todo
-                //if ((!item.speaking_line.Contains("wahr") && !item.speaking_line.Contains("falsch")))
-                //{
-                //    testErrorList.Add(item);
-                //    continue;
-                //}
-                //if (item.speaking_line.Length > 6)
-                //{
-                //    testErrorList.Add(item);
-                //    continue;
-                //}
-
                 // solange true ist, füge die strings in normalized text zusammen 
                 if (item.speaking_line == "WAHR")
                 {
@@ -166,8 +151,6 @@ namespace SimpsonsSearch.searchEngine
             }
             return sceneList;
         }
-
-
 
         //bekommt eine liste von scenen geliefert
         public virtual Document BuildDocumentForEachScene(ScriptLine scriptLine)
