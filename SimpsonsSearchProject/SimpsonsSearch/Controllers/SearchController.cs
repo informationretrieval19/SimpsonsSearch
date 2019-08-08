@@ -49,12 +49,21 @@ namespace SimpsonsSearch.Controllers
 
         }
 
-        public void Evaluation(SearchformModel model)
+        public void LogGoodResult(Hit ratedDoc)
         {
-            // die zeile die angedrückt wurde loggen .. 
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} hat ");
+            
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc.Id} with a good score!");
+        }
+
+        public void LogBadResult(Hit ratedDoc)
+        {
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc} with a bad score!");
         }
     }
 }
 
 
+
+
+
+   

@@ -3,18 +3,16 @@
     ViewData["Title"] = "Results";
 }
 
-
 <div class="container">
     @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
 </div>
-
 <table id="results">
     <tr class="spaceUnder">
         <th class="Episode" scope="col">Episode</th>
         <th class="Text" scope="col">Text</th>
         <th class="Actor" scope="col">Location</th>
         <th class="ID" scope="col">Persons</th>
-        <th class= "Score" scope="col">Score</th>
+        <th class="Score" scope="col">Score</th>
         <th class="collapse multi-collapse" id="evaluationtable" scope="col">Evaluation</th>
     </tr>
     @foreach (var hit in Model.Hits)
@@ -27,26 +25,17 @@
             <td> @hit.Person</td>
             <td>@hit.Score</td>
             <td>
-                @*<div class="collapse multi-collapse" id="evaluation">
-                        <form class="form-inline " method="post" asp-controller="Search" asp-action="">
-                            <button type="submit" class="btn btn-success">Good</button>
-
-                        </form>
-                        <form class="form-inline " method="post" asp-controller="Search" asp-action="">
-
-                            <button type="submit" class="btn btn-danger">Bad</button>
-                        </form>
-                    </div>*@
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" asp-controller="Search" asp-action="Evalution">
-                    <label class="btn btn-warning">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> +
-                    </label>
-                    <label class="btn btn-warning">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> -
-                    </label>
-
+                <div>
+                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogGoodResult">
+                        <button type="submit" asp-for="hit" class="btn btn-primary">+</button>
+                    </form>
+                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogBadResult" asp-for="@hit">
+                        <button type="submit" class="btn btn-primary">-</button>
+                    </form>
                 </div>
             </td>
         </tr>
     }
 </table>
+
+
