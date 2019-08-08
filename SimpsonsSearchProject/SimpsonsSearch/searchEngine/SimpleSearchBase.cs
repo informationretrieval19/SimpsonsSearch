@@ -126,6 +126,7 @@ namespace SimpsonsSearch.searchEngine
             var spokenLinesList = new List<string>();
             var personsList = new HashSet<string>();
             var startingTime = "";
+            var sceneId = 0;
 
             foreach (var item in scriptLines)
             {
@@ -142,9 +143,12 @@ namespace SimpsonsSearch.searchEngine
                 // schreibe zusammengefügte scene in liste 
                 else
                 {
+                    sceneId = sceneId + 1;
+
                     sceneList.Add(new ScriptLine()
                     {
-                        id = item.id,
+                        // id wird zu einer neuen scenen id 
+                        id = sceneId.ToString(),
                         episode_id = item.episode_id,
                         timestamp_in_ms = startingTime,
                         normalized_text = String.Join(":", spokenLinesList.ToArray()),
