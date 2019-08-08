@@ -1,0 +1,9 @@
+{
+	"topic_id": "t36", 
+	"query": "movies / films", 
+	"description": "To find scenes that are film-themed",
+	"narrative": [
+		"Relevant scenes would include topics about movies, be film-themed or have a film festival happen.",
+		"Insufficient would be scenes where a film is simply watched in the background and not discussed." 
+	]
+}

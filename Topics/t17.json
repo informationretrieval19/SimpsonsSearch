@@ -1,9 +1,9 @@
 {
 	"topic_id": "t17",
 	"query": "alcohol", 
-	"description": "To find episodes focusing around alcohol consumation or addiction.",
+	"description": "To find scenes focusing around alcohol consumation or addiction.",
 	"narrative": [
-		"Relevant documents would include alcohol or alcoholism as the main theme of the episode.",
+		"Relevant documents would include alcohol or alcoholism as the main theme of the scene.",
 		"It does neither suffice if someone consumes a single alcoholic beverage nor someone shown drinking or drunk who regularly consumes alcohol." 
 	]
 		

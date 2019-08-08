@@ -1,10 +1,10 @@
 {
 	"topic_id": "t20",
 	"query": "crime", 
-	"description": "To find episodes focusing around criminal activities.",
+	"description": "To find scenes focusing around criminal activities.",
 	"narrative": [
 		"Relevant documents would include directly shown crimes or their planning leading to a successful ord failed execution.",
-		"Dealing with the aftermath of a crime that already happened would be just as insufficient for the document to be relevant as a small crime not being in the centre of the episode." 
+		"Dealing with the aftermath of a crime that already happened would be just as insufficient for the document to be relevant as a small crime not being in the centre of the scene." 
 	]
 		
 }

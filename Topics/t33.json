@@ -1,0 +1,9 @@
+{
+	"topic_id": "t33", 
+	"query": "mafia", 
+	"description": "To find scenes that focus on the Springfield Mafia",
+	"narrative": [
+		"Scenes revolving around the Springfield Mafia or their figure head Fat Tony would count as relevant. This includes plotting of any kind and taking action by the mafia.",
+		"Insufficient scenes would include the simple appearance of a member of the mafia."		
+	]
+}
