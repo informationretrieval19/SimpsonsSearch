@@ -27,9 +27,11 @@ namespace SimpsonsSearch.searchEngine
 		public string Timestamp { get; set; }
 
         //aus episodes.csv, mapping über episodeId aus scriptlines.csv
-        public string episodeName { get; set; }
-        public string season { get; set; }
-	}
+        public string EpisodeName { get; set; }
+        public string Season { get; set; }
+        public string EpisodeInSeason { get; set; }
+
+    }
 }
 
 

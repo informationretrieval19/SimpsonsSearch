@@ -8,6 +8,7 @@
 </div>
 <table id="results">
     <tr class="spaceUnder">
+        <th scope="col"></th>
         <th scope="col">SceneId</th>
         <th class="Episode" scope="col">Episode</th>
         <th scope="col">Season</th>
@@ -18,13 +19,16 @@
         <th class="Score" scope="col">Score</th>
         <th class="collapse multi-collapse" id="evaluationtable" scope="col">Evaluation</th>
     </tr>
+
+    @{int counter = 0;}
     @foreach (var hit in Model.Hits)
     {
-
+        {counter++;}
         <tr class="Entry">
+            <th>@counter </th>
             <th> @hit.Id</th>
-            <td> Episode: @hit.EpisodeId @hit.episodeName</td>
-            <td> @hit.season</td>
+            <td>  @hit.EpisodeName</td>
+            <td> Season:@hit.Season Episode: @hit.EpisodeInSeason</td>
             <td>@hit.Timestamp</td>
             <td> @hit.Text</td>
             <td> @hit.Location </td>

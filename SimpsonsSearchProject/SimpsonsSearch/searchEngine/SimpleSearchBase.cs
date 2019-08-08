@@ -202,10 +202,10 @@ namespace SimpsonsSearch.searchEngine
                     Person = document.GetField("persons")?.GetStringValue(),
                     Text = document.GetField("text")?.GetStringValue(),
                     Timestamp = document.GetField("timestamp")?.GetStringValue(),
-
-                    episodeName = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).title,
-                    season = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).season
-
+                  
+                    EpisodeName = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).title,
+                    Season = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).season,
+                    EpisodeInSeason = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).number_in_season
 
                 };
                 searchResults.Hits.Add(searchResult);
