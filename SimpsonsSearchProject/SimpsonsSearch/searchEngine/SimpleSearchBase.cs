@@ -12,6 +12,7 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
+using SimpsonsSearch.Models;
 using SimpsonsSearch.Services;
 
 
@@ -27,15 +28,18 @@ namespace SimpsonsSearch.searchEngine
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
 
-
+        private readonly IEnumerable<Episode> _episodes;
 
         public SimpleSearchBase(IConversionService conversionService)
         {
             _conversionService = conversionService;
             analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzer);
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "persons", "location" }, analyzer);
             indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
             searcherManager = new SearcherManager(indexWriter, true, null);
+
+
+            _episodes = _conversionService.ConvertCsvToEpisodes();
         }
 
 
@@ -56,7 +60,7 @@ namespace SimpsonsSearch.searchEngine
                 BuildIndex();
             }
 
-            var resultsPerPage = 20000;
+            var resultsPerPage = 100;
             var query = queryParser.Parse(searchQuery);
             searcherManager.MaybeRefresh();
 
@@ -82,15 +86,17 @@ namespace SimpsonsSearch.searchEngine
         {
             var scriptLines = BuildScene(_conversionService.ConvertCsVtoScriptLines());
 
+
+
             if (scriptLines == null) throw new ArgumentNullException();
 
             // if speaking line == false create document 
             foreach (var scriptLine in scriptLines)
             {
                 var document = BuildDocumentForEachScene(scriptLine);
+                //var document = BuildDocumentForEachSpeakingLine(scriptLine);
 
                 indexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
-
             }
 
             indexWriter.Flush(true, true);
@@ -120,26 +126,12 @@ namespace SimpsonsSearch.searchEngine
             var spokenLinesList = new List<string>();
             var personsList = new HashSet<string>();
             var startingTime = "";
-            var testErrorList = new List<ScriptLine>();
+            var sceneId = 0;
 
             foreach (var item in scriptLines)
             {
-
-                // "fix" für falsches spalten einlesen..
-                // Todo
-                if ((!item.speaking_line.Contains("true") && !item.speaking_line.Contains("false")))
-                {
-                    testErrorList.Add(item);
-                    continue;
-                }
-                if (item.speaking_line.Length > 6)
-                {
-                    testErrorList.Add(item);
-                    continue;
-                }
-
                 // solange true ist, füge die strings in normalized text zusammen 
-                if (Convert.ToBoolean(item.speaking_line) == true)
+                if (item.speaking_line == "WAHR")
                 {
 
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
@@ -151,9 +143,12 @@ namespace SimpsonsSearch.searchEngine
                 // schreibe zusammengefügte scene in liste 
                 else
                 {
+                    sceneId = sceneId + 1;
+
                     sceneList.Add(new ScriptLine()
                     {
-                        id = item.id,
+                        // id wird zu einer neuen scenen id 
+                        id = sceneId.ToString(),
                         episode_id = item.episode_id,
                         timestamp_in_ms = startingTime,
                         normalized_text = String.Join(":", spokenLinesList.ToArray()),
@@ -166,8 +161,6 @@ namespace SimpsonsSearch.searchEngine
             }
             return sceneList;
         }
-
-
 
         //bekommt eine liste von scenen geliefert
         public virtual Document BuildDocumentForEachScene(ScriptLine scriptLine)
@@ -195,6 +188,8 @@ namespace SimpsonsSearch.searchEngine
         public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
         {
             var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
+
+
             foreach (var result in topDocs.ScoreDocs)
             {
                 Document document = searcher.Doc(result.Doc);
@@ -206,7 +201,12 @@ namespace SimpsonsSearch.searchEngine
                     Score = result.Score,
                     Person = document.GetField("persons")?.GetStringValue(),
                     Text = document.GetField("text")?.GetStringValue(),
-                    Timestamp = document.GetField("timestamp")?.GetStringValue()
+                    Timestamp = document.GetField("timestamp")?.GetStringValue(),
+
+                    episodeName = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).title,
+                    season = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).season
+
+
                 };
                 searchResults.Hits.Add(searchResult);
             }
@@ -316,6 +316,14 @@ namespace SimpsonsSearch.searchEngine
                 q.MinimumNumberShouldMatch = match;
                 yield return q;
             }
+        }
+
+
+        public Episode MapScriptlinesToEpisodes(string episodeId)
+        {
+            var episode = _episodes.FirstOrDefault(x => x.id == episodeId);
+
+            return episode;
         }
     }
 }

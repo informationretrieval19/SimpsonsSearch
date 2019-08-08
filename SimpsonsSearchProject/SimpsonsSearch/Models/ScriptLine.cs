@@ -24,13 +24,4 @@ namespace SimpsonsSearch.searchEngine
 
     }
 
-    public sealed class BadFieldMap : ClassMap<ScriptLine>
-    {
-        public BadFieldMap()
-        {
-            AutoMap();
-            Map(m => m.raw_text).Ignore();
-            Map(m => m.spoken_words).Ignore();
-        }
-    }
 }
