@@ -33,7 +33,7 @@ namespace SimpsonsSearch.searchEngine
         {
             _conversionService = conversionService;
             analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text" }, analyzer);
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "persons", "location"  }, analyzer);
             indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
             searcherManager = new SearcherManager(indexWriter, true, null);
         }

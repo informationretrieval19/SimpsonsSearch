@@ -29,7 +29,7 @@
                     <form class="form-inline " method="post" asp-controller="Search" asp-action="LogGoodResult">
                         <button type="submit" asp-for="hit" class="btn btn-primary">+</button>
                     </form>
-                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogBadResult" asp-for="@hit">
+                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogBadResult" asp-for="@hit.Id">
                         <button type="submit" class="btn btn-primary">-</button>
                     </form>
                 </div>

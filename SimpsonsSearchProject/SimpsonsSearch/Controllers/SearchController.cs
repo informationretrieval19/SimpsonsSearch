@@ -46,7 +46,6 @@ namespace SimpsonsSearch.Controllers
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
 
             return View(results);
-
         }
 
         public void LogGoodResult(Hit ratedDoc)
@@ -55,9 +54,9 @@ namespace SimpsonsSearch.Controllers
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc.Id} with a good score!");
         }
 
-        public void LogBadResult(Hit ratedDoc)
+        public void LogBadResult(int id)
         {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc} with a bad score!");
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the document with id {id} with a bad score!");
         }
     }
 }
