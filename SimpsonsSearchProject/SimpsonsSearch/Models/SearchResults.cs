@@ -26,6 +26,9 @@ namespace SimpsonsSearch.searchEngine
 		public float Score { get; set; }
 		public string Timestamp { get; set; }
 
+        //aus episodes.csv, mapping über episodeId aus scriptlines.csv
+        public string episodeName { get; set; }
+        public string season { get; set; }
 	}
 }
 

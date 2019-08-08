@@ -18,9 +18,10 @@ namespace SimpsonsSearch.Controllers
     {
         private readonly ISearchEngine _searchEngine;
         private readonly ILogger<SearchController> _logger;
+   
 
-        // Konstruktur der duch 'Dependency Injektion' den SeachEngineService und einen ConversionService initialisiert
-        // somit stehen alle Methoden die in diesen KLassen erstellt wurden zur Verfügug
+        // Konstruktur der duch 'Dependency Injektion' den SeachEngineService initialisiert
+        // somit stehen alle Methoden in dieser KLasse  zur Verfügug
         public SearchController(ISearchEngine searchEngine, ILoggerFactory loggerFactory)
         {
             _searchEngine = searchEngine;
@@ -50,6 +51,7 @@ namespace SimpsonsSearch.Controllers
 
         public void LogGoodResult(Hit ratedDoc)
         {
+            
             
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc.Id} with a good score!");
         }

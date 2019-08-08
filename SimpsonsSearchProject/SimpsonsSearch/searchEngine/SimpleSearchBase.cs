@@ -12,6 +12,7 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
+using SimpsonsSearch.Models;
 using SimpsonsSearch.Services;
 
 
@@ -27,15 +28,18 @@ namespace SimpsonsSearch.searchEngine
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
 
-
+        private readonly IEnumerable<Episode> _episodes;
 
         public SimpleSearchBase(IConversionService conversionService)
         {
             _conversionService = conversionService;
             analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "persons", "location"  }, analyzer);
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "persons", "location" }, analyzer);
             indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
             searcherManager = new SearcherManager(indexWriter, true, null);
+
+
+            _episodes = _conversionService.ConvertCsvToEpisodes();
         }
 
 
@@ -82,6 +86,8 @@ namespace SimpsonsSearch.searchEngine
         {
             var scriptLines = BuildScene(_conversionService.ConvertCsVtoScriptLines());
 
+
+
             if (scriptLines == null) throw new ArgumentNullException();
 
             // if speaking line == false create document 
@@ -120,7 +126,7 @@ namespace SimpsonsSearch.searchEngine
             var spokenLinesList = new List<string>();
             var personsList = new HashSet<string>();
             var startingTime = "";
-            
+
             foreach (var item in scriptLines)
             {
                 // solange true ist, füge die strings in normalized text zusammen 
@@ -178,6 +184,8 @@ namespace SimpsonsSearch.searchEngine
         public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
         {
             var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
+
+
             foreach (var result in topDocs.ScoreDocs)
             {
                 Document document = searcher.Doc(result.Doc);
@@ -189,7 +197,12 @@ namespace SimpsonsSearch.searchEngine
                     Score = result.Score,
                     Person = document.GetField("persons")?.GetStringValue(),
                     Text = document.GetField("text")?.GetStringValue(),
-                    Timestamp = document.GetField("timestamp")?.GetStringValue()
+                    Timestamp = document.GetField("timestamp")?.GetStringValue(),
+
+                    episodeName = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).title,
+                    season = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).season
+
+
                 };
                 searchResults.Hits.Add(searchResult);
             }
@@ -299,6 +312,14 @@ namespace SimpsonsSearch.searchEngine
                 q.MinimumNumberShouldMatch = match;
                 yield return q;
             }
+        }
+
+
+        public Episode MapScriptlinesToEpisodes(string episodeId)
+        {
+            var episode = _episodes.FirstOrDefault(x => x.id == episodeId);
+
+            return episode;
         }
     }
 }
