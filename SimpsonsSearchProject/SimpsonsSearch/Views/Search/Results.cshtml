@@ -35,7 +35,7 @@
                     <form class="form-inline " method="post" asp-controller="Search" asp-action="LogGoodResult" asp-route-id="@hit.Id">
                         <button type="submit" class="btn btn-warning">+</button>
                     </form>
-                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogBadResult" @*asp-route-id="@hit.Id"*@>
+                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogBadResult" @*asp-route-id="@hit.Id" *@>
                         <button type="submit" class="btn btn-warning">-</button>
                     </form>
                 </div>
@@ -43,5 +43,7 @@
         </tr>
     }
 </table>
+
+
 
 
