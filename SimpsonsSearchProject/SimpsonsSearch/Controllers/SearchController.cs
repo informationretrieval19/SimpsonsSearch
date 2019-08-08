@@ -49,16 +49,18 @@ namespace SimpsonsSearch.Controllers
             return View(results);
         }
 
-        public void LogGoodResult(Hit ratedDoc)
+        public IActionResult LogGoodResult(int id)
         {
-            
-            
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated {ratedDoc.Id} with a good score!");
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score!");
+
+            return View("Index");
         }
 
-        public void LogBadResult(int id)
+        public IActionResult LogBadResult(int id)
         {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the document with id {id} with a bad score!");
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score!");
+
+            return View("Index");
         }
     }
 }
