@@ -34,7 +34,7 @@ namespace SimpsonsSearch.searchEngine
         {
             _conversionService = conversionService;
             analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "persons", "location" }, analyzer);
+            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "characters", "location" }, analyzer);
             indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
             searcherManager = new SearcherManager(indexWriter, true, null);
 
@@ -110,7 +110,7 @@ namespace SimpsonsSearch.searchEngine
             {
                 new StoredField("id", scriptLine.id),
                 new TextField("text", scriptLine.normalized_text, Field.Store.YES),
-                new TextField("persons", scriptLine.raw_character_text, Field.Store.YES),
+                new TextField("characters", scriptLine.raw_character_text, Field.Store.YES),
                 new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
                 new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
                 new StoredField("timestamp", scriptLine.timestamp_in_ms)
@@ -124,8 +124,7 @@ namespace SimpsonsSearch.searchEngine
             // wir gehen liste durch und fügen strings zusammen bis speakingline == false
             var sceneList = new List<ScriptLine>();
             var spokenLinesList = new List<string>();
-            var personsList = new HashSet<string>();
-            //var locationsList = new HashSet<string>();
+            var charactersList = new HashSet<string>();
             var startingTime = "";
             var sceneId = 0;
             var startingLocation = "";
@@ -135,14 +134,12 @@ namespace SimpsonsSearch.searchEngine
                 // solange true ist, füge die strings in normalized text zusammen 
                 if (item.character_id != "")
                 {
-
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
 
                     var textWithSpeaker = item.normalized_text;
                     spokenLinesList.Add(textWithSpeaker);
-                    personsList.Add(item.raw_character_text);
+                    charactersList.Add(item.raw_character_text);
                     startingLocation = item.raw_location_text;
-                    //locationsList.Add(item.raw_location_text);
                 }
                 // schreibe zusammengefügte scene in liste 
                 else if (spokenLinesList.Any())
@@ -156,11 +153,11 @@ namespace SimpsonsSearch.searchEngine
                         episode_id = item.episode_id,
                         timestamp_in_ms = startingTime,
                         normalized_text = String.Join(":", spokenLinesList.ToArray()),
-                        raw_character_text = String.Join(", ", personsList),
+                        raw_character_text = String.Join(", ", charactersList),
                         raw_location_text = startingLocation
                     });
                     spokenLinesList.Clear();
-                    personsList.Clear();
+                    charactersList.Clear();
                 };
             }
             return sceneList;
@@ -175,7 +172,7 @@ namespace SimpsonsSearch.searchEngine
             new StoredField("id", scriptLine.id),
             new TextField("text", scriptLine.normalized_text, Field.Store.YES),
             new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
-            new TextField("persons", scriptLine.raw_character_text, Field.Store.YES ),
+            new TextField("characters", scriptLine.raw_character_text, Field.Store.YES ),
             new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
             new TextField("timestamp", scriptLine.timestamp_in_ms, Field.Store.YES)
          };
@@ -203,7 +200,7 @@ namespace SimpsonsSearch.searchEngine
                     Id = document.GetField("id")?.GetStringValue(),
                     EpisodeId = document.GetField("episodeId")?.GetStringValue(),
                     Score = result.Score,
-                    Person = document.GetField("persons")?.GetStringValue(),
+                    Person = document.GetField("characters")?.GetStringValue(),
                     Text = document.GetField("text")?.GetStringValue(),
                     Timestamp = document.GetField("timestamp")?.GetStringValue(),
 
@@ -214,7 +211,6 @@ namespace SimpsonsSearch.searchEngine
                 };
                 searchResults.Hits.Add(searchResult);
             }
-
             return searchResults;
         }
 
