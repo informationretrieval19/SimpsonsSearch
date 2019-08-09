@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Analysis.TokenAttributes;
@@ -124,6 +125,11 @@ namespace SimpsonsSearch.searchEngine
             // wir gehen liste durch und fügen strings zusammen bis speakingline == false
             var sceneList = new List<ScriptLine>();
             var spokenLinesList = new List<string>();
+            var linesWithNames = new List<string>();
+
+            var stringBuilder = new StringBuilder();
+
+
             var charactersList = new HashSet<string>();
             var startingTime = "";
             var sceneId = 0;
@@ -135,11 +141,12 @@ namespace SimpsonsSearch.searchEngine
                 if (item.character_id != "")
                 {
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
-
-                    var textWithSpeaker = item.normalized_text;
-                    spokenLinesList.Add(textWithSpeaker);
+                    spokenLinesList.Add(item.normalized_text);
                     charactersList.Add(item.raw_character_text);
                     startingLocation = item.raw_location_text;
+
+                    stringBuilder.Append(item.raw_text);
+                
                 }
                 // schreibe zusammengefügte scene in liste 
                 else if (spokenLinesList.Any())
@@ -153,11 +160,14 @@ namespace SimpsonsSearch.searchEngine
                         episode_id = item.episode_id,
                         timestamp_in_ms = startingTime,
                         normalized_text = String.Join(":", spokenLinesList.ToArray()),
+                        raw_text = stringBuilder.ToString(),
+
                         raw_character_text = String.Join(", ", charactersList),
                         raw_location_text = startingLocation
                     });
                     spokenLinesList.Clear();
                     charactersList.Clear();
+                    stringBuilder.Clear();
                 };
             }
             return sceneList;
@@ -171,6 +181,8 @@ namespace SimpsonsSearch.searchEngine
             {
             new StoredField("id", scriptLine.id),
             new TextField("text", scriptLine.normalized_text, Field.Store.YES),
+            new TextField("raw_text", scriptLine.raw_text, Field.Store.YES),
+
             new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
             new TextField("characters", scriptLine.raw_character_text, Field.Store.YES ),
             new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
@@ -201,7 +213,7 @@ namespace SimpsonsSearch.searchEngine
                     EpisodeId = document.GetField("episodeId")?.GetStringValue(),
                     Score = result.Score,
                     Person = document.GetField("characters")?.GetStringValue(),
-                    Text = document.GetField("text")?.GetStringValue(),
+                    Text = document.GetField("raw_text")?.GetStringValue(),
                     Timestamp = document.GetField("timestamp")?.GetStringValue(),
 
                     EpisodeName = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).title,
