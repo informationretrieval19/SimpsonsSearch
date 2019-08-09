@@ -9,6 +9,7 @@
 <table id="results">
     <tr class="spaceUnder">
         <th scope="col"></th>
+        <th scope="col">EpisodeId</th>
         <th scope="col">SceneId</th>
         <th class="Episode" scope="col">Episode</th>
         <th scope="col">Season</th>
@@ -26,6 +27,7 @@
         {counter++;}
         <tr class="Entry">
             <th>@counter </th>
+            <th>@hit.EpisodeId</th>
             <th> @hit.Id</th>
             <td>  @hit.EpisodeName</td>
             <td> Season:@hit.Season Episode: @hit.EpisodeInSeason</td>

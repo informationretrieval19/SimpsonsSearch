@@ -125,23 +125,27 @@ namespace SimpsonsSearch.searchEngine
             var sceneList = new List<ScriptLine>();
             var spokenLinesList = new List<string>();
             var personsList = new HashSet<string>();
+            //var locationsList = new HashSet<string>();
             var startingTime = "";
             var sceneId = 0;
+            var startingLocation = "";
 
             foreach (var item in scriptLines)
             {
                 // solange true ist, füge die strings in normalized text zusammen 
-                if (item.speaking_line == "WAHR")
+                if (item.character_id != "")
                 {
 
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
 
-                    var textWithSpeaker = $"({item.raw_character_text}) {item.normalized_text}";
+                    var textWithSpeaker = item.normalized_text;
                     spokenLinesList.Add(textWithSpeaker);
                     personsList.Add(item.raw_character_text);
+                    startingLocation = item.raw_location_text;
+                    //locationsList.Add(item.raw_location_text);
                 }
                 // schreibe zusammengefügte scene in liste 
-                else
+                else if (spokenLinesList.Any())
                 {
                     sceneId = sceneId + 1;
 
@@ -153,7 +157,7 @@ namespace SimpsonsSearch.searchEngine
                         timestamp_in_ms = startingTime,
                         normalized_text = String.Join(":", spokenLinesList.ToArray()),
                         raw_character_text = String.Join(", ", personsList),
-                        raw_location_text = item.raw_location_text
+                        raw_location_text = startingLocation
                     });
                     spokenLinesList.Clear();
                     personsList.Clear();
@@ -202,7 +206,7 @@ namespace SimpsonsSearch.searchEngine
                     Person = document.GetField("persons")?.GetStringValue(),
                     Text = document.GetField("text")?.GetStringValue(),
                     Timestamp = document.GetField("timestamp")?.GetStringValue(),
-                  
+
                     EpisodeName = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).title,
                     Season = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).season,
                     EpisodeInSeason = MapScriptlinesToEpisodes(document.GetField("episodeId")?.GetStringValue()).number_in_season
@@ -238,85 +242,85 @@ namespace SimpsonsSearch.searchEngine
             }
         }
 
-        public void CreateQuery()
-        {
-            // is button bad result is pressed --> delete it for this index, or give it bad score
-            // good result button is pressed --> boost score
+        //public void CreateQuery()
+        //{
+        //    // is button bad result is pressed --> delete it for this index, or give it bad score
+        //    // good result button is pressed --> boost score
 
 
-        }
+        //}
 
-        // spliting user input into tokens 
-        IList<string> Tokenize(string userInput)
-        {
-            List<string> tokens = new List<string>();
-            using (var reader = new StringReader(userInput))
-            using (TokenStream stream = analyzer.GetTokenStream("myfield", reader))
-            {
-                stream.Reset();
-                while (stream.IncrementToken())
-                    tokens.Add(stream.GetAttribute<ICharTermAttribute>().ToString());
-            }
-            return tokens;
-        }
+        //// spliting user input into tokens 
+        //IList<string> Tokenize(string userInput)
+        //{
+        //    List<string> tokens = new List<string>();
+        //    using (var reader = new StringReader(userInput))
+        //    using (TokenStream stream = analyzer.GetTokenStream("myfield", reader))
+        //    {
+        //        stream.Reset();
+        //        while (stream.IncrementToken())
+        //            tokens.Add(stream.GetAttribute<ICharTermAttribute>().ToString());
+        //    }
+        //    return tokens;
+        //}
 
-        class FieldDefinition
-        {
-            public string Name { get; set; }
-            public bool IsDefault { get; set; } = false;
-            //other properties omitted
-        }
+        //class FieldDefinition
+        //{
+        //    public string Name { get; set; }
+        //    public bool IsDefault { get; set; } = false;
+        //    //other properties omitted
+        //}
 
-        //in a different class
-        Query BuildQuery(string userInput, IEnumerable<FieldDefinition> fields)
-        {
-            BooleanQuery query = new BooleanQuery();
-            IList<string> tokens = Tokenize(userInput);
+        ////in a different class
+        //Query BuildQuery(string userInput, IEnumerable<FieldDefinition> fields)
+        //{
+        //    BooleanQuery query = new BooleanQuery();
+        //    IList<string> tokens = Tokenize(userInput);
 
-            //combine tokens present in user input
-            if (tokens.Count > 1)
-            {
-                FieldDefinition defaultField = fields.FirstOrDefault(f => f.IsDefault == true);
-                query.Add(BuildExactPhraseQuery(tokens, defaultField), Occur.SHOULD);
+        //    //combine tokens present in user input
+        //    if (tokens.Count > 1)
+        //    {
+        //        FieldDefinition defaultField = fields.FirstOrDefault(f => f.IsDefault == true);
+        //        query.Add(BuildExactPhraseQuery(tokens, defaultField), Occur.SHOULD);
 
-                foreach (var q in GetIncrementalMatchQuery(tokens, defaultField))
-                    query.Add(q, Occur.SHOULD);
-            }
+        //        foreach (var q in GetIncrementalMatchQuery(tokens, defaultField))
+        //            query.Add(q, Occur.SHOULD);
+        //    }
 
-            //create a term query per field - non boosted
-            foreach (var token in tokens)
-                foreach (var field in fields)
-                    query.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
+        //    //create a term query per field - non boosted
+        //    foreach (var token in tokens)
+        //        foreach (var field in fields)
+        //            query.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
 
-            return query;
-        }
+        //    return query;
+        //}
 
-        Query BuildExactPhraseQuery(IList<string> tokens, FieldDefinition field)
-        {
-            //boost factor (6) and slop (2) come from configuration - code omitted for simplicity
-            PhraseQuery pq = new PhraseQuery() { Boost = tokens.Count * 6, Slop = 2 };
-            foreach (var token in tokens)
-                pq.Add(new Term(field.Name, token));
+        //Query BuildExactPhraseQuery(IList<string> tokens, FieldDefinition field)
+        //{
+        //    //boost factor (6) and slop (2) come from configuration - code omitted for simplicity
+        //    PhraseQuery pq = new PhraseQuery() { Boost = tokens.Count * 6, Slop = 2 };
+        //    foreach (var token in tokens)
+        //        pq.Add(new Term(field.Name, token));
 
-            return pq;
-        }
+        //    return pq;
+        //}
 
-        IEnumerable<Query> GetIncrementalMatchQuery(IList<string> tokens, FieldDefinition field)
-        {
-            BooleanQuery bq = new BooleanQuery();
-            foreach (var token in tokens)
-                bq.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
+        //IEnumerable<Query> GetIncrementalMatchQuery(IList<string> tokens, FieldDefinition field)
+        //{
+        //    BooleanQuery bq = new BooleanQuery();
+        //    foreach (var token in tokens)
+        //        bq.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
 
-            //5 comes from config - code omitted
-            int upperLimit = Math.Min(tokens.Count, 5);
-            for (int match = 2; match <= upperLimit; match++)
-            {
-                BooleanQuery q = bq.Clone() as BooleanQuery;
-                q.Boost = match * 3;
-                q.MinimumNumberShouldMatch = match;
-                yield return q;
-            }
-        }
+        //    //5 comes from config - code omitted
+        //    int upperLimit = Math.Min(tokens.Count, 5);
+        //    for (int match = 2; match <= upperLimit; match++)
+        //    {
+        //        BooleanQuery q = bq.Clone() as BooleanQuery;
+        //        q.Boost = match * 3;
+        //        q.MinimumNumberShouldMatch = match;
+        //        yield return q;
+        //    }
+        //}
 
 
         public Episode MapScriptlinesToEpisodes(string episodeId)
