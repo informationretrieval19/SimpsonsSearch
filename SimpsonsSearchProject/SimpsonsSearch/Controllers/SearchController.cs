@@ -19,14 +19,15 @@ namespace SimpsonsSearch.Controllers
     {
         private readonly ISearchEngine _searchEngine;
         private readonly ILogger<SearchController> _logger;
-   
+        private readonly JsonBuilder _jsonBuilder;
 
         // Konstruktur der duch 'Dependency Injektion' den SeachEngineService initialisiert
         // somit stehen alle Methoden in dieser KLasse  zur Verfügug
-        public SearchController(ISearchEngine searchEngine, ILoggerFactory loggerFactory)
+        public SearchController(ISearchEngine searchEngine, ILoggerFactory loggerFactory, JsonBuilder jsonBuilder)
         {
             _searchEngine = searchEngine;
             _logger = loggerFactory.CreateLogger<SearchController>();
+            _jsonBuilder = jsonBuilder;
         }
 
         // Methode die aufgerufen wird wenn man die seite: ../search/Index aufruft
@@ -55,13 +56,14 @@ namespace SimpsonsSearch.Controllers
         public void LogGoodResult(int id)
         {
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score!");
+            _jsonBuilder.BuildJsonFile();
         }
 
         public void LogBadResult(int id)
         {
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score!");
+            _jsonBuilder.BuildJsonFile();
 
-            
         }
     }
 }

@@ -40,6 +40,7 @@ namespace SimpsonsSearch
             services.AddScoped<ISearchEngine, LuceneEngine>();
             services.AddScoped<SimpleSearchBase>();
             services.AddScoped<IConversionService, ConversionService>();
+            services.AddScoped<JsonBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

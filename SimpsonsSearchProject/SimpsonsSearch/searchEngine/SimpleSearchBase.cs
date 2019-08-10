@@ -23,11 +23,14 @@ namespace SimpsonsSearch.searchEngine
     {
         public const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
         private readonly IConversionService _conversionService;
+       
+
         private FSDirectory _indexDirectory;
         private readonly IndexWriter indexWriter;
         private readonly Analyzer analyzer;
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
+       
 
         private readonly IEnumerable<Episode> _episodes;
 
@@ -127,9 +130,6 @@ namespace SimpsonsSearch.searchEngine
             var spokenLinesList = new List<string>();
             var linesWithNames = new List<string>();
 
-            var stringBuilder = new StringBuilder();
-
-
             var charactersList = new HashSet<string>();
             var startingTime = "";
             var sceneId = 0;
@@ -146,8 +146,9 @@ namespace SimpsonsSearch.searchEngine
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
                     spokenLinesList.Add(item.normalized_text);
                     charactersList.Add(item.raw_character_text);
-                   
-                    stringBuilder.Append(item.raw_text);
+
+                    linesWithNames.Add(item.raw_text);
+                  
 
                 }
                 // schreibe zusammengefügte scene in liste 
@@ -161,15 +162,15 @@ namespace SimpsonsSearch.searchEngine
                         id = sceneId.ToString(),
                         episode_id = item.episode_id,
                         timestamp_in_ms = startingTime,
-                        normalized_text = String.Join(":", spokenLinesList.ToArray()),
-                        raw_text = stringBuilder.ToString(),
+                        normalized_text = String.Join(" ", spokenLinesList.ToArray()),
+                        raw_text = String.Join($"{Environment.NewLine}", linesWithNames.ToArray()),
 
-                        raw_character_text = String.Join(", ", charactersList),
+                        raw_character_text = String.Join($"{Environment.NewLine}", charactersList),
                         raw_location_text = item.raw_location_text
                     });
                     spokenLinesList.Clear();
                     charactersList.Clear();
-                    stringBuilder.Clear();
+                    linesWithNames.Clear();
                 };
             }
             return sceneList;
