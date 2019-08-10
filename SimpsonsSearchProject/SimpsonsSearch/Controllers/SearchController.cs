@@ -47,21 +47,21 @@ namespace SimpsonsSearch.Controllers
             //sollte eigenlich nur info sein, aber da werden zusätzlich weitere dinge gelogt, deswegen "fix" --> höheres loglevel 
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
 
+      
+
             return View(results);
         }
 
-        public IActionResult LogGoodResult(int id)
+        public void LogGoodResult(int id)
         {
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score!");
-
-            return View("Index");
         }
 
-        public IActionResult LogBadResult(int id)
+        public void LogBadResult(int id)
         {
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score!");
 
-            return View("Index");
+            
         }
     }
 }

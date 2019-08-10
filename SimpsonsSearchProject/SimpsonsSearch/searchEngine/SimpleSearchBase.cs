@@ -133,20 +133,22 @@ namespace SimpsonsSearch.searchEngine
             var charactersList = new HashSet<string>();
             var startingTime = "";
             var sceneId = 0;
-            var startingLocation = "";
+
+
+            
 
             foreach (var item in scriptLines)
             {
                 // solange true ist, füge die strings in normalized text zusammen 
+
                 if (item.character_id != "")
                 {
                     startingTime = _conversionService.ConvertMillisecondsToMinutes(Convert.ToDouble(item.timestamp_in_ms));
                     spokenLinesList.Add(item.normalized_text);
                     charactersList.Add(item.raw_character_text);
-                    startingLocation = item.raw_location_text;
-
+                   
                     stringBuilder.Append(item.raw_text);
-                
+
                 }
                 // schreibe zusammengefügte scene in liste 
                 else if (spokenLinesList.Any())
@@ -163,7 +165,7 @@ namespace SimpsonsSearch.searchEngine
                         raw_text = stringBuilder.ToString(),
 
                         raw_character_text = String.Join(", ", charactersList),
-                        raw_location_text = startingLocation
+                        raw_location_text = item.raw_location_text
                     });
                     spokenLinesList.Clear();
                     charactersList.Clear();
@@ -182,7 +184,6 @@ namespace SimpsonsSearch.searchEngine
             new StoredField("id", scriptLine.id),
             new TextField("text", scriptLine.normalized_text, Field.Store.YES),
             new TextField("raw_text", scriptLine.raw_text, Field.Store.YES),
-
             new TextField("episodeId", scriptLine.episode_id.ToString(), Field.Store.YES),
             new TextField("characters", scriptLine.raw_character_text, Field.Store.YES ),
             new TextField("location", scriptLine.raw_location_text, Field.Store.YES),
@@ -190,9 +191,6 @@ namespace SimpsonsSearch.searchEngine
          };
             return document;
         }
-
-
-
 
         /// <summary>
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 

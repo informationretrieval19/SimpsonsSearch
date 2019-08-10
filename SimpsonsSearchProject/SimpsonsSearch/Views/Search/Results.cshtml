@@ -24,7 +24,7 @@
     @{int counter = 0;}
     @foreach (var hit in Model.Hits)
     {
-        {counter++;}
+        { counter++; }
         <tr class="Entry">
             <th>@counter </th>
             <th>@hit.EpisodeId</th>
@@ -38,18 +38,34 @@
             <td>@hit.Score</td>
             <td>
                 <div>
-                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogGoodResult" asp-route-id="@hit.Id">
-                        <button type="submit" class="btn btn-warning">+</button>
-                    </form>
-                    <form class="form-inline " method="post" asp-controller="Search" asp-action="LogBadResult" @*asp-route-id="@hit.Id" *@>
-                        <button type="submit" class="btn btn-warning">-</button>
-                    </form>
+                    <div class="form-inline">
+                        <button class="btn btn-warning" type="submit" value="@hit.Id" id="logGoodBtn" onclick="return logGoodResult();">+</button>
+                    </div>
+                    <div class="form-inline">
+                        <button class="btn btn-warning" type="submit" value="@hit.Id" id="logBadBtn" onclick="return logBadResult();">-</button>
+                    </div>
                 </div>
             </td>
         </tr>
     }
 </table>
 
+@section Scripts {
+    <script>
+        function logBadResult() {
+            var url = "@Url.Action("LogBadResult")";
+            var id = $("#logBadBtn").val();
+            $.get(url, { id: id }, function () {   
+                alert("Evaluation got logged!");
+            });
+        }
 
-
-
+        function logGoodResult() {
+            var url = "@Url.Action("LogGoodResult")";
+            var id = $("#logGoodBtn").val();
+            $.get(url, { id: id }, function () {   
+                alert("Evaluation got logged!");
+            });
+        }
+    </script>
+}

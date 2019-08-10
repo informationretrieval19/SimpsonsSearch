@@ -30,7 +30,6 @@ namespace SimpsonsSearch.searchEngine
         public string EpisodeName { get; set; }
         public string Season { get; set; }
         public string EpisodeInSeason { get; set; }
-
     }
 }
 
