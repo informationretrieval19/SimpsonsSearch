@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Index\" />
+    <Folder Include="Index\Base\" />
   </ItemGroup>
 
 </Project>
