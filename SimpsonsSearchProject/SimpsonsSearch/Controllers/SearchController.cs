@@ -53,13 +53,13 @@ namespace SimpsonsSearch.Controllers
             return View(results);
         }
 
-        public void LogGoodResult(int id)
+        public void LogGoodResult(Hit hit)
         {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score!");
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {hit.Id} with a good score!");
             _jsonBuilder.BuildJsonFile();
         }
 
-        public void LogBadResult(int id)
+        public void LogBadResult(int id, string TopicName)
         {
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score!");
             _jsonBuilder.BuildJsonFile();

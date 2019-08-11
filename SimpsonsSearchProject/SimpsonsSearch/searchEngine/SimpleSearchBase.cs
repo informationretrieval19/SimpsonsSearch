@@ -73,7 +73,7 @@ namespace SimpsonsSearch.searchEngine
             try
             {
                 var topDocs = searcher.Search(query, resultsPerPage);
-                var results = CompileResults(searcher, topDocs);
+                var results = CompileResults(searcher, topDocs, searchQuery);
                 return results;
             }
             finally
@@ -197,9 +197,9 @@ namespace SimpsonsSearch.searchEngine
         /// Methode die aus gefundenen Documenten im INdex, ein Ergebnis erstellt 
         /// </summary>
         /// <returns>SearchResults</returns>
-        public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs)
+        public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs, string searchQuery)
         {
-            var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits };
+            var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits, TopicName = searchQuery};
 
 
             foreach (var result in topDocs.ScoreDocs)

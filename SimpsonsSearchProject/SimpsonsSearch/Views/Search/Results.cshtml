@@ -39,10 +39,10 @@
             <td>
                 <div>
                     <div class="form-inline">
-                        <button class="btn btn-warning" type="submit" value="@hit.Id" id="logGoodBtn" onclick="return logGoodResult();">+</button>
+                        <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="logGoodBtn" onclick="return logGoodResult();">+</button>
                     </div>
                     <div class="form-inline">
-                        <button class="btn btn-warning" type="submit" value="@hit.Id" id="logBadBtn" onclick="return logBadResult();">-</button>
+                        <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="logBadBtn" onclick="return logBadResult();">-</button>
                     </div>
                 </div>
             </td>
@@ -54,16 +54,26 @@
     <script>
         function logBadResult() {
             var url = "@Url.Action("LogBadResult")";
-            var id = $("#logBadBtn").val();
-            $.get(url, { id: id }, function () {   
+
+            var buttom = document.querySelector("#logBadBtn");
+            var TopicName = buttom.getAttribute("data-value");
+
+            var id = $('#logBadBtn').val();
+           
+            $.get(url, { id: id, TopicName: TopicName  }, function () {   
                 alert("Evaluation got logged!");
             });
         }
 
         function logGoodResult() {
             var url = "@Url.Action("LogGoodResult")";
-            var id = $("#logGoodBtn").val();
-            $.get(url, { id: id }, function () {   
+
+            var buttom = document.querySelector("#logGoodBtn");
+            var TopicName = buttom.getAttribute("data-value");
+
+            var id = $('#logGoodBtn').val();
+           
+            $.get(url, { id: id, TopicName: TopicName  }, function () {   
                 alert("Evaluation got logged!");
             });
         }
