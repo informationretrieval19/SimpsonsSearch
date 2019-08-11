@@ -1,0 +1,52 @@
+2019-08-11 11:41:32,495 - User 127.0.0.1 / ::1 searched for 'oh homer' and got 10289 results
+2019-08-11 11:41:35,414 - User 127.0.0.1 rated the result with SceneId 11899 with a good score, while searching for oh homer
+2019-08-11 11:41:35,419 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 11:41:40,414 - User 127.0.0.1 / ::1 searched for 'oh homer' and got 10289 results
+2019-08-11 11:41:43,331 - User 127.0.0.1 rated the result with SceneId 11899 with a bad score, while searching for oh homer
+2019-08-11 11:41:43,334 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 11:41:45,070 - User 127.0.0.1 / ::1 searched for 'oh homer' and got 10289 results
+2019-08-11 11:42:39,663 - User 127.0.0.1 / ::1 searched for 'homer' and got 8462 results
+2019-08-11 11:42:41,876 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for homer
+2019-08-11 11:43:14,104 - User 127.0.0.1 / ::1 searched for 'mr president' and got 1458 results
+2019-08-11 11:43:17,961 - User 127.0.0.1 rated the result with SceneId 1602 with a good score, while searching for mr president
+2019-08-11 11:43:17,964 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 11:43:54,304 - User 127.0.0.1 / ::1 searched for 'mr president' and got 1458 results
+2019-08-11 11:47:22,737 - User 127.0.0.1 / ::1 searched for 'boy' and got 1342 results
+2019-08-11 11:49:11,212 - User 127.0.0.1 / ::1 searched for 'mr president' and got 1458 results
+2019-08-11 11:49:12,716 - User 127.0.0.1 rated the result with SceneId 1602 with a good score, while searching for mr
+2019-08-11 11:49:12,719 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 11:49:16,479 - User 127.0.0.1 rated the result with SceneId 1602 with a good score, while searching for mr
+2019-08-11 11:49:16,482 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 11:49:20,153 - User 127.0.0.1 rated the result with SceneId 1602 with a good score, while searching for mr
+2019-08-11 11:49:20,156 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 15:56:52,964 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 15:57:00,596 - User 127.0.0.1 rated the result with SceneId 5085 with a good score, while searching for lisa
+2019-08-11 15:57:00,602 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 16:00:50,118 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 16:00:52,230 - User 127.0.0.1 rated the result with SceneId 5085 with a bad score, while searching for lisa
+2019-08-11 16:00:52,233 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 16:06:09,606 - User 127.0.0.1 / ::1 searched for 'george bush' and got 126 results
+2019-08-11 16:06:11,322 - User 127.0.0.1 rated the result with SceneId 4278 with a bad score, while searching for george
+2019-08-11 16:06:11,325 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 16:06:15,645 - User 127.0.0.1 rated the result with SceneId 4278 with a bad score, while searching for george
+2019-08-11 16:06:15,649 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 16:07:33,310 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 16:08:04,831 - User 127.0.0.1 / ::1 searched for 'mr president' and got 1458 results
+2019-08-11 16:08:06,596 - User 127.0.0.1 rated the result with SceneId 1602 with a bad score, while searching for mr
+2019-08-11 16:08:06,599 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 16:14:05,655 - User 127.0.0.1 / ::1 searched for 'george bush' and got 126 results
+2019-08-11 16:14:48,021 - User 127.0.0.1 / ::1 searched for 'george bush' and got 126 results
+2019-08-11 16:16:03,495 - User 127.0.0.1 / ::1 searched for 'mr president' and got 1458 results
+2019-08-11 16:16:05,114 - User 127.0.0.1 rated the result with SceneId 1602 with a bad score, while searching for mr
+2019-08-11 16:16:05,117 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 16:16:25,588 - User 127.0.0.1 / ::1 searched for 'george bush' and got 126 results
+2019-08-11 23:16:43,268 - User 127.0.0.1 / ::1 searched for 'george bush' and got 126 results
+2019-08-11 23:16:55,646 - User 127.0.0.1 rated the result with SceneId 4278 with a good score, while searching for george
+2019-08-11 23:16:55,650 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 23:17:03,425 - User 127.0.0.1 rated the result with SceneId 4278 with a good score, while searching for george
+2019-08-11 23:17:03,429 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-11 23:50:39,303 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 23:52:16,081 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 23:53:23,490 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 23:56:23,442 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
+2019-08-11 23:59:46,753 - User 127.0.0.1 / ::1 searched for 'lisa you are stupid' and got 11741 results
