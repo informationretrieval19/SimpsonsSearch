@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SimpsonsSearch.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,17 +11,15 @@ namespace SimpsonsSearch.Services
 {
     public class JsonBuilder
     {
-        public void BuildJsonFile()
+        public void BuildJsonFile(EvaluationModel model)
         {
-            var json = new JObject(
-           new JProperty("Topic_Id", "1"),
-           new JProperty("SceneId", "2"),
-           new JProperty("Relevance", "good"));
+            var dateTime = new DateTime().ToString();
+            dateTime = DateTime.Now.ToString("HHmmss tt");
 
-            using (var file = File.CreateText(@"evaluation.json"))
+            using (var file = File.CreateText($@"EvaluationFiles/{dateTime}evaluation.json"))
             {
                 var serializer = new JsonSerializer();
-                serializer.Serialize(file, json);
+                serializer.Serialize(file, model);
             }
         }
 

@@ -53,16 +53,47 @@ namespace SimpsonsSearch.Controllers
             return View(results);
         }
 
-        public void LogGoodResult(Hit hit)
+        public void LogGoodResult(int id, string TopicName)
         {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {hit.Id} with a good score!");
-            _jsonBuilder.BuildJsonFile();
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score, while searching for {TopicName}");
+
+            var dictionaries = new Dictionaries();
+            if (dictionaries.topicDic.ContainsKey(TopicName))
+            {
+                var model = new EvaluationModel()
+                {
+                    TopicId = dictionaries.topicDic[TopicName],
+                    SceneId = id.ToString(),
+                    Relevance = 1
+                };
+                _jsonBuilder.BuildJsonFile(model);
+            }
+            else
+            {
+                _logger.LogWarning($"Coundn't create Evaluation, because TopicName did not match!");
+            }
         }
 
         public void LogBadResult(int id, string TopicName)
         {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score!");
-            _jsonBuilder.BuildJsonFile();
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score, while searching for {TopicName}");
+
+            var dictionaries = new Dictionaries();
+            if (dictionaries.topicDic.ContainsKey(TopicName))
+            {
+                var model = new EvaluationModel()
+                {
+                    TopicId = dictionaries.topicDic[TopicName],
+                    SceneId = id.ToString(),
+                    Relevance = 0
+                };
+                _jsonBuilder.BuildJsonFile(model);
+            }
+            else
+            {
+                _logger.LogWarning($"Coundn't create Evaluation, because TopicName did not match!");
+            }
+            
 
         }
     }
