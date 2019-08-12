@@ -24,7 +24,7 @@ namespace SimpsonsSearch.searchEngine
         private readonly Analyzer analyzerSearch;
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
-
+        //
         public AdvancedSearchWithSynonyms(IConversionService conversionService) : base(conversionService)
         {
             _conversionService = conversionService;
