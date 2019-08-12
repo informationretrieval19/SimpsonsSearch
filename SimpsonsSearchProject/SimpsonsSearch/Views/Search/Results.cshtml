@@ -38,7 +38,6 @@
             <td>@hit.Score</td>
             <td>
                 <div>
-
                     <div>
                         <div class="form-inline">
                             <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="1">+</button>
@@ -57,22 +56,23 @@
 @section Scripts {
 
     <script>
-        //give him document and class selector
 
-        $(document).on('click','.logging', 'button[id], button[data-value], button[value]', function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-                var id = $(this).attr("value");
-                var TopicName = $(this).attr("data-value");
+        $(document).on('click', '.logging','button[id], button[data-value], button[value]', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var id = $(this).attr("value");
+            var TopicName = $(this).attr("data-value");
 
-                var logType = $(this).attr("id");
+            var logType = $(this).attr("id");
 
             var url = "@Url.Action("LogResult")";
 
 
             $.post(url, { id: id, TopicName: TopicName, logType: logType }, function () {
                 alert("Evaluation successful!")
-                });
+            });
+        });
+
     </script>
 }
 

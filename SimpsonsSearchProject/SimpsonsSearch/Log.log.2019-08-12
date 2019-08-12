@@ -1,0 +1,183 @@
+2019-08-12 18:39:28,373 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 18:39:31,423 - User 127.0.0.1 rated the result with SceneId 13819 with a bad score, while searching for hey homer
+2019-08-12 18:39:31,427 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:39:32,610 - User 127.0.0.1 rated the result with SceneId 13088 with a bad score, while searching for hey homer
+2019-08-12 18:39:32,611 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:39:32,625 - User 127.0.0.1 rated the result with SceneId 13088 with a bad score, while searching for hey homer
+2019-08-12 18:39:32,627 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:39:33,545 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:39:33,547 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:39:33,549 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:39:33,552 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:39:34,564 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:39:34,566 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:41:06,498 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 18:41:12,358 - User 127.0.0.1 rated the result with SceneId 13819 with a bad score, while searching for hey homer
+2019-08-12 18:41:12,363 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:41:13,545 - User 127.0.0.1 rated the result with SceneId 13088 with a bad score, while searching for hey homer
+2019-08-12 18:41:13,548 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:41:13,570 - User 127.0.0.1 rated the result with SceneId 13088 with a bad score, while searching for hey homer
+2019-08-12 18:41:13,573 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:41:14,761 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:41:14,765 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:41:14,768 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:41:14,773 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:41:15,844 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:41:15,848 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:48:15,125 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 18:56:55,913 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 18:58:05,878 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 18:58:07,495 - User 127.0.0.1 rated the result with SceneId 13819 with a bad score, while searching for hey homer
+2019-08-12 18:58:07,499 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:58:08,420 - User 127.0.0.1 rated the result with SceneId 13088 with a bad score, while searching for hey homer
+2019-08-12 18:58:08,424 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:58:09,255 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 18:58:09,257 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 18:59:58,712 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:00:02,114 - User 127.0.0.1 rated the result with SceneId 13819 with a bad score, while searching for hey homer
+2019-08-12 19:00:02,115 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:00:02,122 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:00:02,129 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:00:03,353 - User 127.0.0.1 rated the result with SceneId 13088 with a bad score, while searching for hey homer
+2019-08-12 19:00:03,355 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:00:03,374 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for hey homer
+2019-08-12 19:00:03,376 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:00:04,015 - User 127.0.0.1 rated the result with SceneId 11065 with a good score, while searching for hey homer
+2019-08-12 19:00:04,017 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:00:05,046 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for hey homer
+2019-08-12 19:00:05,050 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:03:28,474 - Connection processing ended abnormally.
+Microsoft.AspNetCore.Connections.ConnectionAbortedException: The connection was aborted
+   at System.IO.Pipelines.PipeCompletion.ThrowLatchedException()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.GetReadAsyncResult()
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequestsAsync[TContext](IHttpApplication`1 application)
+2019-08-12 19:03:43,003 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:06:06,769 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:06:09,419 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:06:09,423 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:10,800 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:06:10,802 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:11,285 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:06:11,287 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:11,946 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for hey homer
+2019-08-12 19:06:11,949 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:12,392 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for hey homer
+2019-08-12 19:06:12,394 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:12,811 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for hey homer
+2019-08-12 19:06:12,813 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:13,238 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for hey homer
+2019-08-12 19:06:13,240 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:06:56,267 - User 127.0.0.1 / ::1 searched for 'homer' and got 8462 results
+2019-08-12 19:06:58,920 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for homer
+2019-08-12 19:07:01,426 - User 127.0.0.1 rated the result with SceneId 11065 with a good score, while searching for homer
+2019-08-12 19:07:02,215 - User 127.0.0.1 rated the result with SceneId 8225 with a good score, while searching for homer
+2019-08-12 19:10:36,421 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:10:45,360 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:10:45,365 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:11:53,170 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:11:54,827 - User 127.0.0.1 rated the result with SceneId 1 with a good score, while searching for hey homer
+2019-08-12 19:11:54,831 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:11:57,455 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:11:57,457 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:13:58,342 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:14:01,020 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 19:14:01,024 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:14:05,263 - User 127.0.0.1 rated the result with SceneId 1 with a good score, while searching for hey homer
+2019-08-12 19:14:05,269 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 19:15:54,779 - User 127.0.0.1 / ::1 searched for 'homer tavern' and got 8651 results
+2019-08-12 19:15:56,276 - User 127.0.0.1 rated the result with SceneId 8208 with a good score, while searching for homer tavern
+2019-08-12 19:17:54,777 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:18:34,189 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:20:50,045 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 19:25:04,535 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 20:46:30,750 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 20:46:34,316 - User 127.0.0.1 rated the result with SceneId 1 with a good score, while searching for hey homer
+2019-08-12 20:46:34,321 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 20:46:41,953 - User 127.0.0.1 rated the result with SceneId 0 with a good score, while searching for hey homer
+2019-08-12 20:46:41,957 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 20:52:34,374 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 20:52:38,053 - User 127.0.0.1 rated the result with SceneId 1 with a good score, while searching for hey homer
+2019-08-12 20:52:38,057 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 20:52:40,183 - User 127.0.0.1 rated the result with SceneId 0 with a bad score, while searching for hey homer
+2019-08-12 20:52:40,185 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 20:58:58,015 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 20:58:59,499 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 20:58:59,502 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 20:59:03,978 - User 127.0.0.1 rated the result with SceneId 13819 with a bad score, while searching for hey homer
+2019-08-12 20:59:03,982 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 20:59:40,986 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 21:00:06,311 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 21:00:20,166 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 21:00:30,331 - User 127.0.0.1 rated the result with SceneId 0 with a good score, while searching for 
+2019-08-12 21:00:46,962 - An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   at System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)
+   at SimpsonsSearch.Controllers.SearchController.LogResult(Int32 id, String TopicName, String logType) in D:\repos\UNI\SimpsonsSearch\SimpsonsSearchProject\SimpsonsSearch\Controllers\SearchController.cs:line 69
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-08-12 21:01:08,229 - User 127.0.0.1 rated the result with SceneId 0 with a good score, while searching for 
+2019-08-12 21:01:22,856 - An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   at System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)
+   at SimpsonsSearch.Controllers.SearchController.LogResult(Int32 id, String TopicName, String logType) in D:\repos\UNI\SimpsonsSearch\SimpsonsSearchProject\SimpsonsSearch\Controllers\SearchController.cs:line 69
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-08-12 21:02:03,274 - User 127.0.0.1 rated the result with SceneId 0 with a good score, while searching for 
+2019-08-12 21:02:57,395 - User 127.0.0.1 / ::1 searched for 'homer' and got 8462 results
+2019-08-12 21:03:10,670 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for homer
+2019-08-12 21:03:25,595 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for homer
+2019-08-12 21:03:31,702 - User 127.0.0.1 rated the result with SceneId 0 with a good score, while searching for 
+2019-08-12 21:07:04,993 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 21:07:07,969 - User 127.0.0.1 rated the result with SceneId 13819 with a good score, while searching for hey homer
+2019-08-12 21:07:07,973 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 21:07:10,752 - User 127.0.0.1 rated the result with SceneId 13819 with a bad score, while searching for hey homer
+2019-08-12 21:07:10,757 - Coundn't create Evaluation, because TopicName did not match!
+2019-08-12 21:07:12,360 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 21:07:24,021 - User 127.0.0.1 / ::1 searched for 'homer' and got 8462 results
+2019-08-12 21:07:42,161 - User 127.0.0.1 rated the result with SceneId 13088 with a good score, while searching for homer
+2019-08-12 21:07:57,171 - User 127.0.0.1 rated the result with SceneId 11065 with a bad score, while searching for homer
+2019-08-12 21:08:17,946 - User 127.0.0.1 rated the result with SceneId 8225 with a good score, while searching for homer
+2019-08-12 22:03:17,971 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:08:07,038 - User 127.0.0.1 / ::1 searched for 'homer' and got 8462 results
+2019-08-12 22:10:18,888 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:11:35,413 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:29:14,618 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:31:17,151 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:31:52,259 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:35:54,676 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
+2019-08-12 22:39:51,901 - User 127.0.0.1 / ::1 searched for 'hey homer' and got 9562 results
