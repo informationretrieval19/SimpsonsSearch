@@ -16,11 +16,14 @@ namespace SimpsonsSearch.Services
             var dateTime = new DateTime().ToString();
             dateTime = DateTime.Now.ToString("HHmmss tt");
 
-            using (var file = File.CreateText($@"EvaluationFiles/{dateTime}evaluation.json"))
-            {
-                var serializer = new JsonSerializer();
-                serializer.Serialize(file, model);
-            }
+            try {
+                using (var file = File.CreateText($@"EvaluationFiles/{model.TopicId}{model.Relevance}{model.SceneId}evaluation.json"))
+                {
+                    var serializer = new JsonSerializer();
+                    serializer.Serialize(file, model);
+                }
+            } catch { }
+            
         }
 
     }

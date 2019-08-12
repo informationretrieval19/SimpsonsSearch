@@ -34,7 +34,6 @@
   <ItemGroup>
     <Folder Include="EvaluationFiles\" />
     <Folder Include="Index\" />
-    <Folder Include="Index\Base\" />
   </ItemGroup>
 
 </Project>

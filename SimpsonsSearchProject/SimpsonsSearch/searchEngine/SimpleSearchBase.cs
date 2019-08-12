@@ -23,24 +23,31 @@ namespace SimpsonsSearch.searchEngine
     {
         public const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
         private readonly IConversionService _conversionService;
-       
+
 
         private FSDirectory _indexDirectory;
         private readonly IndexWriter indexWriter;
         private readonly Analyzer analyzer;
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
-       
+
 
         private readonly IEnumerable<Episode> _episodes;
 
         public SimpleSearchBase(IConversionService conversionService)
         {
-            _conversionService = conversionService;
-            analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
-            queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "characters", "location" }, analyzer);
-            indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
-            searcherManager = new SearcherManager(indexWriter, true, null);
+            
+            try
+            {
+                _conversionService = conversionService;
+                analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
+                queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "characters", "location" }, analyzer);
+                indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
+                searcherManager = new SearcherManager(indexWriter, true, null);
+            }
+            catch { }
+
+            
 
 
             _episodes = _conversionService.ConvertCsvToEpisodes();
@@ -135,7 +142,7 @@ namespace SimpsonsSearch.searchEngine
             var sceneId = 0;
 
 
-            
+
 
             foreach (var item in scriptLines)
             {
@@ -148,7 +155,7 @@ namespace SimpsonsSearch.searchEngine
                     charactersList.Add(item.raw_character_text);
 
                     linesWithNames.Add(item.raw_text);
-                  
+
 
                 }
                 // schreibe zusammengefügte scene in liste 
@@ -199,7 +206,7 @@ namespace SimpsonsSearch.searchEngine
         /// <returns>SearchResults</returns>
         public virtual SearchResults CompileResults(IndexSearcher searcher, TopDocs topDocs, string searchQuery)
         {
-            var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits, TopicName = searchQuery};
+            var searchResults = new SearchResults() { TotalHits = topDocs.TotalHits, TopicName = searchQuery };
 
 
             foreach (var result in topDocs.ScoreDocs)

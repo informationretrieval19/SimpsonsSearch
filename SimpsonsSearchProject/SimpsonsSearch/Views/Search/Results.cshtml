@@ -38,48 +38,62 @@
             <td>@hit.Score</td>
             <td>
                 <div>
-                    <div class="form-inline">
-                        <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName"  onclick="return logGoodResult();">+</button>
-                    </div>
-                    <div class="form-inline">
-                        <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName"  onclick="return logBadResult();">-</button>
-                    </div>
-                </div> 
+
+                    <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" onclick="return logGoodResult();">+</button>
+
+
+                    <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" onclick="return logBadResult();">-</button>
+
+                </div>
             </td>
         </tr>
     }
 </table>
 
 @section Scripts {
+
     <script>
-
         function logBadResult() {
-
             $(document).on('click', 'button[value]', 'button[data-value]', function (e) {
-                var id = $(this).attr("value");
-                var TopicName = $(this).attr("data-value")
-             
-                var url = "@Url.Action("LogBadResult")";
+                    e.preventDefault();
+                    var id = $(this).attr("value");
+                    var TopicName = $(this).attr("data-value")
 
-            $.get(url, { id: id, TopicName: TopicName  }, function () {
-               
-            });
-            });
+                    var url = "@Url.Action("LogBadResult")";
+
+                $.get(url, { id: id, TopicName: TopicName  }, function () {
+
+                });
+                });
         }
 
         function logGoodResult() {
-            var url = "@Url.Action("LogGoodResult")";
-
             $(document).on('click', 'button[value]', 'button[data-value]', function (e) {
-                var id = $(this).attr("value");
-                var TopicName = $(this).attr("data-value")
+                    e.preventDefault();
+                    var id = $(this).attr("value");
+                    var TopicName = $(this).attr("data-value")
 
-                var url = "@Url.Action("LogBadResult")";
+                    var url = "@Url.Action("LogGoodResult")";
 
-            $.get(url, { id: id, TopicName: TopicName  }, function () {
-               
-            });
-            });
+                $.get(url, { id: id, TopicName: TopicName  }, function () {
+
+                });
+                });
         }
+
     </script>
 }
+
+@*
+    $(document).on('click', 'button[value]', 'button[data-value]', function (e) {
+                    e.preventDefault();
+                    var id = $(this).attr("value");
+                    var TopicName = $(this).attr("data-value")
+
+                    var url = "@Url.Action("LogBadResult")";
+
+                $.get(url, { id: id, TopicName: TopicName  }, function () {
+                    alert("Evaluation logged!")
+                });
+                });
+*@
