@@ -53,9 +53,17 @@ namespace SimpsonsSearch.Controllers
             return View(results);
         }
 
-        public void LogGoodResult(int id, string TopicName)
+        public void LogResult(int id, string TopicName, string logType)
         {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score, while searching for {TopicName}");
+            if(logType == "0")
+            {
+                _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score, while searching for {TopicName}");
+            }
+            else
+            {
+                _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a good score, while searching for {TopicName}");
+
+            }
 
             var dictionaries = new Dictionaries();
             if (dictionaries.topicDic.ContainsKey(TopicName))
@@ -64,7 +72,7 @@ namespace SimpsonsSearch.Controllers
                 {
                     TopicId = dictionaries.topicDic[TopicName],
                     SceneId = id.ToString(),
-                    Relevance = 1
+                    Relevance = int.Parse(logType)
                 };
                 _jsonBuilder.BuildJsonFile(model);
             }
@@ -74,29 +82,6 @@ namespace SimpsonsSearch.Controllers
             }
         }
 
-        public void LogBadResult(int id, string TopicName)
-        {
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score, while searching for {TopicName}");
-
-            var dictionaries = new Dictionaries();
-            if (dictionaries.topicDic.ContainsKey(TopicName))
-            {
-                var model = new EvaluationModel()
-                {
-                    TopicId = dictionaries.topicDic[TopicName],
-                    SceneId = id.ToString(),
-                    Relevance = 0
-                };
-                _jsonBuilder.BuildJsonFile(model);
-            }
-            else
-            {
-                _logger.LogWarning($"Coundn't create Evaluation, because TopicName did not match!");
-
-            }
-            
-
-        }
     }
 }
 
