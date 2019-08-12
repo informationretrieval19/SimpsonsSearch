@@ -25,6 +25,84 @@ namespace SimpsonsSearch.searchEngine
 
         };
 
+        public Dictionary<string, string> actionDic = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
+        {
+            {"key1", "hit and run"},
+            {"key2", "hit'n'run"},
+            {"key3", "robbery"},
+            {"key4", "criminal"},
+            {"key5", "chase"},
+            {"key6", "skate"},
+            {"key7", "skateboard"},
+            {"key8", "shoot"},
+            {"key9", "shooting"},
+            {"key10", "thriller"}
+        };
+
+        public Dictionary<string, string> AffairDic = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
+        {
+            {"key1", "infidelity"},
+            {"key2", "lover"},
+            {"key3", "mistress"},
+            {"key4", "intimate"},
+            {"key5", "kiss"},
+            {"key6", "betrayal"},
+            {"key7", "betray"},
+            {"key8", "sex"},
+            {"key9", "sexual relationship"},
+            {"key10", "married"},
+            {"key11", "polygamy"},
+            {"key12", "scandal"},
+            {"key13", "affaire"}, {"key14", "fling"}, {"key15", "cocktail"}
+        };
+
+        public Dictionary<string, string> animalsDic = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
+        {
+            {"key1", "frog"},
+            {"key2", "toad"},
+            {"key3", "scorpion"},
+            {"key4", "spider"},
+            {"key5", "tarantula"},
+            {"key6", "blackbird"},
+            {"key7", "canary"},
+            {"key8", "crow"},
+            {"key9", "dove"},
+            {"key10", "cuckoo"},
+            {"key11", "pigeon"},
+            {"key12", "raven"},
+            {"key13", "penguin"}, {"key14", "peacock"}, {"key15", "pelican"}, {"key16", "owl"}, {"key17", "ostrich"},
+            {"key14","nightingale" },
+            {"key15","sparrow" },
+            {"key16","pheasant" },
+            {"key17","turky" },
+            {"key18","butterfly" },
+            {"key19","goldfish" },
+            {"key20","jellyfish" },
+            {"key21","lobster" },
+            {"key22","salmon" },
+            {"key23","shark" },
+            {"key24","sawfish" },
+            {"key25","ray" },
+            {"key26","shrimp" },
+            {"key27","ant" },
+            {"key28","dog" },
+            {"key29","santa's little helper" },
+            {"key30","snowball" },
+            {"key31","otter" },
+            {"key32","reindeer" },
+            {"key33","tortoise" },
+            {"key34","wolf" }
+        };
+
+
+
+
+
+
+
+
+
+
         public Dictionary<string, string> topicDic = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
             {"Homer", "t1"},

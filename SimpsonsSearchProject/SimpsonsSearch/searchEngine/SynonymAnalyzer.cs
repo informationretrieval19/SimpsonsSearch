@@ -27,7 +27,6 @@ namespace SimpsonsSearch.searchEngine
 
         
         // hier wortlisten er synonymmap hinzufügen
-        // herausfinden wie man mehr als ein string einer base hinzufügt.. 
         public SynonymMap GetSynonyms()
         {
 
@@ -42,6 +41,22 @@ namespace SimpsonsSearch.searchEngine
                 
                     sBuilder.Add(new CharsRef("alcohol"), new CharsRef(dictionaries.alcoholDic[key]), true);
                 
+            }
+
+            for (int i = 1; i <= dictionaries.AffairDic.Count(); i++)
+            {
+                var key = $"key{i}";
+
+                sBuilder.Add(new CharsRef("affair"), new CharsRef(dictionaries.alcoholDic[key]), true);
+
+            }
+
+            for (int i = 1; i <= dictionaries.animalsDic.Count(); i++)
+            {
+                var key = $"key{i}";
+
+                sBuilder.Add(new CharsRef("animal"), new CharsRef(dictionaries.alcoholDic[key]), true);
+
             }
 
             var synonyms = sBuilder.Build();
