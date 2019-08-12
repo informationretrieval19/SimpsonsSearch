@@ -1,4 +1,5 @@
-﻿@model SimpsonsSearch.searchEngine.SearchResults;
+﻿@using Newtonsoft.Json.Schema
+@using SimpsonsSearch.searchEngine
 @{
     ViewData["Title"] = "Results";
 }
@@ -6,58 +7,106 @@
 <div class="container">
     @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
 </div>
-<table id="results">
-    <tr class="spaceUnder">
-        <th scope="col"></th>
-        <th scope="col">EpisodeId</th>
-        <th scope="col">SceneId</th>
-        <th class="Episode" scope="col">Episode</th>
-        <th scope="col">Season</th>
-        <th scope"col">Timespamp</th>
-        <th class="Text" scope="col">Text</th>
-        <th class="Actor" scope="col">Location</th>
-        <th class="ID" scope="col">Characters</th>
-        <th class="Score" scope="col">Score</th>
-        <th class="collapse multi-collapse" id="evaluationtable" scope="col">Evaluation</th>
-    </tr>
-
-    @{int counter = 0;}
-    @foreach (var hit in Model.Hits)
+@{
+    int counter = 0;
+    int curMaxSite = 10;
+    int siteCount = 0;
+    List<Hit> s = new List<Hit>();
+    List<List<Hit>> sites = new List<List<Hit>>();
+}
+    
+@foreach (var hit in Model.Hits)
+{
     {
-        { counter++; }
+        counter++;
+    }
+    @if (counter <= curMaxSite)
+     {
+         s.Add(hit);
+     }
+     else
+     {
+         sites.Add(s);
+         s = new List<Hit>();
+         s.Add(hit);
+         curMaxSite += 10;
+     }
+}
+
+<table id="results" style="border: 10px solid rgba(255,255,255,1); margin-left: 7%; margin-right: 7%; margin-top: 5%; font-family:SansSerif,sans-serif;">
+    <tbody>
+    
+    @{
+        int rank = (siteCount) * 10;
+    }
+    @foreach (var searchHit in sites[siteCount])
+    {
+        {
+            rank++;
+        }
         <tr class="Entry">
-            <th>@counter </th>
-            <th>@hit.EpisodeId</th>
-            <th> @hit.Id</th>
-            <td>  @hit.EpisodeName</td>
-            <td> Season:@hit.Season Episode: @hit.EpisodeInSeason</td>
-            <td>@hit.Timestamp</td>
-            <td> @hit.Text</td>
-            <td> @hit.Location </td>
-            <td> @hit.Person</td>
-            <td>@hit.Score</td>
-            <td>
-                <div>
-
-                    <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" onclick="return logGoodResult();">+</button>
-
-
-                    <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" onclick="return logBadResult();">-</button>
-
+            <td style="width: 10%; text-align: left;">
+                <strong>@rank</strong>
+            </td>
+            <td style="width: 80%;">
+                <div style="text-align: left;">@searchHit.Text</div>
+                <div style="text-align: right; color: #737373">
+                    <hr/>
+                    <strong>@searchHit.Timestamp, Episode "@searchHit.EpisodeName", Season @searchHit.Season</strong>
+                </div>
+                <div style="text-align: right; color: #737373">
+                    <strong>@searchHit.Location</strong>
                 </div>
             </td>
+            <td style="width: 10%;">
+            <div>
+
+                <button class="btn btn-warning" type="submit" value="@searchHit.Id" data-value="@Model.TopicName" onclick="return logGoodResult();">+</button>
+
+
+                <button class="btn btn-warning" type="submit" value="@searchHit.Id" data-value="@Model.TopicName" onclick="return logBadResult();">-</button>
+
+            </div>
         </tr>
     }
+    </tbody>
 </table>
+<div style="text-align: center">
+    <button style="width: 10%; display: none" id="backwards" class="btn" onclick="backward()">Previous Results</button><a id="filler">     </a><button style="width: 10%" id="forwards" class="btn" onclick="forward()">Next Results</button>
+</div>
+
 
 @section Scripts {
 
     <script>
+    
+        function forward() {
+            @{
+                siteCount++;
+                rank = siteCount * 10;
+            }
+            $('.Entry').remove();
+            if(@siteCount > 0){
+                $( "#backwards" ).css( "display", "inline" );
+            }
+        }
+        
+        function backward() {
+            @{
+                siteCount--;
+            }
+            $('.Entry').remove()
+            if(@siteCount == 0){
+                $( "#backwards" ).css( "display", "none" );
+            }
+          
+        }
+    
         function logBadResult() {
             $(document).on('click', 'button[value]', 'button[data-value]', function (e) {
                     e.preventDefault();
                     var id = $(this).attr("value");
-                    var TopicName = $(this).attr("data-value")
+                    var TopicName = $(this).attr("data-value");
 
                     var url = "@Url.Action("LogBadResult")";
 
@@ -71,7 +120,7 @@
             $(document).on('click', 'button[value]', 'button[data-value]', function (e) {
                     e.preventDefault();
                     var id = $(this).attr("value");
-                    var TopicName = $(this).attr("data-value")
+                    var TopicName = $(this).attr("data-value");
 
                     var url = "@Url.Action("LogGoodResult")";
 
@@ -80,6 +129,18 @@
                 });
                 });
         }
+        
+    function loadResults(p) {
+            var table = document.getElementById("results");
+            @{
+                var site = sites[siteCount];
+            }
+            
+            @foreach (var page in site)
+            {
+                
+            }
+    }
 
     </script>
 }
