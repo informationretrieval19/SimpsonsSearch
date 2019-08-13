@@ -54,7 +54,7 @@ body {
 
 #results {
     font-family: "Arial", sans-serif;
-    border: 3px solid rgba(255,255,255,1);
+    border: 10px solid rgba(255,255,255,1);
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 5%;
@@ -63,76 +63,38 @@ body {
 .Entry {
     width: 150px;
     text-align: left;
-    border: 2px solid #e0d823;
+    border-bottom: 3px solid #e0d823;
     border-spacing: 5px;
 }
 
-.Episode {
-    width: 10%;
-}
-
-.Text {
-    width: 40%;
-}
-
-.Actor {
-    width: 15%;
-}
-
-.Score {
-    width: 30%;
-}
-
-.ID {
-    width: 5%;
-}
-
-tr > td {
-    padding-bottom: 12px;
-    padding-top: 12px;
-}
-
-#results {
-    font-family: "Arial", sans-serif;
-    border: 3px solid rgba(255,255,255,1);
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-}
-
-.Entry {
-    width: 150px;
+.firstRow{
+    width: 10%; 
     text-align: left;
-    border: 2px solid #e0d823;
-    border-spacing: 5px;
 }
 
-.Episode {
-    width: 10%;
+.secondRow{
+    width: 80%;
 }
 
-.Text {
-    width: 40%;
+.thirdRow{
+    width: 100px;
 }
 
-.Actor {
-    width: 15%;
+.Text{
+    text-align: left;
 }
 
-.Score {
-    width: 30%;
+.Meta-info{
+    text-align: right; 
+    color: #737373;
 }
 
-.ID {
-    width: 5%;
+.feedback{
+    margin-left: 30px;
 }
 
 tr > td {
     padding-bottom: 12px;
     padding-top: 12px;
 }
-
-
-
-/* PAGEINATION*/
 

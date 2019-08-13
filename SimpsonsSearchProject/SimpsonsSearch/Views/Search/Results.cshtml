@@ -1,5 +1,4 @@
-﻿@using Newtonsoft.Json.Schema
-@using SimpsonsSearch.searchEngine
+﻿@using SimpsonsSearch.searchEngine
 @{
     ViewData["Title"] = "Results";
 }
@@ -8,71 +7,49 @@
     @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
 </div>
 @{
-    int counter = 0;
-    int curMaxSite = 10;
-    int siteCount = 0;
-    List<Hit> s = new List<Hit>();
-    List<List<Hit>> sites = new List<List<Hit>>();
-}
-    
-@foreach (var hit in Model.Hits)
-{
-    {
-        counter++;
-    }
-    @if (counter <= curMaxSite)
-     {
-         s.Add(hit);
-     }
-     else
-     {
-         sites.Add(s);
-         s = new List<Hit>();
-         s.Add(hit);
-         curMaxSite += 10;
-     }
+    var siteCount = 0;
+    var rank = (siteCount) * 10;
 }
 
-<table id="results" style="border: 10px solid rgba(255,255,255,1); margin-left: 7%; margin-right: 7%; margin-top: 5%; font-family:SansSerif,sans-serif;">
+<table id="results">
     <tbody>
     
-    @{
-        int rank = (siteCount) * 10;
-    }
-    @foreach (var searchHit in sites[siteCount])
+    @foreach (var hit in Model.Hits)
     {
         {
             rank++;
         }
-        <tr class="Entry">
-            <td style="width: 10%; text-align: left;">
+        <tr class="Entry" id="@rank" style="display: none">
+            <td class="firstRow">
                 <strong>@rank</strong>
             </td>
-            <td style="width: 80%;">
-                <div style="text-align: left;">@searchHit.Text</div>
-                <div style="text-align: right; color: #737373">
+            <td class="secondRow">
+                <div class="Text">@hit.Text</div>
+                <div class="Meta-info">
                     <hr/>
-                    <strong>@searchHit.Timestamp, Episode "@searchHit.EpisodeName", Season @searchHit.Season</strong>
+                    <strong>@hit.Timestamp, Episode "@hit.EpisodeName", Season @hit.Season</strong>
                 </div>
-                <div style="text-align: right; color: #737373">
-                    <strong>@searchHit.Location</strong>
+                <div class="Meta-info">
+                    <strong>@hit.Location</strong>
                 </div>
             </td>
-            <td style="width: 10%;">
-            <div>
+            <td class="thirdRow">
+            <div class="feedback">
 
-                <button class="btn btn-warning" type="submit" value="@searchHit.Id" data-value="@Model.TopicName" onclick="return logGoodResult();">+</button>
+                <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" onclick="return logGoodResult();">+</button>
 
 
-                <button class="btn btn-warning" type="submit" value="@searchHit.Id" data-value="@Model.TopicName" onclick="return logBadResult();">-</button>
+                <button class="btn btn-warning" type="submit" value="@hit.Id" data-value="@Model.TopicName" onclick="return logBadResult();">-</button>
 
             </div>
+            </td>
         </tr>
     }
+    
     </tbody>
 </table>
 <div style="text-align: center">
-    <button style="width: 10%; display: none" id="backwards" class="btn" onclick="backward()">Previous Results</button><a id="filler">     </a><button style="width: 10%" id="forwards" class="btn" onclick="forward()">Next Results</button>
+    <button style="width: 200px; display: none" id="backwards" class="btn" onclick="backward()">Previous Results</button><a id="filler">     </a><button style="width: 200px" id="forwards" class="btn" onclick="forward()">Next Results</button>
 </div>
 
 
@@ -80,28 +57,67 @@
 
     <script>
     
+        var pageNR = 0;
+        var maxRank = @rank;
+    
         function forward() {
-            @{
+            pageNR++;
+            var siteCount = pageNR * 10;
+            
+            $('.Entry').css( "display", "none" );
+            
+            if(pageNR > 0){
+                $("#backwards").css( "display", "" );
+            }
+            
+            for(var i = 0; i < 10; i++)
+            {
                 siteCount++;
-                rank = siteCount * 10;
+                var entry = document.getElementById(siteCount);
+                entry.style.display = "";
+            }        
+            
+            if(siteCount < 100)
+            {
+                $("forwards").css("display", "none")
             }
-            $('.Entry').remove();
-            if(@siteCount > 0){
-                $( "#backwards" ).css( "display", "inline" );
-            }
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
         }
         
         function backward() {
-            @{
-                siteCount--;
-            }
-            $('.Entry').remove()
-            if(@siteCount == 0){
+            pageNR--;
+            var siteCount = pageNR * 10;
+            $('.Entry').css( "display", "none" );
+            
+            if(pageNR == 0){
                 $( "#backwards" ).css( "display", "none" );
             }
+            
+            if(siteCount < 100)
+                        {
+                            $("forwards").css("display", "")
+                        }
+            
+            for(var i = 0; i < 10; i++)
+            {
+                siteCount++;
+                var entry = document.getElementById(siteCount);
+                entry.style.display = ""
+            }
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
           
         }
-    
+        
+        window.onload = function showFirstResults() {
+            var pageNr = 0;
+            for(var i = 0; i < 10; i++)
+            {
+                pageNr++;
+                var entry = document.getElementById(pageNr);
+                entry.style.display = ""
+            }
+        }
+        
         function logBadResult() {
             $(document).on('click', 'button[value]', 'button[data-value]', function (e) {
                     e.preventDefault();
@@ -129,18 +145,6 @@
                 });
                 });
         }
-        
-    function loadResults(p) {
-            var table = document.getElementById("results");
-            @{
-                var site = sites[siteCount];
-            }
-            
-            @foreach (var page in site)
-            {
-                
-            }
-    }
 
     </script>
 }
