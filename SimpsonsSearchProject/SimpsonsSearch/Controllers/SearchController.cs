@@ -43,14 +43,20 @@ namespace SimpsonsSearch.Controllers
         // der über die Nutzereingabe über die View hierhergelangt
         public IActionResult Results(SearchformModel model)
         {
-            var results = _searchEngine.Search(model.searchQuery);
 
-            //sollte eigenlich nur info sein, aber da werden zusätzlich weitere dinge gelogt, deswegen "fix" --> höheres loglevel 
-            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
-
-      
-
-            return View(results);
+            if (model.searchQuery.Contains('*'))
+            {
+                var searchQueryEdited = model.searchQuery.Replace("*", string.Empty);
+                var results = _searchEngine.SearchAdvanced(searchQueryEdited);
+                _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
+                return View(results);
+            }
+            else
+            {
+                var results = _searchEngine.Search(model.searchQuery);
+                _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
+                return View(results);
+            }
         }
 
         public void LogResult(int id, string TopicName, string logType)

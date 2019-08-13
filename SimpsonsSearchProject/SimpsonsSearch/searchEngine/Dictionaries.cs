@@ -58,6 +58,7 @@ namespace SimpsonsSearch.searchEngine
 
         };
 
+
         public Dictionary<string, string> animalsDic = new Dictionary<string, string>
         {
             {"key1", "frog"},
@@ -143,8 +144,8 @@ namespace SimpsonsSearch.searchEngine
             {"key21", "thief"},
             {"key22", "fight"},
             {"key23", "damage"},
-            {"key23", "punish"},
-            {"key23", "murder"}
+            {"key24", "punish"},
+            {"key25", "murder"}
 
         };
 
@@ -177,8 +178,8 @@ namespace SimpsonsSearch.searchEngine
             {"key6", "armageddon"},
             {"key7", "fate"},
             {"key8", "end"},
-            {"key8", "world"},
-            {"key9", "catastrophe"},
+            {"key9", "world"},
+            {"key10", "catastrophe"},
 
         };
 
