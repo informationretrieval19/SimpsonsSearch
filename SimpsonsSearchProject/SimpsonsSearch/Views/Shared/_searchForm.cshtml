@@ -5,10 +5,16 @@
 
         <form method="post" class="active-cyan-3" asp-controller="Search" asp-action="Results">
             <div class="form-group">
-                <input class="form-control" type="text" asp-for="searchQuery"/>
+                <input class="form-control" type="text" asp-for="searchQuery" />
             </div>
             <div class="text-center">
                 <button id="searchButton" type="submit" class="btn btn-danger">Search</button>
+            </div>
+            <div class="text-center">
+                <button asp-controller="Search" asp-action="AdvancedWithOneTerm" id="searchButton" type="submit" class="btn btn-success">SearchAdvancedOnlyInText</button>
+            </div>
+            <div class="text-center">
+                <button asp-controller="Search" asp-action="AdvancedWithAllTerms" id="searchButton" type="submit" class="btn btn-warning">SearchAdvancedAllTerms</button>
             </div>
         </form>
     </div>

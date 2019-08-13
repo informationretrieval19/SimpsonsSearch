@@ -7,11 +7,13 @@ namespace SimpsonsSearch.searchEngine
     {
         private readonly SimpleSearchBase _simpleSearchBase;
         private readonly SynonymSearch _synonymSearch;
+        private readonly SynonymSearchAllTerms _synonymAllTerms;
 
-        public LuceneEngine(SimpleSearchBase simpleSearchBase, SynonymSearch synonymSearch)
+        public LuceneEngine(SimpleSearchBase simpleSearchBase, SynonymSearch synonymSearch, SynonymSearchAllTerms synonymAllTerms)
         {
             _simpleSearchBase = simpleSearchBase;
             _synonymSearch = synonymSearch;
+            _synonymAllTerms = synonymAllTerms;
          
         }
         // zuordnungsklasse
@@ -27,11 +29,16 @@ namespace SimpsonsSearch.searchEngine
         public SearchResults SearchAdvanced(string query)
         {
             var dicionaries = new Dictionaries();
-            //if (dicionaries.alcoholDic.ContainsValue(query))
-            //{
-            //    return _alcoholTopic.PrepareSearch(query);
-            //}
+            
             return _synonymSearch.PrepareSearch(query);
         }
+
+        public SearchResults SynonymSearchAllTerms(string query)
+        {
+            var dicionaries = new Dictionaries();
+
+            return _synonymAllTerms.PrepareSearch(query);
+        }
+        
     }
 }

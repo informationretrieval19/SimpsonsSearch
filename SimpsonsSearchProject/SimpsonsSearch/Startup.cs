@@ -40,6 +40,7 @@ namespace SimpsonsSearch
             services.AddScoped<ISearchEngine, LuceneEngine>();
             services.AddScoped<SimpleSearchBase>();
             services.AddScoped<SynonymSearch>();
+            services.AddScoped<SynonymSearchAllTerms>();
             services.AddScoped<IConversionService, ConversionService>();
             services.AddScoped<JsonBuilder>();
         }

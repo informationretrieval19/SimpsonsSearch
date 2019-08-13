@@ -6,5 +6,6 @@
 		//void BuildIndex();
 		SearchResults Search(string query);
         SearchResults SearchAdvanced(string query);
+        SearchResults SynonymSearchAllTerms(string query);
     }
 }
