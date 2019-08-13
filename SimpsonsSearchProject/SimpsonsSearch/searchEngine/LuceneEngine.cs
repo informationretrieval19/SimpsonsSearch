@@ -6,11 +6,14 @@ namespace SimpsonsSearch.searchEngine
     public class LuceneEngine : ISearchEngine
     {
         private readonly SimpleSearchBase _simpleSearchBase;
-       
+        private readonly SynonymSearch _synonymSearch;
+        private readonly SynonymSearchAllTerms _synonymAllTerms;
 
-        public LuceneEngine(SimpleSearchBase simpleSearchBase)
+        public LuceneEngine(SimpleSearchBase simpleSearchBase, SynonymSearch synonymSearch, SynonymSearchAllTerms synonymAllTerms)
         {
             _simpleSearchBase = simpleSearchBase;
+            _synonymSearch = synonymSearch;
+            _synonymAllTerms = synonymAllTerms;
          
         }
         // zuordnungsklasse
@@ -23,6 +26,19 @@ namespace SimpsonsSearch.searchEngine
             return _simpleSearchBase.PrepareSearch(query);
         }
 
- 
+        public SearchResults SearchAdvanced(string query)
+        {
+            var dicionaries = new Dictionaries();
+            
+            return _synonymSearch.PrepareSearch(query);
+        }
+
+        public SearchResults SynonymSearchAllTerms(string query)
+        {
+            var dicionaries = new Dictionaries();
+
+            return _synonymAllTerms.PrepareSearch(query);
+        }
+        
     }
 }

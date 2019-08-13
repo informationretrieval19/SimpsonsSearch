@@ -129,7 +129,7 @@ namespace SimpsonsSearch.searchEngine
             return doc;
         }
 
-        public IEnumerable<ScriptLine> BuildScene(IEnumerable<ScriptLine> scriptLines)
+        public virtual IEnumerable<ScriptLine> BuildScene(IEnumerable<ScriptLine> scriptLines)
         {
             //bekommt alle scriptlines geliefert
             // wir gehen liste durch und fügen strings zusammen bis speakingline == false

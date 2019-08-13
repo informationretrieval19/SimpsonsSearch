@@ -43,19 +43,41 @@ namespace SimpsonsSearch.Controllers
         // der über die Nutzereingabe über die View hierhergelangt
         public IActionResult Results(SearchformModel model)
         {
+
+            //if (model.searchQuery.Contains('*'))
+            //{
+            //    var searchQueryEdited = model.searchQuery.Replace("*", string.Empty);
+            //    var results = _searchEngine.SearchAdvanced(searchQueryEdited);
+            //    _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
+            //    return View(results);
+            //}
+            //else
+            //{
             var results = _searchEngine.Search(model.searchQuery);
-
-            //sollte eigenlich nur info sein, aber da werden zusätzlich weitere dinge gelogt, deswegen "fix" --> höheres loglevel 
             _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
-
-      
-
             return View(results);
+            //}
+        }
+
+        public IActionResult AdvancedWithOneTerm(SearchformModel model)
+        {
+
+            var results = _searchEngine.SearchAdvanced(model.searchQuery);
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
+            return View("Results", results);
+        }
+
+        public IActionResult AdvancedWithAllTerms(SearchformModel model)
+        {
+
+            var results = _searchEngine.SynonymSearchAllTerms(model.searchQuery);
+            _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} / {Request.HttpContext.Connection.RemoteIpAddress} searched for '{model.searchQuery}' and got {results.TotalHits} results");
+            return View("Results", results);
         }
 
         public void LogResult(int id, string TopicName, string logType)
         {
-            if(logType == "0")
+            if (logType == "0")
             {
                 _logger.LogWarning($"User {Request.HttpContext.Connection.LocalIpAddress} rated the result with SceneId {id} with a bad score, while searching for {TopicName}");
             }
@@ -67,6 +89,7 @@ namespace SimpsonsSearch.Controllers
 
             var dictionaries = new Dictionaries();
             if (dictionaries.topicDic.ContainsKey(TopicName))
+
             {
                 var model = new EvaluationModel()
                 {
@@ -89,4 +112,4 @@ namespace SimpsonsSearch.Controllers
 
 
 
-   
+
