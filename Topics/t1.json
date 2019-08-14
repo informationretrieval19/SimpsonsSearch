@@ -1,0 +1,8 @@
+{
+"topic_id": "t1",
+"query": "Homer", 
+"description": "To find scenes where the character Homer appears.",
+"narrative": ["Documents relevant for this topic would include all scenes where Homer appears as a charakter.
+Scenes without Homer appearing as a character are not considered relevant.
+Scenes where Homer says more should be ranked higher."]
+}
