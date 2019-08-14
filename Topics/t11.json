@@ -1,1 +1,6 @@
-
+{
+"topic_id": "t11",
+"query": "Where is Bart’s favorite location", 
+"description": "To find the location where Bart appears most often and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include scenes that correspond to the favorite location and where Bart appears as a character."]
+}
