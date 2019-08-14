@@ -1,4 +1,4 @@
-﻿@model SimpsonsSearch.searchEngine.SearchResults;
+﻿@using SimpsonsSearch.searchEngine
 @{
     ViewData["Title"] = "Results";
 }
@@ -6,74 +6,127 @@
 <div class="container">
     @await Html.PartialAsync("_searchForm", new SimpsonsSearch.Models.SearchformModel())
 </div>
-<table id="results">
-    <tr class="spaceUnder">
-        <th scope="col"></th>
-        <th scope="col">EpisodeId</th>
-        <th scope="col">SceneId</th>
-        <th class="Episode" scope="col">Episode</th>
-        <th scope="col">Season</th>
-        <th scope"col">Timespamp</th>
-        <th class="Text" scope="col">Text</th>
-        <th class="Actor" scope="col">Location</th>
-        <th class="ID" scope="col">Characters</th>
-        <th class="Score" scope="col">Score</th>
-        <th class="collapse multi-collapse" id="evaluationtable" scope="col">Evaluation</th>
-    </tr>
+@{
+    var siteCount = 0;
+    var rank = (siteCount) * 10;
+}
 
-    @{int counter = 0;}
+<table id="results">
+    <tbody>
+    
     @foreach (var hit in Model.Hits)
     {
-        { counter++; }
-        <tr class="Entry">
-            <th>@counter </th>
-            <th>@hit.EpisodeId</th>
-            <th> @hit.Id</th>
-            <td>  @hit.EpisodeName</td>
-            <td> Season:@hit.Season Episode: @hit.EpisodeInSeason</td>
-            <td>@hit.Timestamp</td>
-            <td> @hit.Text</td>
-            <td> @hit.Location </td>
-            <td> @hit.Person</td>
-            <td>@hit.Score</td>
-            <td>
-                <div>
-
-                    <div>
-                        <div class="form-inline">
-                            <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="1">+</button>
-                        </div>
-                        <div class="form-inline">
-                            <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="0">-</button>
-                        </div>
-                    </div>
-
+        {
+            rank++;
+        }
+        <tr class="Entry" id="@rank" style="display: none">
+            <td class="firstRow">
+                <strong>@rank</strong>
+            </td>
+            <td class="secondRow">
+                <div class="Text">@hit.Text</div>
+                <div class="Meta-info">
+                    <hr/>
+                    <strong>@hit.Timestamp, Episode "@hit.EpisodeName", Season @hit.Season</strong>
                 </div>
+                <div class="Meta-info">
+                    <strong>@hit.Location</strong>
+                </div>
+            </td>
+            <td class="thirdRow">
+            <div class="feedback">
+
+                <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="1">+</button>
+                <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="0">-</button>
+
+            </div>
             </td>
         </tr>
     }
+    
+    </tbody>
 </table>
+<div style="text-align: center">
+    <button style="width: 200px; display: none" id="backwards" class="btn" onclick="backward()">Previous Results</button><a id="filler">     </a><button style="width: 200px" id="forwards" class="btn" onclick="forward()">Next Results</button>
+</div>
+
 
 @section Scripts {
 
     <script>
-        //give him document and class selector
-
+    
+        var pageNR = 0;
+        var maxRank = @rank;
+    
+        function forward() {
+            pageNR++;
+            var siteCount = pageNR * 10;
+            
+            $('.Entry').css( "display", "none" );
+            
+            if(pageNR > 0){
+                $("#backwards").css( "display", "" );
+            }
+            
+            for(var i = 0; i < 10; i++)
+            {
+                siteCount++;
+                var entry = document.getElementById(siteCount);
+                entry.style.display = "";
+            }        
+            
+            if(siteCount < 100)
+            {
+                $("forwards").css("display", "none")
+            }
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+        }
+        
+        function backward() {
+            pageNR--;
+            var siteCount = pageNR * 10;
+            $('.Entry').css( "display", "none" );
+            
+            if(pageNR == 0){
+                $( "#backwards" ).css( "display", "none" );
+            }
+            
+            if(siteCount < 100)
+                        {
+                            $("forwards").css("display", "")
+                        }
+            
+            for(var i = 0; i < 10; i++)
+            {
+                siteCount++;
+                var entry = document.getElementById(siteCount);
+                entry.style.display = ""
+            }
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+          
+        }
+        
+        window.onload = function showFirstResults() {
+            var pageNr = 0;
+            for(var i = 0; i < 10; i++)
+            {
+                pageNr++;
+                var entry = document.getElementById(pageNr);
+                entry.style.display = ""
+            }
+        }
+        
         $(document).on('click','.logging', 'button[id], button[data-value], button[value]', function (e) {
                 e.stopPropagation();
                 e.preventDefault();
                 var id = $(this).attr("value");
                 var TopicName = $(this).attr("data-value");
-
                 var logType = $(this).attr("id");
-
             var url = "@Url.Action("LogResult")";
-
-
             $.post(url, { id: id, TopicName: TopicName, logType: logType }, function () {
                 alert("Evaluation successful!")
                 });
         });
+
     </script>
 }
-
