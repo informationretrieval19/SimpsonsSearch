@@ -279,8 +279,5 @@ namespace SimpsonsSearch.searchEngine
             var synonyms = sBuilder.Build();
             return synonyms;
         }
-
-        
-
     }
 }

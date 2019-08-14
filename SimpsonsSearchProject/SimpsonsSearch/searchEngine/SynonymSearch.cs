@@ -66,7 +66,6 @@ namespace SimpsonsSearch.searchEngine
             finally
             {
                 searcherManager.Release(searcher);
-
             }
         }
 
