@@ -1,1 +1,6 @@
-
+{
+"topic_id": "t14",
+"query": "most relevant words in season 1", 
+"description": "To find the top 5 spoken words that are characteristic for season 1 and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include all the scenes of season 1 that contain the top spoken words of this season."]
+}
