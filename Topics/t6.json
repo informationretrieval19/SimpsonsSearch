@@ -1,0 +1,7 @@
+{
+"topic_id": "t6",
+"query": "Okily Dokily", 
+"description": "To find scenes where the phrase ‘okily dokily’ is being said and by whom.",
+"narrative": ["Documents relevant for this topic would include any scene that contains this phrase.
+Scenes with only one of these words and not this phrase are not relevant."]
+}
