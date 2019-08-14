@@ -1,1 +1,6 @@
-
+{
+"topic_id": "t13",
+"query": "top words in episode 100", 
+"description": "To find the top 5 spoken words that are characteristic for episode 100 and show corresponding scenes.",
+"narrative": ["Documents relevant for this topic would include all the scenes of episode 100 that contain the top spoken words of this episode."]
+}
