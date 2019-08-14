@@ -26,7 +26,7 @@ namespace SimpsonsSearch.searchEngine
         }
 
         
-        // hier wortlisten er synonymmap hinzufügen
+        // hier wortlisten der synonymmap hinzufügen
         public SynonymMap GetSynonyms()
         {
 
@@ -189,19 +189,19 @@ namespace SimpsonsSearch.searchEngine
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("movie"), new CharsRef(dictionaries.moviesDic[key]), true);
+                sBuilder.Add(new CharsRef("movies films"), new CharsRef(dictionaries.moviesDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.musicalDic.Count(); i++)
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("music"), new CharsRef(dictionaries.musicalDic[key]), true);
+                sBuilder.Add(new CharsRef("musical"), new CharsRef(dictionaries.musicalDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.politicsDic.Count(); i++)
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("politic"), new CharsRef(dictionaries.politicsDic[key]), true);
+                sBuilder.Add(new CharsRef("politics"), new CharsRef(dictionaries.politicsDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.religionDic.Count(); i++)
             {
@@ -213,7 +213,7 @@ namespace SimpsonsSearch.searchEngine
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("road"), new CharsRef(dictionaries.road_tripsDic[key]), true);
+                sBuilder.Add(new CharsRef("road trip"), new CharsRef(dictionaries.road_tripsDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.romanceDic.Count(); i++)
             {
@@ -237,7 +237,7 @@ namespace SimpsonsSearch.searchEngine
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("super heroes"), new CharsRef(dictionaries.super_heroesDic[key]), true);
+                sBuilder.Add(new CharsRef("super-heroes"), new CharsRef(dictionaries.super_heroesDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.travelDic.Count(); i++)
             {
