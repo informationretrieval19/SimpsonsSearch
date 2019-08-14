@@ -1,1 +1,6 @@
-
+{
+"topic_id": "t9",
+"query": "How many times is Bart in the Detention Room"
+"description": "To find and count all scenes where Bart is in the Detention room.",
+"narrative": ["Number of found scnes should be shown. Documents relevant for this topic would include all scenes where Bart is in the detention room."]
+}
