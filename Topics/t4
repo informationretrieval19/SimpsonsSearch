@@ -1,0 +1,7 @@
+{
+"topic_id": "t4",
+"query": "Homer tavern", 
+"description": "To find scenes where Home is at Moe’s tavern.",
+"narrative": ["Documents relevant for this topic would include all scenes where Homer as a charakter is at the tavern.
+Scenes without this character/location combination are not considered relevant."]
+}
