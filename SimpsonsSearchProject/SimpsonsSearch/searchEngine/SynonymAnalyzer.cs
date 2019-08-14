@@ -161,11 +161,11 @@ namespace SimpsonsSearch.searchEngine
 
                 sBuilder.Add(new CharsRef("kids"), new CharsRef(dictionaries.kidsDic[key]), true);
             }
-            for (int i = 1; i <= dictionaries.lgtbqDic.Count(); i++)
+            for (int i = 1; i <= dictionaries.lgbtqDic.Count(); i++)
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("lgtbq"), new CharsRef(dictionaries.lgtbqDic[key]), true);
+                sBuilder.Add(new CharsRef("lgbtq"), new CharsRef(dictionaries.lgbtqDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.mafiaDic.Count(); i++)
             {
@@ -231,7 +231,7 @@ namespace SimpsonsSearch.searchEngine
             {
                 var key = $"key{i}";
 
-                sBuilder.Add(new CharsRef("sport"), new CharsRef(dictionaries.sportsDic[key]), true);
+                sBuilder.Add(new CharsRef("sports"), new CharsRef(dictionaries.sportsDic[key]), true);
             }
             for (int i = 1; i <= dictionaries.super_heroesDic.Count(); i++)
             {

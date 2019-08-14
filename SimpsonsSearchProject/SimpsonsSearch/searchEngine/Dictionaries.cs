@@ -446,7 +446,7 @@ namespace SimpsonsSearch.searchEngine
 			
 		};
 		
-		public Dictionary<string, string> lgtbqDic = new Dictionary<string, string>
+		public Dictionary<string, string> lgbtqDic = new Dictionary<string, string>
 		{
 			{"key1", "lesbian"},
 			{"key2", "gay"},
@@ -464,7 +464,7 @@ namespace SimpsonsSearch.searchEngine
 			{"key14", "coming out"},
 			{"key15", "fag"},
 			{"key16", "faggot"},
-			{"key18", "pansexual"}
+			{"key17", "pansexual"}
 			
 		};
 
@@ -491,10 +491,10 @@ namespace SimpsonsSearch.searchEngine
 			{"key7", "autopsy"},
 			{"key8", "patient"},
 			{"key9", "doctor"},
-			{"key11", "infectio"},
-			{"key12", "vaccine"},
-			{"key13", "surgery"},
-			{"key14", "surgeon"}
+			{"key10", "infectio"},
+			{"key11", "vaccine"},
+			{"key12", "surgery"},
+			{"key13", "surgeon"}
 			
 		};
 
@@ -677,32 +677,32 @@ namespace SimpsonsSearch.searchEngine
 			{"key1", "aerobics"},
 			{"key2", "archery"},
 			{"key3", "arena"},
-			{"key5", "exercise"},
-			{"key6", "badminton"},
-			{"key7", "ball"},
-			{"key8", "basketball"},
-			{"key9", "baseball"},
-			{"key10", "rugby"},
-			{"key11", "bicycle"},
-			{"key12", "bike"},
-			{"key13", "billard"},
-			{"key14", "pool"},
-			{"key15", "boxing"},
-			{"key16", "medal"},
-			{"key17", "champion"},
-			{"key18", "competition"},
-			{"key19", "curling"},
-			{"key20", "marathon"},
-			{"key21", "triathlon"},
-			{"key22", "dodgeball"},
-			{"key23", "gym"},
-			{"key24", "fit"},
-			{"key25", "fitness"},
-			{"key26", "jog"},
-			{"key27", "olympics"},
-			{"key28", "play"},
-			{"key29", "winner"}
-			
+			{"key4", "exercise"},
+			{"key5", "badminton"},
+			{"key6", "ball"},
+			{"key7", "basketball"},
+			{"key8", "baseball"},
+			{"key9", "rugby"},
+			{"key10", "bicycle"},
+			{"key11", "bike"},
+			{"key12", "billard"},
+			{"key13", "pool"},
+			{"key14", "boxing"},
+			{"key15", "medal"},
+			{"key16", "champion"},
+			{"key17", "competition"},
+			{"key18", "curling"},
+			{"key19", "marathon"},
+			{"key20", "triathlon"},
+			{"key21", "dodgeball"},
+			{"key22", "gym"},
+			{"key23", "fit"},
+			{"key24", "fitness"},
+			{"key25", "jog"},
+			{"key26", "olympics"},
+			{"key27", "play"},
+			{"key28", "winner"}
+		
 		};
 		
 		public Dictionary<string, string> super_heroesDic = new Dictionary<string, string>
@@ -710,25 +710,25 @@ namespace SimpsonsSearch.searchEngine
 			{"key1", "villain"},
 			{"key2", "evil"},
 			{"key3", "superpower"},
-			{"key5", "nemesis"},
-			{"key6", "shape shifting"},
-			{"key7", "super speed"},
-			{"key8", "rapid healing"},
-			{"key9", "telekinesis"},
-			{"key10", "batman"},
-			{"key11", "superman"},
-			{"key12", "wonderwoman"},
-			{"key13", "hulk"},
-			{"key14", "iron man"},
-			{"key15", "spiderman"},
-			{"key16", "catwoman"},
-			{"key17", "avengers"},
-			{"key18", "black widow"},
-			{"key19", "doctor strange"},
-			{"key20", "joker"},
-			{"key21", "magneto"},
-			{"key22", "thor"},
-			{"key23", "wolverine"}
+			{"key4", "nemesis"},
+			{"key5", "shape shifting"},
+			{"key6", "super speed"},
+			{"key7", "rapid healing"},
+			{"key8", "telekinesis"},
+			{"key9", "batman"},
+			{"key10", "superman"},
+			{"key11", "wonderwoman"},
+			{"key12", "hulk"},
+			{"key13", "iron man"},
+			{"key14", "spiderman"},
+			{"key15", "catwoman"},
+			{"key16", "avengers"},
+			{"key17", "black widow"},
+			{"key18", "doctor strange"},
+			{"key19", "joker"},
+			{"key20", "magneto"},
+			{"key21", "thor"},
+			{"key22", "wolverine"}
 			
 		};
 		

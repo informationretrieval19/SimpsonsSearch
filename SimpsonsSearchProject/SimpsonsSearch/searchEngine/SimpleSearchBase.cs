@@ -76,6 +76,7 @@ namespace SimpsonsSearch.searchEngine
             searcherManager.MaybeRefresh();
 
             var searcher = searcherManager.Acquire();
+            //searcher.Similarity.ComputeNorm();
 
             try
             {
@@ -106,7 +107,6 @@ namespace SimpsonsSearch.searchEngine
             {
                 var document = BuildDocumentForEachScene(scriptLine);
                 //var document = BuildDocumentForEachSpeakingLine(scriptLine);
-
                 indexWriter.UpdateDocument(new Term("scriptlines", scriptLine.id), document);
             }
 
