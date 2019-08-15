@@ -888,6 +888,7 @@ namespace SimpsonsSearch.searchEngine
             {"crime", "t20"},
             {"death", "t21"},
             {"doomsday", "t22"},
+            {"education", "t23" },
             {"environment", "t24"},
             {"fantasy", "t25"},
             {"food", "t26"},
