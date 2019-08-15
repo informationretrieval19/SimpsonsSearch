@@ -1,10 +1,10 @@
 {
 	"topic_id": "t39",
 	"query": "religion", 
-	"description": "To find scenes where religion plays a part in.",
+	"description": "To find scenes in which religion plays a part.",
 	"narrative": [
 		"When the scene is very religion centred or someone's religion strongly influence their action the document would be relevant. This does include all religions, not just christianity.",
-		"Insufficient would be the mere mentioning of a religion or a religious practice. Also going to church on a regular basis is not important enough." 
+		"Mentioning of a religion or a religious practice can be relevant, if the attitude toward religion motivating the scene becomes clear." 
 	]
 		
 }
