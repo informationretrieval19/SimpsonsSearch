@@ -35,15 +35,15 @@ https://docs.docker.com/engine/examples/dotnetcore/
 
 -------------------------------------
 
-Alternativ: manuelles Deployment
+alternatively: manual deployment
 
 - clone rep
 	git clone https://github.com/informationretrieval19/SimpsonsSearch.git
 	
-- benötigt wird .net core Runtime um Anwendung auszuführen 
+- .net core Runtime is needed to run the application
 
-	- version 2.1.505 wird benötigt 
-	- diesem guide folgen zur installation der runtime:
+	- version 2.1.505 is needed
+	- follow this guide for the installation of the runtime:
 		https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/runtime-2.1.5
 		
 - start application
