@@ -60,12 +60,12 @@ How to use this search engine:
 
 - The red search button ('Search') uses the baseline version of the search engine. 
 
+- The matching terms between query and documents will be highlighted in bold.
+
 - The green search button ('SearchAdvancedOnlyInText') uses Query Refinement for a certain amount of topics (topics 15-50). Only script lines will be searched (mainly dialogue).
 
 - The yellow search button ('SearchAdvancedAllTerms') uses the same Query Refinement, but will search in all fields (location, characters).
 
 - Results are scenes, not whole episodes. Information about the episode and season where the scene appears will be given, though.
-
-- The matching terms between query and documents will be highlighted in bold. 
-
+ 
 - A timestamp was added so you can conveniently skip to a scene of interest when watching the show.
