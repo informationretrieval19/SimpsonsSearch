@@ -64,6 +64,8 @@ How to use this search engine:
 
 - The yellow search button ('SearchAdvancedAllTerms') uses the same Query Refinement, but will search in all fields (location, characters).
 
+- Results are scenes, not whole episodes. Information about the episode and season where the scene appears will be given, though.
+
 - The matching terms between query and documents will be highlighted in bold. 
 
 - A timestamp was added so you can conveniently skip to a scene of interest when watching the show.
