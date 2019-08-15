@@ -1,4 +1,6 @@
-﻿@using SimpsonsSearch.searchEngine
+﻿@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Html
+@using SimpsonsSearch.searchEngine
 @{
     ViewData["Title"] = "Results";
 }
@@ -9,22 +11,52 @@
 @{
     var siteCount = 0;
     var rank = (siteCount) * 10;
+    var highlightedText = new HtmlString("");
 }
 
 <table id="results">
     <tbody>
-    
+
     @foreach (var hit in Model.Hits)
     {
+        
         {
             rank++;
+            string text = @hit.Text;
+            var searchQuery = Model.TopicName;
+            string[] queryWords = searchQuery.Split(null);
+            if (text.Contains(searchQuery))
+            {
+                highlightedText = new HtmlString(queryWords.Select(word => word.Trim()).Aggregate(text,
+                    (current, pattern) =>
+                        Regex.Replace(current,
+                            pattern,
+                            string.Format("<strong>{0}{1}</strong>",
+                                "",
+                                "$0"),
+                            RegexOptions.IgnoreCase)));
+            }
+            else
+            {
+                highlightedText = new HtmlString(queryWords.Select(word => "\\b" + word.Trim() + "\\b")
+                    .Aggregate(text, (current, pattern) =>
+                        Regex.Replace(current,
+                            pattern,
+                            string.Format("<strong>{0}{1}</strong>",
+                                "",
+                                "$0"),
+                            RegexOptions.IgnoreCase)));
+            }
         }
+
         <tr class="Entry" id="@rank" style="display: none">
             <td class="firstRow">
                 <strong>@rank</strong>
             </td>
             <td class="secondRow">
-                <div class="Text">@hit.Text</div>
+                <div class="Text">
+                    @highlightedText
+                </div>
                 <div class="Meta-info">
                     <hr/>
                     <strong>@hit.Timestamp, Episode @hit.EpisodeInSeason "@hit.EpisodeName", Season @hit.Season</strong>
@@ -34,20 +66,20 @@
                 </div>
             </td>
             <td class="thirdRow">
-            <div class="feedback">
+                <div class="feedback">
 
-                <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="1">+</button>
-                <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="0">-</button>
+                    <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="1">+</button>
+                    <button class="btn btn-warning logging" type="submit" value="@hit.Id" data-value="@Model.TopicName" id="0">-</button>
 
-            </div>
+                </div>
             </td>
         </tr>
     }
-    
+
     </tbody>
 </table>
 <div style="text-align: center">
-    <button style="width: 200px; display: none" id="backwards" class="btn" onclick="backward()">Previous Results</button><a id="filler">     </a><button style="width: 200px" id="forwards" class="btn" onclick="forward()">Next Results</button>
+    <button style="width: 200px; display: none" id="backwards" class="btn" onclick="backward()">Previous Results</button><a id="filler"> </a><button style="width: 200px" id="forwards" class="btn" onclick="forward()">Next Results</button>
 </div>
 
 
@@ -62,22 +94,34 @@
             pageNR++;
             var siteCount = pageNR * 10;
             
-            $('.Entry').css( "display", "none" );
+            try 
+            {
+                $('.Entry').css( "display", "none" );
+            }
+            catch (TypeError) 
+            {
+                          
+            }
             
             if(pageNR > 0){
-                $("#backwards").css( "display", "" );
+                $("#backwards").css( "display", "inline" );
             }
             
             for(var i = 0; i < 10; i++)
             {
                 siteCount++;
                 var entry = document.getElementById(siteCount);
-                entry.style.display = "";
+                try {
+                  entry.style.display = ""
+                }
+                catch (TypeError) {
+                  
+                }
             }        
             
-            if(siteCount < 100)
+            if(siteCount > 99)
             {
-                $("forwards").css("display", "none")
+                $("#forwards").css("display", "none")
             }
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         }
@@ -85,24 +129,38 @@
         function backward() {
             pageNR--;
             var siteCount = pageNR * 10;
-            $('.Entry').css( "display", "none" );
             
-            if(pageNR == 0){
+            try 
+            {
+              $('.Entry').css( "display", "none" );
+            }
+            catch (TypeError) 
+            {
+              
+            }
+            
+            
+            if(pageNR === 0){
                 $( "#backwards" ).css( "display", "none" );
             }
             
-            if(siteCount < 100)
+            if(siteCount < 99)
                         {
-                            $("forwards").css("display", "")
+                            $("#forwards").css("display", "inline");
                         }
             
             for(var i = 0; i < 10; i++)
             {
                 siteCount++;
                 var entry = document.getElementById(siteCount);
-                entry.style.display = ""
+                try {
+                  entry.style.display = ""
+                }
+                catch (TypeError) {
+                  
+                }
             }
-            $('html, body').animate({ scrollTop: 0 }, 'fast');
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
           
         }
         
@@ -114,7 +172,7 @@
                 var entry = document.getElementById(pageNr);
                 entry.style.display = ""
             }
-        }
+        };
         
         $(document).on('click','.logging', 'button[id], button[data-value], button[value]', function (e) {
                 e.stopPropagation();
