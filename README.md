@@ -30,4 +30,23 @@ Deployment:
 
 Guides:
 https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04
+
 https://docs.docker.com/engine/examples/dotnetcore/
+
+
+Alternativ: manuelles Deployment
+
+- clone rep
+	git clone https://github.com/informationretrieval19/SimpsonsSearch.git
+	
+- benötigt wird .net core Runtime um Anwendung auszuführen 
+
+	- version 2.1.505 wird benötigt 
+	- diesem guide folgen zur installation der runtime:
+		https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/runtime-2.1.5
+		
+- start application
+
+	- change directory to ../simpsonssearch/simpsonssearch/simpsonssearchproject/simpsonssearch/bin/release/netcoreapp2.1
+	dotnet simpsonssearch.dll 
+
