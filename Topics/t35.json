@@ -3,6 +3,7 @@
 	"query": "military", 
 	"description": "To find scenes where the military is in the centre.",
 	"narrative": [
-		"Scenes where the military (i.e. Army, Navy, Air Force, Boot camp) takes the main focus and/or set in a military camp." 
+		"Scenes that focus on the military (i.e. Army, Navy, Air Force, Boot camp) and/or are set in a military camp.",
+		"Scenes hinting at military practices are relevant, if the attitude toward these practices motivating the scene becomes clear."
 	]
 }
