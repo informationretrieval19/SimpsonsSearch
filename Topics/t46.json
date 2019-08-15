@@ -4,6 +4,7 @@
 	"description": "To find documents that include an employment.",
 	"narrative": [
 		"Documents relevant for this topic are showing a person on its workplace or talking about their employment.",
-		"Insufficient are documents which include only people that are not working in any form of payed work."
+		"Insufficient are documents which include only people that are not working in any form of payed work.",
+		"Also not relevant are occurences of the term work in the sense of 'working out', 'functioning'."
 	]
 }
