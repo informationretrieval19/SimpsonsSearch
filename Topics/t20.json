@@ -3,8 +3,8 @@
 	"query": "crime", 
 	"description": "To find scenes focusing around criminal activities.",
 	"narrative": [
-		"Relevant documents would include directly shown crimes or their planning leading to a successful ord failed execution.",
-		"Dealing with the aftermath of a crime that already happened would be just as insufficient for the document to be relevant as a small crime not being in the centre of the scene." 
+		"Relevant documents would include directly shown crimes or their planning leading to a successful or failed execution.",
+		"Relevant documents would show crimes being committed, planned, criminals being arrested, tried or admitting to a crime they committed. Not relevant are phrases like „it‘s not like that‘s a crime.“" 
 	]
 		
 }
