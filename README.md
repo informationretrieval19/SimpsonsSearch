@@ -5,7 +5,7 @@
 This project uses Lucene.net as search engine library:  
 https://lucenenetdocs.azurewebsites.net/
 
-Deployment: 
+Deployment of this application: 
 
 1. Ubunto docker installation:
 
@@ -35,7 +35,7 @@ https://docs.docker.com/engine/examples/dotnetcore/
 
 -------------------------------------
 
-alternatively: manual deployment
+Alternatively: manual deployment
 
 - clone rep
 	git clone https://github.com/informationretrieval19/SimpsonsSearch.git
@@ -62,7 +62,7 @@ How to use this search engine:
 
 - The green search button ('SearchAdvancedOnlyInText') uses Query Refinement for a certain amount of topics (topics 15-50). Only script lines will be searched (mainly dialogue).
 
-- The yellow search button ('SearchAdvancedAllTerms') uses the same Query Refinement, but will search in all fields (location, characters.)
+- The yellow search button ('SearchAdvancedAllTerms') uses the same Query Refinement, but will search in all fields (location, characters).
 
 - The matching terms between query and documents will be highlighted in bold. 
 
