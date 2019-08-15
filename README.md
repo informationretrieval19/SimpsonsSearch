@@ -33,6 +33,7 @@ https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04
 
 https://docs.docker.com/engine/examples/dotnetcore/
 
+-------------------------------------
 
 Alternativ: manuelles Deployment
 
@@ -48,5 +49,7 @@ Alternativ: manuelles Deployment
 - start application
 
 	- change directory to ../simpsonssearch/simpsonssearch/simpsonssearchproject/simpsonssearch/bin/release/netcoreapp2.1
-	dotnet simpsonssearch.dll 
+	dotnet 
+	
+	simpsonssearch.dll 
 
