@@ -1,7 +1,8 @@
 Kurzer Kommentar zum abgegebenen Relevanz-Feedback: 
 Die Topic-Definitionen, v.a. die Narratives zur Abgrenzung, stammen teilweise noch aus der Anfangsphase des Projekts,
-in der wir nach Episoden und nicht Szenen suchen wollten. Um eine ganze Episode als zu einem Thema zugehörig zu definieren, braucht es eine
-kontinuierliche, starke und deutliche Bezugnahme.
-Bei Szenen dagegen halten wir teilweise auch Anspielungen für relevant, insofern sie dennoch eindeutig und auf deutliche Weise eine bestimmte Haltung zu dem Thema erkennen lassen.
+in der wir nach Episoden und nicht Szenen suchen wollten. Um eine ganze Episode als zu einem Thema zugehörig zu definieren, 
+braucht es eine kontinuierliche, starke und deutliche Bezugnahme.
+Bei Szenen dagegen halten wir teilweise auch Anspielungen für relevant, insofern sie dennoch eindeutig und auf deutliche Weise 
+eine bestimmte Haltung zu dem Thema erkennen lassen.
 Daher folgen wir bei der Evaluation teilweise einem eher weiteren narrative, als sie in den Topics formuliert sind. 
 Als Beispiele für in diesem Sinne aktualisierte narratives können t20, crime, und t35, military, dienen.
