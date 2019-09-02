@@ -16,7 +16,7 @@ Deployment of this application:
 	  docker --version
   
 3. Start application:
-	- clone git repo: https://github.com/informationretrieval19/SimpsonsSearch	
+	- link to git repo: https://github.com/informationretrieval19/SimpsonsSearch	
   
 	- navigate to project folder from command prompt 
   

@@ -37,4 +37,13 @@
     <Folder Include="Index\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\simpsons_episodes.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\simpsons_script_lines.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
