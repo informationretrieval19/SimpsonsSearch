@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CsvHelper;
+using Microsoft.AspNetCore.Hosting;
 using SimpsonsSearch.Models;
 using SimpsonsSearch.searchEngine;
 using SimpsonsSearch.Services;
@@ -19,6 +20,12 @@ namespace SimpsonsSearch.Helper
         public IEnumerable<Episode> _episodeRecords;
         IList<string> _badRecords = new List<string>();
 
+        private readonly IHostingEnvironment _environment;
+
+        public ConversionService(IHostingEnvironment environment)
+        {
+            _environment = environment;
+        }
         /// <summary>
         /// Methode zur Umwandlung von sciptlines.csv zu einer Liste von ScriptLine Objekten
         /// zur HIlfe wird hier eine Library benutzt die es sehr einfach ermöglicht .csv Dateien umzuwandeln(csvHelper)
@@ -26,7 +33,8 @@ namespace SimpsonsSearch.Helper
         /// <returns>Liste von Scriptline objekten</returns>
         public IEnumerable<ScriptLine> ConvertCsVtoScriptLines()
         {
-            using (var reader = new StreamReader(@"data/simpsons_script_lines.csv"))
+            var filePath = Path.Combine(_environment.ContentRootPath, @"data/simpsons_script_lines.csv");
+            using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader))
             {
 
@@ -50,9 +58,9 @@ namespace SimpsonsSearch.Helper
         /// <returns></returns>
         public IEnumerable<Episode> ConvertCsvToEpisodes()
         {
-            IList<string> _badRecords = new List<string>();
+            var filePath = Path.Combine(_environment.ContentRootPath, @"Data\simpsons_episodes.csv");
 
-            using (var reader = new StreamReader(@"Data\simpsons_episodes.csv"))
+            using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader))
             {
                 csv.Configuration.Delimiter = ",";

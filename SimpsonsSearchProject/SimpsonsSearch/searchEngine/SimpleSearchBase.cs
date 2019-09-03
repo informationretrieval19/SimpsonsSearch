@@ -31,12 +31,9 @@ namespace SimpsonsSearch.searchEngine
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
 
-
-        private readonly IEnumerable<Episode> _episodes;
-
         public SimpleSearchBase(IConversionService conversionService)
         {
-            
+
             try
             {
                 _conversionService = conversionService;
@@ -46,11 +43,6 @@ namespace SimpsonsSearch.searchEngine
                 searcherManager = new SearcherManager(indexWriter, true, null);
             }
             catch { }
-
-            
-
-
-            _episodes = _conversionService.ConvertCsvToEpisodes();
         }
 
 
@@ -186,7 +178,6 @@ namespace SimpsonsSearch.searchEngine
         //bekommt eine liste von scenen geliefert
         public virtual Document BuildDocumentForEachScene(ScriptLine scriptLine)
         {
-
             var document = new Document
             {
             new StoredField("id", scriptLine.id),
@@ -256,90 +247,10 @@ namespace SimpsonsSearch.searchEngine
             }
         }
 
-        //public void CreateQuery()
-        //{
-        //    // is button bad result is pressed --> delete it for this index, or give it bad score
-        //    // good result button is pressed --> boost score
-
-
-        //}
-
-        //// spliting user input into tokens 
-        //IList<string> Tokenize(string userInput)
-        //{
-        //    List<string> tokens = new List<string>();
-        //    using (var reader = new StringReader(userInput))
-        //    using (TokenStream stream = analyzer.GetTokenStream("myfield", reader))
-        //    {
-        //        stream.Reset();
-        //        while (stream.IncrementToken())
-        //            tokens.Add(stream.GetAttribute<ICharTermAttribute>().ToString());
-        //    }
-        //    return tokens;
-        //}
-
-        //class FieldDefinition
-        //{
-        //    public string Name { get; set; }
-        //    public bool IsDefault { get; set; } = false;
-        //    //other properties omitted
-        //}
-
-        ////in a different class
-        //Query BuildQuery(string userInput, IEnumerable<FieldDefinition> fields)
-        //{
-        //    BooleanQuery query = new BooleanQuery();
-        //    IList<string> tokens = Tokenize(userInput);
-
-        //    //combine tokens present in user input
-        //    if (tokens.Count > 1)
-        //    {
-        //        FieldDefinition defaultField = fields.FirstOrDefault(f => f.IsDefault == true);
-        //        query.Add(BuildExactPhraseQuery(tokens, defaultField), Occur.SHOULD);
-
-        //        foreach (var q in GetIncrementalMatchQuery(tokens, defaultField))
-        //            query.Add(q, Occur.SHOULD);
-        //    }
-
-        //    //create a term query per field - non boosted
-        //    foreach (var token in tokens)
-        //        foreach (var field in fields)
-        //            query.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
-
-        //    return query;
-        //}
-
-        //Query BuildExactPhraseQuery(IList<string> tokens, FieldDefinition field)
-        //{
-        //    //boost factor (6) and slop (2) come from configuration - code omitted for simplicity
-        //    PhraseQuery pq = new PhraseQuery() { Boost = tokens.Count * 6, Slop = 2 };
-        //    foreach (var token in tokens)
-        //        pq.Add(new Term(field.Name, token));
-
-        //    return pq;
-        //}
-
-        //IEnumerable<Query> GetIncrementalMatchQuery(IList<string> tokens, FieldDefinition field)
-        //{
-        //    BooleanQuery bq = new BooleanQuery();
-        //    foreach (var token in tokens)
-        //        bq.Add(new TermQuery(new Term(field.Name, token)), Occur.SHOULD);
-
-        //    //5 comes from config - code omitted
-        //    int upperLimit = Math.Min(tokens.Count, 5);
-        //    for (int match = 2; match <= upperLimit; match++)
-        //    {
-        //        BooleanQuery q = bq.Clone() as BooleanQuery;
-        //        q.Boost = match * 3;
-        //        q.MinimumNumberShouldMatch = match;
-        //        yield return q;
-        //    }
-        //}
-
-
         public Episode MapScriptlinesToEpisodes(string episodeId)
         {
-            var episode = _episodes.FirstOrDefault(x => x.id == episodeId);
+            var episodes = _conversionService.ConvertCsvToEpisodes();
+            var episode = episodes.FirstOrDefault(x => x.id == episodeId);
 
             return episode;
         }
