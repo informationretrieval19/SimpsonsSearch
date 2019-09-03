@@ -33,7 +33,7 @@ namespace SimpsonsSearch.Helper
         /// <returns>Liste von Scriptline objekten</returns>
         public IEnumerable<ScriptLine> ConvertCsVtoScriptLines()
         {
-            var filePath = Path.Combine(_environment.ContentRootPath, @"data/simpsons_script_lines.csv");
+            var filePath = Path.Combine(_environment.ContentRootPath, @"Data/simpsons_script_lines.csv");
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader))
             {
