@@ -13,6 +13,7 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
+using Microsoft.AspNetCore.Hosting;
 using SimpsonsSearch.Models;
 using SimpsonsSearch.Services;
 
@@ -24,18 +25,19 @@ namespace SimpsonsSearch.searchEngine
         public const LuceneVersion LUCENEVERSION = LuceneVersion.LUCENE_48;
         private readonly IConversionService _conversionService;
 
-
+        private readonly IHostingEnvironment _environment;
         private FSDirectory _indexDirectory;
         private readonly IndexWriter indexWriter;
         private readonly Analyzer analyzer;
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
 
-        public SimpleSearchBase(IConversionService conversionService)
+        public SimpleSearchBase(IConversionService conversionService, IHostingEnvironment environment)
         {
 
             try
             {
+                _environment = environment;
                 _conversionService = conversionService;
                 analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
                 queryParser = new MultiFieldQueryParser(LUCENEVERSION, new[] { "text", "characters", "location" }, analyzer);
@@ -51,7 +53,7 @@ namespace SimpsonsSearch.searchEngine
         {
             get
             {
-                var luceneDir = @"Index/Base";
+                var luceneDir = Path.Combine(_environment.ContentRootPath, @"Index/Base");
                 return luceneDir;
             }
         }

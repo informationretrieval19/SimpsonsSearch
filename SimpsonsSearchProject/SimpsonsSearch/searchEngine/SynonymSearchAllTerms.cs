@@ -7,6 +7,7 @@ using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
+using Microsoft.AspNetCore.Hosting;
 using SimpsonsSearch.Models;
 using SimpsonsSearch.Services;
 
@@ -19,10 +20,11 @@ namespace SimpsonsSearch.searchEngine
         private readonly Analyzer analyzerSearch;
         private readonly QueryParser queryParser;
         private readonly SearcherManager searcherManager;
+        private readonly IHostingEnvironment _environment;
 
-        public SynonymSearchAllTerms(IConversionService conversionService, IEnumerable<Episode> episodes) : base(conversionService, episodes)
+        public SynonymSearchAllTerms(IConversionService conversionService, IHostingEnvironment environment) : base(conversionService, environment)
         {
-            
+            _environment = environment;
             indexWriter = new IndexWriter(GetIndex(), new IndexWriterConfig(LUCENEVERSION, analyzer));
             analyzer = new StandardAnalyzer(LUCENEVERSION, StandardAnalyzer.STOP_WORDS_SET);
             analyzerSearch = new SynonymAnalyzer();
