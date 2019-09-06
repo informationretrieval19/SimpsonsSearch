@@ -7,52 +7,25 @@ https://lucenenetdocs.azurewebsites.net/
 
 Deployment of this application: 
 
-1. Ubunto docker installation:
-
-	  sudo apt install docker.io
-
-2. Verify docker installation:
-
-	  docker --version
-  
-3. Start application:
-	- link to git repo: https://github.com/informationretrieval19/SimpsonsSearch	
-  
-	- navigate to project folder from command prompt 
-  
-    ../simpsonssearch/simpsonssearchproject/simpsonssearch
-  
-    docker build -t simpsonssearch .
-    
-    docker run -d -p 8080:80 --name myapp SimpsonsSearch
-  
-	- go to localhost:8080
-
-Guides:
-https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04
-
-https://docs.docker.com/engine/examples/dotnetcore/
-
--------------------------------------
-
-Alternatively: manual deployment
-
-- clone rep
+- clone repository
 	git clone https://github.com/informationretrieval19/SimpsonsSearch.git
 	
 - .net core Runtime is needed to run the application
 
-	- version 2.1.505 is needed
-	- follow this guide for the installation of the runtime:
-		https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/runtime-2.1.5
+	wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+	sudo dpkg -i packages-microsoft-prod.deb
+	sudo add-apt-repository universe
+	sudo apt-get install apt-transport-https
+	sudo apt-get update
+	sudo apt-get install dotnet-sdk-2.2
 		
 - start application
 
-	- change directory to ../simpsonssearch/simpsonssearch/simpsonssearchproject/simpsonssearch/bin/release/netcoreapp2.1
-	dotnet 
-	
-	simpsonssearch.dll 
-
+	cd SimpsonsSearch/SimpsonsSearchProject/SimpsonsSearch
+	dotnet restore
+	dotnet build
+	dotnet run 
+	 
 -------------------------------------
 
 How to use this search engine:
