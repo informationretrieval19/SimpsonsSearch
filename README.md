@@ -5,26 +5,27 @@
 This project uses Lucene.net as search engine library:  
 https://lucenenetdocs.azurewebsites.net/
 
-Deployment of this application: 
+Deployment of this application using Ubuntu Terminal:   
 
-- clone repository
-	git clone https://github.com/informationretrieval19/SimpsonsSearch.git
+Step 1: Clone repository    
+
+	git clone https://github.com/informationretrieval19/SimpsonsSearch.git  
 	
-- .net core Runtime is needed to run the application
+Step 2: .net core Runtime is needed to run the application
 
-	wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
-	sudo dpkg -i packages-microsoft-prod.deb
-	sudo add-apt-repository universe
-	sudo apt-get install apt-transport-https
-	sudo apt-get update
-	sudo apt-get install dotnet-sdk-2.2
+	wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb  
+	sudo dpkg -i packages-microsoft-prod.deb  
+	sudo add-apt-repository universe  
+	sudo apt-get install apt-transport-https  
+	sudo apt-get update  
+	sudo apt-get install dotnet-sdk-2.2  
 		
-- start application
+Step 3: Start application
 
-	cd SimpsonsSearch/SimpsonsSearchProject/SimpsonsSearch
-	dotnet restore
-	dotnet build
-	dotnet run 
+	cd SimpsonsSearch/SimpsonsSearchProject/SimpsonsSearch  
+	dotnet restore  
+	dotnet build  
+	dotnet run   
 	 
 -------------------------------------
 
