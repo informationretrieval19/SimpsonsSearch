@@ -26,6 +26,9 @@ Step 3: Start application
 	dotnet restore  
 	dotnet build  
 	dotnet run   
+	
+	open the link https://localhost:5001 
+	(Note: You may have to add a security exception in Mozilla Firefox for this site when first running it.)
 	 
 -------------------------------------
 
