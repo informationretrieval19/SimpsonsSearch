@@ -58,7 +58,7 @@ namespace SimpsonsSearch.Helper
         /// <returns></returns>
         public IEnumerable<Episode> ConvertCsvToEpisodes()
         {
-            var filePath = Path.Combine(_environment.ContentRootPath, @"Data\simpsons_episodes.csv");
+            var filePath = Path.Combine(_environment.ContentRootPath, @"Data/simpsons_episodes.csv");
 
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader))
